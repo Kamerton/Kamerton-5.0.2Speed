@@ -1,0 +1,2 @@
+E:\1  SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Debug\Kamerton 5.0.2Speed.exe
+E:\1  SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Debug\Kamerton 5.0.2Speed.pdb

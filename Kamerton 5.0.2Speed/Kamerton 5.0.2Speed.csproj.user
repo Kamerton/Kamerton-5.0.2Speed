@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\Publish\|E:\1 SVN Kamerton5.0.1\trunk\Kamerton 5.0.1\Publish\|E:\Kamerton5.0.1\Kamerton 5.0.1\Publish\|E:\1 SVN Kamerton5.0-x86\trunk\Kamerton 5.0 x86\Publish\|\\Nto-farid\обмен\Kamerton5.0x64\</PublishUrlHistory>
+    <InstallUrlHistory>\\Nto-farid\обмен\Kamerton5.0x64\|\\Nto-farid\обмен\</InstallUrlHistory>
+    <SupportUrlHistory>\\Nto-farid\обмен\Kamerton5.0x64</SupportUrlHistory>
+    <UpdateUrlHistory>\\Nto-farid\обмен\Kamerton5.0x64\|\\Nto-farid\обмен\|\\Decima-files\users\nto\Мосейчук\|http://localhost/KamertonTestFin/</UpdateUrlHistory>
+    <BootstrapperUrlHistory>file:///C:/VirtualBuffer/|E:\1 SVN Kamerton4_0\trunk\KamertonTestFin</BootstrapperUrlHistory>
+    <ErrorReportUrlHistory />
+    <FallbackCulture>ru-RU</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>

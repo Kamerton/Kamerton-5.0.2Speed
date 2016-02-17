@@ -1,0 +1,9 @@
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\bin\Debug\ComPortAutodetect.exe
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\bin\Debug\ComPortAutodetect.pdb
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\ComPortAutodetect.Form1.resources
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\ComPortAutodetect.Properties.Resources.resources
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\ComPortAutodetect.exe
+E:\1 SVN KamertonTestArduino\trunk\ComPortAutodetect\ComPortAutodetect\obj\x86\Debug\ComPortAutodetect.pdb

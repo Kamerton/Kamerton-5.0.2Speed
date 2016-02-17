@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы исходного кода">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="_core">
+      <UniqueIdentifier>{bcc23263-9c20-4272-a579-3821981db6d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries">
+      <UniqueIdentifier>{a17b3b88-2ced-4f09-82d3-1a39b465102e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\AH_AD9850">
+      <UniqueIdentifier>{61f6c9ad-075b-4cb5-b475-e1a2fb85d270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\MCP23017">
+      <UniqueIdentifier>{4251d638-e64e-4898-b392-8f866105b045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\MODBUS">
+      <UniqueIdentifier>{216bb0cb-90ad-4b99-ade9-d803044213d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\MsTimer2">
+      <UniqueIdentifier>{7f5e9529-a007-4b25-ae52-f389ebec3adf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\RTClib">
+      <UniqueIdentifier>{a6078842-c707-4c78-bb69-fe18a9498e3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\SdFat">
+      <UniqueIdentifier>{ad29da90-e397-4d4d-887d-98fab7e3be5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\SdFat\utility">
+      <UniqueIdentifier>{39d5df6c-11c9-4a9b-ac6a-6ff5d96308cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\SPI">
+      <UniqueIdentifier>{a418638e-d652-4070-a3e2-ac961162c17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\Wire">
+      <UniqueIdentifier>{6626b189-2b15-4fe8-b936-b6d01a1efc47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\Wire\utility">
+      <UniqueIdentifier>{ec99615a-a02f-43ad-8a90-124221c72fba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kamerton5_0_1ArduinoSpeed2.ino" />
+    <None Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_pulse.S">
+      <Filter>_core</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Visual Micro\.Kamerton5_0_1ArduinoSpeed2.vsarduino.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="AnalogBinLogger.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Arduino.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\binary.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Client.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial_private.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\IPAddress.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\new.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Print.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Printable.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Server.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Stream.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Udp.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBAPI.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBCore.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBDesc.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WCharacter.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_private.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WString.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\variants\mega\pins_arduino.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\AH_AD9850\AH_AD9850.h">
+      <Filter>_libraries\AH_AD9850</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\MCP23017\MCP23017.h">
+      <Filter>_libraries\MCP23017</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\MODBUS\modbus.h">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\MODBUS\modbusDevice.h">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\MODBUS\modbusRegBank.h">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\MODBUS\modbusSlave.h">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\MsTimer2\MsTimer2.h">
+      <Filter>_libraries\MsTimer2</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\RTClib\RTClib.h">
+      <Filter>_libraries\RTClib</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\MinimumSerial.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdFat.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdFatConfig.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdFatmainpage.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdFatUtil.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdInfo.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdSpi.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdSpiCard.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\SdVolume.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\ArduinoFiles.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\ArduinoStream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\bufstream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\DigitalPin.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatApiConstants.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatFile.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatFileSystem.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatLib.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatLibConfig.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatStructs.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FatVolume.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\FmtNumber.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\fstream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\ios.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\iostream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\istream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\ostream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\SoftSPI.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="libraries\SdFat\utility\StdioStream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\SPI\SPI.h">
+      <Filter>_libraries\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\Wire.h">
+      <Filter>_libraries\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\utility\twi.h">
+      <Filter>_libraries\Wire\utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\abi.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\CDC.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial0.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial1.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial2.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial3.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HID.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\hooks.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\IPAddress.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\main.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\new.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Print.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Stream.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Tone.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBCore.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WInterrupts.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_analog.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_digital.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_pulse.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_shift.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WMath.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WString.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\AH_AD9850\AH_AD8950.cpp">
+      <Filter>_libraries\AH_AD9850</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\MCP23017\MCP23017.cpp">
+      <Filter>_libraries\MCP23017</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\MODBUS\modbusDevice.cpp">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\MODBUS\modbusRegBank.cpp">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\MODBUS\modbusSlave.cpp">
+      <Filter>_libraries\MODBUS</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\MsTimer2\MsTimer2.cpp">
+      <Filter>_libraries\MsTimer2</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\RTClib\RTClib.cpp">
+      <Filter>_libraries\RTClib</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\MinimumSerial.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\SdFatBase.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\SdFatUtil.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\SdSpiCard.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\SdSpiSAM3X.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\SdSpiSTM32F1.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\SdSpiTeensy3.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\FatFile.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\FatFileLFN.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\FatFilePrint.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\FatFileSFN.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\FatVolume.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\FmtNumber.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\fstream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\istream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\ostream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="libraries\SdFat\utility\StdioStream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\SPI\SPI.cpp">
+      <Filter>_libraries\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\Wire.cpp">
+      <Filter>_libraries\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\utility\twi.c">
+      <Filter>_libraries\Wire\utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

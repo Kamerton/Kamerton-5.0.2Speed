@@ -1,0 +1,26 @@
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Oscilloscope\Oscilloscope_settings.ini
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Oscilloscope\Osc_DLL.dll
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Oscilloscope\Oscilloscope.cs
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Kamerton 5.0.2Speed.exe.manifest
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Kamerton 5.0.2Speed.application
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Kamerton 5.0.2Speed.exe
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\Kamerton 5.0.2Speed.pdb
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\bin\x86\Release\mbusmaster.net.dll
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\ResolveAssemblyReference.cache
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form2.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form1.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Properties.Resources.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Resource1.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form3.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form4.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form5.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form6.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form7.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\KamertonTest.Form8.resources
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\GenerateResource.read.1.tlog
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\GenerateResource.write.1.tlog
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\Kamerton 5.0.2Speed.TrustInfo.xml
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\Kamerton 5.0.2Speed.exe.manifest
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\Kamerton 5.0.2Speed.application
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\Kamerton 5.0.2Speed.exe
+E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\obj\x86\Release\Kamerton 5.0.2Speed.pdb
