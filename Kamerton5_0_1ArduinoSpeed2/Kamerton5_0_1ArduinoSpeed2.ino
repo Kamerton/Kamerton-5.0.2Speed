@@ -895,7 +895,7 @@ const unsigned int porog_default[]    PROGMEM  = {  // 270 ячеек
 	8,   //[90]
 	20,  //[91]
 	20,  //[92]
-    20,  //[93]
+	20,  //[93]
 	20,  //[94]
 	20,  //[95]
 	20,  //[96]
@@ -1947,7 +1947,7 @@ void Stop_Kamerton ()                  //Если не приходит информация с Камертона
 	 {
 		 regBank.set(40004+i,0);
 		// regs_in[i]=0;
-     }
+	 }
   }
 
 void calculateCRC_Out()                // Вычисление контрольной суммы ниблов байта
@@ -2216,16 +2216,16 @@ void UpdateRegs()                                        // Обновить регистры
 void UpdateRegs_istr()
 { 
 	 boolean set_rele ;
-	    //-----Установить бит 1
+		//-----Установить бит 1
 	  set_rele = regBank.get(2);
 	  mcp_Out1.digitalWrite(1, set_rele);                  // Реле RL1 Звук Mic2p  Инструктор
-	  	 //-----Установить бит 4                           // Реле RL4 XP1 12
+		 //-----Установить бит 4                           // Реле RL4 XP1 12
 	  set_rele = regBank.get(5);
 	  mcp_Out1.digitalWrite(4, set_rele);    
-	    //-----Установить бит 10
+		//-----Установить бит 10
 	  set_rele = regBank.get(27);
 	  mcp_Out2.digitalWrite(10, set_rele);                 // XP1- 16 HeS2Rs    флаг подключения гарнитуры инструктора с 2 наушниками
-	  	  //-----Установить бит 12
+		  //-----Установить бит 12
 	  set_rele = regBank.get(29);
 	  mcp_Out2.digitalWrite(12, set_rele);                 // XP1- 13 HeS2Ls    флаг подключения гарнитуры инструктора 
 	
@@ -2829,41 +2829,41 @@ void control_command()
 				 break;
 			case 43:
 				 i2c_eeprom_write_byte(deviceaddress,adr_set_USB,255);  // Реле переключения USB - RS232 
-		         set_USB0();
+				 set_USB0();
 				 break;
-	       case 44:
+		   case 44:
 				 UpdateRegs();
-                 break;
-	       case 45:
+				 break;
+		   case 45:
 				 UpdateRegs_istr();
-                 break;
-	       case 46:
+				 break;
+		   case 46:
 				// UpdateRegs_disp();
-                 break;
-	       case 47:
+				 break;
+		   case 47:
 				// UpdateRegs_mtt();
-                 break;
-	       case 48:
+				 break;
+		   case 48:
 				// UpdateRegs_mic();
-                 break;
-	       case 49:
+				 break;
+		   case 49:
 				// UpdateRegs_ggs();
-                 break;
-	       case 50:
+				 break;
+		   case 50:
 				// UpdateRegs_radio1();
-                 break;
-	       case 51:
+				 break;
+		   case 51:
 				 //UpdateRegs_radio2();
-                 break;
-	       case 52:
+				 break;
+		   case 52:
 				 set_radio_send();
-                 break;
-	       case 53:
+				 break;
+		   case 53:
 				 set_ggs_mute();
-                 break;
-	       case 54:
+				 break;
+		   case 54:
 				// 
-                 break;
+				 break;
 
 			default:
 				 regBank.set(adr_control_command,0);        // Установить резистором №1,№2  уровень сигнала
@@ -4359,7 +4359,7 @@ void test_headset_dispatcher()
 		myFile.println(buffer);                                                    // " ****** Test headset dispatcher start! ******"               ;
 		file_print_date();
 		myFile.println("");
-    }
+	}
 	unsigned int regcount = 0;
 	test_disp_off();                                                                // Отключить реле и сенсоры, прверить отключение
 	test_disp_on();                                                                 // Включить необходимые сенсоры, проверить состояние
@@ -4558,7 +4558,7 @@ void test_tangR()
 		myFile.println(buffer);                              //
 		file_print_date();
 		myFile.println("");
-    }
+	}
 	regBank.set(17,0);                                                              // J8-12     XP7 4 PTT2 тангента ручная DSR
 	regBank.set(19,0);                                                              // J8-11     XP7 2 sensor тангента ручная
 	regBank.set(20,0);                                                              // J8-23     XP7 1 PTT1 тангента ручная CTS
@@ -4775,7 +4775,7 @@ void test_tangN()
 		myFile.println(buffer);                                                         // "Command sensor OFF tangenta nognaja              send!"      ;
 		file_print_date();
 		myFile.println("");
-    }
+	}
 	regBank.set(13,0);                                                              // XP8 - 2   sensor Тангента ножная
 	regBank.set(14,0);                                                              // XP8 - 1   PTT Тангента ножная
 	UpdateRegs();                                                                   // Выполнить команду
@@ -4928,7 +4928,7 @@ void test_mikrophon()
 		myFile.println(buffer);                                                         // " ****** Test miсrophone start! ******"                       ;
 		file_print_date();
 		myFile.println("");
-    }
+	}
 	regBank.set(15,0);                                                              // XS1 - 5   PTT Мик CTS
 	regBank.set(16,0);                                                              // XS1 - 6   sensor подключения микрофона
 
@@ -5621,7 +5621,7 @@ void test_power()
 		if (test_repeat)                                          // Параметры в норме. Тест одиночный
 			{
 				file_print_date();
-	  			myFile.print ("  ");  
+				myFile.print ("  ");  
 			}
 		myFile.print(buffer);   
 		myFile.print("Error! - "); 
@@ -5655,7 +5655,7 @@ void test_power()
 		if (test_repeat)                                          // Параметры в норме. Тест одиночный
 			{
 				file_print_date();
-	  			myFile.print ("  ");  
+				myFile.print ("  ");  
 			}
 		myFile.print(buffer);   
 		myFile.print("Error! - "); 
@@ -5689,7 +5689,7 @@ void test_power()
 		if (test_repeat)                                          // Параметры в норме. Тест одиночный
 			{
 				file_print_date();
-	  			myFile.print ("  ");  
+				myFile.print ("  ");  
 			}
 		myFile.print(buffer);   
 		myFile.print("Error! - "); 
@@ -5712,7 +5712,7 @@ void test_power()
 				myFile.print(buffer);                               // "Power Radio2 V    - "                                        ;
 				myFile.print("Pass | power ");
 				myFile.print(read_reg_eeprom(adr_reg40495)*2.61/100);
-			    myFile.println("v / porog min 11v - max 13v");
+				myFile.println("v / porog min 11v - max 13v");
 			}
 	}
 
@@ -5723,7 +5723,7 @@ void test_power()
 		if (test_repeat)                                          // Параметры в норме. Тест одиночный
 			{
 				file_print_date();
-	  			myFile.print ("  ");  
+				myFile.print ("  ");  
 			}
 		myFile.print(buffer);   
 		myFile.print("Error! - "); 
@@ -5757,7 +5757,7 @@ void test_power()
 		if (test_repeat)                                          // Параметры в норме. Тест одиночный
 			{
 				file_print_date();
-	  			myFile.print ("  ");  
+				myFile.print ("  ");  
 			}
 		myFile.print(buffer);   
 		myFile.print("Error! - "); 
@@ -5926,7 +5926,7 @@ void set_ggs_mute()
 	if (ggs_mute)
 	{
 		bitSet(regs_out[1], 4);                     //
-    }
+	}
 	else
 	{
 		bitClear(regs_out[1], 4);
@@ -5954,7 +5954,7 @@ void set_ggs_mute1()
 	if (ggs_mute)
 	{
 		bitSet(regs_out[1], 4);                     //
-    }
+	}
 	else
 	{
 		bitClear(regs_out[1], 4);
@@ -6906,7 +6906,7 @@ void measure_vol_min(int istochnik, unsigned int adr_count, unsigned int adr_cou
 				if (test_repeat)                                          // Параметры в норме. Тест одиночный
 				{
 					file_print_date();
-	  				myFile.print ("  ");  
+					myFile.print ("  ");  
 				}
 				myFile.print(buffer); 
 				regcount = read_reg_eeprom(_adr_count);                              // адрес счетчика ошибки 
@@ -7024,7 +7024,7 @@ void measure_vol_max(int istochnik, unsigned int adr_count, unsigned int adr_cou
 			case 332:
 				strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[132])));   // "Test GGS ** Signal mag radio                                 ON  - ";
 				break;
-            case 333:
+			case 333:
 				strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[133])));   // "Test headset instructor ** Signal mag radio                  ON  - ";
 				break;
 			case 334:
@@ -7044,8 +7044,8 @@ void measure_vol_max(int istochnik, unsigned int adr_count, unsigned int adr_cou
 				if (test_repeat)                                          // Параметры в норме. Тест одиночный
 				{
 				  file_print_date();
-	  			  myFile.print ("  ");  
-		        }
+				  myFile.print ("  ");  
+				}
 				myFile.print(buffer); 
 				regcount = read_reg_eeprom(_adr_count);                             // адрес счетчика ошибки 
 				regcount++;                                                         // увеличить счетчик ошибок канала 
@@ -8145,10 +8145,10 @@ modbus registers follow the following format
 	regBank.add(330);                         // Флаг ошибки "Test Radio1 ** Signal mag radio                             ON  - ";
 	regBank.add(331);                         // Флаг ошибки "Test Radio2 ** Signal mag radio                             ON  - ";                    // 
 	regBank.add(332);                         // Флаг ошибки "Test GGS ** Signal mag radio                                ON  - ";
-    regBank.add(333);                         // "Test headset instructor ** Signal mag radio                             ON  - ";
-    regBank.add(334);                         // "Test headset dispatcher ** Signal mag radio                             ON  - ";
-    regBank.add(335);                         // "Test MTT ** Signal mag radio                                            ON  - ";
-    regBank.add(336);                         // "Test Microphone ** Signal mag radio                                     ON  - ";
+	regBank.add(333);                         // "Test headset instructor ** Signal mag radio                             ON  - ";
+	regBank.add(334);                         // "Test headset dispatcher ** Signal mag radio                             ON  - ";
+	regBank.add(335);                         // "Test MTT ** Signal mag radio                                            ON  - ";
+	regBank.add(336);                         // "Test Microphone ** Signal mag radio                                     ON  - ";
 	regBank.add(337);                         // Свободен 
 
 
