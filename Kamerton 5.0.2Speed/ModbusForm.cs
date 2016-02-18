@@ -2410,36 +2410,36 @@ namespace KamertonTest
 				    stop_DoWorkAll_Test1();                       //  Остановить прогрессбар выполнения теста
 				    }
 			}
-
+/*
         private void timer_s_txt7_Tick(object sender, EventArgs e)
         {
-            textBox7.Text += s_txt7;
-            s_txt7 = "";
-            textBox7.Refresh();
+            //textBox7.Text += s_txt7;
+            //s_txt7 = "";
+            //textBox7.Refresh();
             timer_s_txt7.Stop();
         }
         private void timer_s_txt8_Tick(object sender, EventArgs e)
         {
-            textBox8.Text += s_txt8;
-            s_txt8 = "";
-            textBox8.Refresh();
+            //textBox8.Text += s_txt8;
+            //s_txt8 = "";
+            //textBox8.Refresh();
             timer_s_txt8.Stop();
         }
         private void timer_s_txt9_Tick(object sender, EventArgs e)
         {
-            textBox9.Text += s_txt9;
-            s_txt9 = "";
-            textBox9.Refresh();
+            //textBox9.Text += s_txt9;
+            //s_txt9 = "";
+            //textBox9.Refresh();
             timer_s_txt9.Stop();
         }
         private void timer_s_txt48_Tick(object sender, EventArgs e)
         {
-            textBox48.Text += s_txt48;
-            s_txt48 = "";
-            textBox48.Refresh();
+            //textBox48.Text += s_txt48;
+            //s_txt48 = "";
+            //textBox48.Refresh();
             timer_s_txt48.Stop();
         }
-
+*/
         private void timer_param_set_Tick(object sender, EventArgs e)
 			{
 			timer1.Start();
@@ -3036,7 +3036,6 @@ namespace KamertonTest
    
 		private void sensor_off()// 
 		{
-          //  timer1.Start();
 			ushort[] writeVals = new ushort[2];
 			short[] readVals = new short[124];
 			bool[] coilArr = new bool[64];
@@ -3044,8 +3043,7 @@ namespace KamertonTest
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 1); // Отключить все сенсоры
 			s_txt7 += ("Команда на отключение сенсоров отправлена" + "\r\n");
-            timer_s_txt7.Start();
-			Thread.Sleep(300);
+ 			Thread.Sleep(300);
 
 			// Новый фрагмент чтения регистров 40001-40007
 
@@ -3064,7 +3062,6 @@ namespace KamertonTest
 			startRdReg = 1;
 			numRdRegs = 7;
 			res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);    // 03  Считать число из регистров по адресу  40000 -49999
-			//label78.Text = ("Результат: " + (BusProtocolErrors.getBusProtocolErrorText(res) + "\r\n"));
 			if ((res == BusProtocolErrors.FTALK_SUCCESS))
 			{
 				toolStripStatusLabel1.Text = "    MODBUS ON    ";
@@ -3109,22 +3106,17 @@ namespace KamertonTest
 				}
 
 			}
-		   // Thread.Sleep(200);
-			//test_end();
-		//	File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void sensor_on()
 		{
-         //   timer1.Start();
-			ushort[] writeVals = new ushort[2];
+ 			ushort[] writeVals = new ushort[2];
 			short[] readVals = new short[124];
 			bool[] coilArr = new bool[64];
 			slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 2); // Включить все сенсоры
 			s_txt7 += ("Команда на включение сенсоров отправлена" + "\r\n");
-            timer_s_txt7.Start();
-			Thread.Sleep(300);
+ 			Thread.Sleep(300);
 
 			//  фрагмент чтения регистров 40001-40007 состояния "Камертон"
 
@@ -3143,7 +3135,6 @@ namespace KamertonTest
 			startRdReg = 1;
 			numRdRegs = 7;
 			res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);    // 03  Считать число из регистров по адресу  40000 -49999
-			//  label78.Text = ("Результат: " + (BusProtocolErrors.getBusProtocolErrorText(res) + "\r\n"));
 			if ((res == BusProtocolErrors.FTALK_SUCCESS))
 			{
 				toolStripStatusLabel1.Text = "    MODBUS ON    ";
@@ -3188,123 +3179,83 @@ namespace KamertonTest
 				}
 
 			}
-		   // Thread.Sleep(200);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_instruktora()
 		{
-          //  timer1.Start();
 			startWrReg = 120;                                           // В 40120 ячейке хранится номер теста. Эту ячейку применяет test_switch() Arduino
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 3); // Команда на проверку 'Гарнитура Инструктора'
 			s_txt7 += ("Команда на проверку 'Гарнитура Инструктора' отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(4050);
-		 //   test_end();
-			// File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_dispetchera()
 		{
-         //   timer1.Start();
 			startWrReg = 120;                                           // В 40120 ячейке хранится номер теста. Эту ячейку применяет test_switch() Arduino
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 4); // Команда на проверку 'Гарнитура Диспетчера'
-			//startCoil = 38; // Запустить полный тест , адрес в контроллере 37
-			//res = myProtocol.writeCoil(slave, startCoil, true);
 			s_txt7 += ("Команда на проверку 'Гарнитура Диспетчера' отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(450);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_MTT()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 5);   // Команда на проверку 'МТТ'
 			s_txt7 += ("Команда на проверку 'МТТ' отправлена" + "\r\n");
-            timer_s_txt7.Start();
-			Thread.Sleep(450);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
+ 			Thread.Sleep(450);
 		}
 		private void test_tangR()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 6); // Команда на проверку 'Тангента ручная'
 			s_txt7 += ("Команда на проверку 'Тангента ручная' отправлена" + "\r\n");
-            timer_s_txt7.Start();
-			Thread.Sleep(450);
-		//	test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
+ 			Thread.Sleep(450);
 		}
 		private void test_tangN()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 7); // Команда на проверку 'Тангента ножная'
 			s_txt7 += ("Команда на проверку 'Тангента ножная' отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(450);
-		//	test_end();
-		//	File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void testGGS()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 8); // Команда на проверку ГГС 
 			s_txt7 += ("Команда на проверку ГГС отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(250);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_GG_Radio1()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 9);   //Команда на проверку 'ГГ-Радио1'
 			s_txt7 += ("Команда на проверку 'ГГ-Радио1' отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(250);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_GG_Radio2()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 10); // Команда на проверку 'ГГ-Радио2
 			s_txt7 += ("Команда на проверку 'ГГ-Радио2' отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(250);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_mikrophon()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 11);   // Команда на проверку 'Микрофон'
 			s_txt7 = ("Команда на проверку 'Микрофон' отправлена" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(250);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_power()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 17); // Проверка напряжения питания
 			s_txt7 += ("Проверка напряжения питания" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(250);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		private void test_valueDisp()
 		{
 			startWrReg = 120;
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 19); // Отключить все сенсоры
 			s_txt7 += ("Проверка регулировки яркости дисплея" + "\r\n");
-            timer_s_txt7.Start();
 			Thread.Sleep(250);
-			//test_end();
-			//File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
 		}
 		#endregion
 
@@ -3337,15 +3288,9 @@ namespace KamertonTest
 				// Обработка ошибки.
 				s_txt48 += ("Ошибка! " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\t");
 				s_txt8 = ("Ошибка!  " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
-                timer_s_txt48.Start();
-                timer_s_txt8.Start();
-				error_list();
-				// File.AppendAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
-				//  File.AppendAllText(pathString, s_txt48, Encoding.GetEncoding("UTF-8"));
+ 				error_list();
 			}
-           // timer1.Stop();
-			s_txt7 += ("Выполнение команды завершено" + "\r\n");
-            timer_s_txt7.Start();
+ 			s_txt7 += ("Выполнение команды завершено" + "\r\n");
 			All_Test_run = false;
 		}
 		private void test_end1()
@@ -3392,16 +3337,6 @@ namespace KamertonTest
 					toolStripStatusLabel1.Text = "    MODBUS ON    ";
 					MODBUS_SUCCESS = true;
 				}
-/*
-				else
-				{
-					toolStripStatusLabel1.Text = "    MODBUS ERROR (reset) ";
-					toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					MODBUS_SUCCESS = false;
-					Thread.Sleep(100);
-					return;
-				}
-				*/
 				Thread.Sleep(50);
 			} while (coilArr[0] == false);                                     // Если coilArr[0] == true , тест завершен
 		}
@@ -3416,9 +3351,7 @@ namespace KamertonTest
 				error_list_reg(1310, 2, 0, 0);
 				s_txt8  += ("Сенсор  трубки не отключился                              \t< = " + readVals_all[0] + ">\r\n");
 				s_txt48 += ("Сенсор  трубки не отключился                              \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
-				res      = myProtocol.writeCoil(slave, 200, false);
+ 				res      = myProtocol.writeCoil(slave, 200, false);
 			}
 
 			if (coilArr_all[1] != false)
@@ -3426,8 +3359,6 @@ namespace KamertonTest
 				error_list_reg(1314, 2, 1, 1);
 				s_txt8  += ("Сенсор Тангента ручная не отключился                      \t< = " + readVals_all[1] + ">\r\n");
 				s_txt48 += ("Сенсор Тангента ручная не отключился         \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 201, false);
 			}
 
@@ -3436,8 +3367,6 @@ namespace KamertonTest
 				error_list_reg(1318, 2, 2, 2);
 				s_txt8  += ("Сенсор Тангента ножная не отключился                      \t< = " + readVals_all[2] + ">\r\n");
 				s_txt48 += ("Сенсор Тангента ножная не отключился          \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 202, false);
 			}
 
@@ -3446,8 +3375,6 @@ namespace KamertonTest
 				error_list_reg(1322, 2, 3, 3);
 				s_txt8  += ("Сенсор гарнитуры инструктора с 2 наушниками  не отключился\t< = " + readVals_all[3] + ">\r\n");
 				s_txt48 += ("Сенсор гарнитуры инструктора с 2 наушниками  не отключился\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 203, false);
 			}
 			if (coilArr_all[4] != false)
@@ -3455,8 +3382,6 @@ namespace KamertonTest
 				error_list_reg(1326, 2, 4, 4);
 				s_txt8  += ("Сенсор гарнитуры инструктора  не отключился               \t< = " + readVals_all[4] + ">\r\n");
 				s_txt48 += ("Сенсор гарнитуры инструктора  не отключился               \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 204, false);
 			}
 			if (coilArr_all[5] != false)
@@ -3464,8 +3389,6 @@ namespace KamertonTest
 				error_list_reg(1330, 2, 5, 5);
 				s_txt8  += ("Сенсор диспетчера с 2 наушниками не отключился            \t< = " + readVals_all[5] + ">\r\n");
 				s_txt48 += ("Сенсор диспетчера с 2 наушниками не отключился            \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 205, false);
 			}
 			if (coilArr_all[6] != false)
@@ -3473,8 +3396,6 @@ namespace KamertonTest
 				error_list_reg(1334, 2, 6, 6);
 				s_txt8  += ("Сенсор диспетчера не отключился                           \t< = " + readVals_all[6] + ">\r\n");
 				s_txt48 += ("Сенсор диспетчера не отключился                           \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 206, false);
 			}
 			if (coilArr_all[7] != false)
@@ -3483,8 +3404,6 @@ namespace KamertonTest
 				error_list_reg(1338, 2, 7, 7);
 				s_txt8  += ("Сенсор Микрофона не отключился                            \t< = " + readVals_all[7] + ">\r\n");
 				s_txt48 += ("Сенсор Микрофона не отключился                            \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 207, false);
 			}
 			if (coilArr_all[8] != false)
@@ -3492,8 +3411,6 @@ namespace KamertonTest
 				error_list_reg(1342, 2, 8, 8);
 				s_txt8  += ("Микрофон инструктора не отключился                        \t< = " + readVals_all[8] + ">\r\n");
 				s_txt48 += ("Микрофон инструктора не отключился                        \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 208, false);
 			}
 			if (coilArr_all[9] != false)
@@ -3501,8 +3418,6 @@ namespace KamertonTest
 				error_list_reg(1346, 2, 9, 9);
 				s_txt8  += ("Микрофон диспетчера не отключился                         \t< = " + readVals_all[9] + ">\r\n");
 				s_txt48 += ("Микрофон диспетчера не отключился                         \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 209, false);
 			}
 
@@ -3511,8 +3426,6 @@ namespace KamertonTest
 				error_list_reg(1350, 2, 10, 10);
 				s_txt8  += ("Сенсор  трубки не включился                               \t\t< = " + readVals_all[10] + ">\r\n");
 				s_txt48 += ("Сенсор  трубки не включился                               \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 210, false);
 			}
 
@@ -3521,8 +3434,6 @@ namespace KamertonTest
 				error_list_reg(1354, 2, 11, 11);
 				s_txt8  += ("Сенсор Тангента ручная не включился                       \t< = " + readVals_all[11] + ">\r\n");
 				s_txt48 += ("Сенсор Тангента ручная не включился                       \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 211, false);
 			}
 
@@ -3531,8 +3442,6 @@ namespace KamertonTest
 				error_list_reg(1358, 2, 12, 12);
 				s_txt8  += ("Сенсор Тангента ножная не включился                       \t< = " + readVals_all[12] + ">\r\n");
 				s_txt48 += ("Сенсор Тангента ножная не включился                       \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 212, false);
 			}
 
@@ -3548,8 +3457,6 @@ namespace KamertonTest
 				error_list_reg(1366, 2, 14, 14);
 				s_txt8  += ("Сенсор гарнитуры инструктора  не включился                \t< = " + readVals_all[14] + ">\r\n");
 				s_txt48 += ("Сенсор гарнитуры инструктора  не включился                \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 214, false);
 			}
 			if (coilArr_all[15] != false)
@@ -3564,8 +3471,6 @@ namespace KamertonTest
 				error_list_reg(1374, 2, 16, 16);
 				s_txt8  += ("Сенсор диспетчера не включился                            \t< = " + readVals_all[16] + ">\r\n");
 				s_txt48 += ("Сенсор диспетчера не включился                            \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 216, false);
 			}
 			if (coilArr_all[17] != false)
@@ -3580,8 +3485,6 @@ namespace KamertonTest
 				error_list_reg(1382, 2, 18, 18);
 				s_txt8  += ("Микрофон инструктора не включился                         \t< = " + readVals_all[18] + ">\r\n");
 				s_txt48 += ("Микрофон инструктора не включился                         \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 218, false);
 			}
 			if (coilArr_all[19] != false)
@@ -3589,8 +3492,6 @@ namespace KamertonTest
 				error_list_reg(1386, 2, 19, 19);
 				s_txt8  += ("Микрофон диспетчера не включился                          \t< = " + readVals_all[19] + ">\r\n");
 				s_txt48 += ("Микрофон диспетчера не включился                          \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 219, false);
 			}
 
@@ -3599,8 +3500,6 @@ namespace KamertonTest
 				error_list_reg(1390, 2, 20, 20);
 				s_txt8  += ("PTT инструктора не отключился                             \t< = " + readVals_all[20] + ">\r\n");
 				s_txt48 += ("PTT инструктора не отключился                             \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 220, false);
 			}
 
@@ -3609,8 +3508,6 @@ namespace KamertonTest
 				error_list_reg(1394, 2, 21, 21);
 				s_txt8  += ("PTT инструктора не включился                              \t\t< = " + readVals_all[21] + ">\r\n");
 				s_txt48 += ("PTT инструктора не включился                              \t\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 221, false);
 			}
 
@@ -3619,8 +3516,6 @@ namespace KamertonTest
 				error_list_reg(1398, 2, 22, 22);
 				s_txt8  += ("PTT диспетчера не отключился                              \t< = " + readVals_all[22] + ">\r\n");
 				s_txt48 += ("PTT диспетчера не отключился                              \t\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 222, false);
 			}
 
@@ -3629,8 +3524,6 @@ namespace KamertonTest
 				error_list_reg(1402, 2, 23, 23);
 				s_txt8  += ("PTT диспетчера не включился                               \t\t< = " + readVals_all[23] + ">\r\n");
 				s_txt48 += ("PTT диспетчера не включился                               \t\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 223, false);
 			}
 			if (coilArr_all[24] != false)
@@ -3639,8 +3532,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[24];
 				s_txt8   += ("Сигнал инструктора LineL не в норме                     \t< = " + readVals_all[24] + ">  " + temp_disp / 100 + " V \r\n");
 				s_txt48  += ("Сигнал инструктора LineL не в норме                     \t = " + temp_disp / 100 + " V \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 224, false);
 			}
 			if (coilArr_all[25] != false)
@@ -3657,8 +3548,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[26];
 				s_txt8   += ("Сигнал инструктора на разъеме Маг phone не в норме \t< = " + readVals_all[26] + ">  " + temp_disp / 100 + " V \r\n");
 				s_txt48  += ("Сигнал инструктора на разъеме Маг phone не в норме \t = " + temp_disp / 100 + " V \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 226, false);
 			}
 			if (coilArr_all[27] != false)
@@ -3667,8 +3556,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[27];
 				s_txt8   += ("Сигнал диспетчера LineL не в норме                      \t< = " + readVals_all[27] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Сигнал диспетчера LineL не в норме                      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 227, false);
 			}
 			if (coilArr_all[28] != false)
@@ -3677,8 +3564,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[28];
 				s_txt8   += ("Сигнал диспетчера LineR не в норме                      \t< = " + readVals_all[28] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Сигнал диспетчера LineR не в норме                      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 228, false);
 			}
 			if (coilArr_all[29] != false)
@@ -3687,8 +3572,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[29];
 				s_txt8   += ("Сигнал диспетчера на разъеме Маг phone не в норме       \t< = " + readVals_all[29] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Сигнал диспетчера на разъеме Маг phone не в норме       \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 229, false);
 			}
 
@@ -3707,8 +3590,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[31];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал FrontR    \tOFF     \t< = " + readVals_all[31] + ">  " + temp_disp / 100 + " V\r\n");
                 s_txt48  += ("Тест гарнитуры инструктора ** Сигнал FrontR    \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 231, false);
 			}
 
@@ -3718,8 +3599,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[32];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал LineL     \tOFF     \t< = " + readVals_all[32] + ">  " + temp_disp / 100 + " V\r\n");
                 s_txt48 += ("Тест гарнитуры инструктора ** Сигнал LineL      \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 232, false);
 			}
 
@@ -3729,8 +3608,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[33];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал LineR     \tOFF     \t< = " + readVals_all[33] + ">  " + temp_disp / 100 + " V\r\n");
                 s_txt48  += ("Тест гарнитуры инструктора ** Сигнал LineR     \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 233, false);
 			}
 			if (coilArr_all[34] != false)
@@ -3739,8 +3616,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[34];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал mag radio \tOFF     \t< = " + readVals_all[34] + ">  " + temp_disp / 100 + " V\r\n");
                 s_txt48  += ("Тест гарнитуры инструктора ** Сигнал mag radio \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 234, false);
 			}
 			if (coilArr_all[35] != false)
@@ -3749,8 +3624,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[35];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал mag phone \tOFF     \t< = " + readVals_all[35] + ">  " + temp_disp / 100 + " V\r\n");
                 s_txt48  += ("Тест гарнитуры инструктора ** Сигнал mag phone \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 235, false);
 			}
 			if (coilArr_all[36] != false)
@@ -3759,8 +3632,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[36];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал ГГС       \tOFF     \t< = " + readVals_all[36] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест гарнитуры инструктора ** Сигнал ГГС       \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 236, false);
 			}
 			if (coilArr_all[37] != false)
@@ -3769,8 +3640,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[37];
 				s_txt8   += ("Тест гарнитуры инструктора ** Сигнал ГГ Радио1 \tOFF     \t< = " + readVals_all[37] + ">  " + temp_disp / 100 + " V\r\n");
                 s_txt48  += ("Тест гарнитуры инструктора ** Сигнал ГГ Радио1 \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 237, false);
 			}
 			if (coilArr_all[38] != false)
@@ -3787,8 +3656,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[39];
 				s_txt8   += ("Ошибка! Ток устройства не в норме  < = " + readVals_all[38] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Ошибка! Ток устройства не в норме  < = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 239, false);
 			}
 
@@ -3807,8 +3674,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[41];
 				s_txt8   += ("Тест гарнитуры диспетчера ** Сигнал FrontR     \tOFF     \t< = " + readVals_all[41] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест гарнитуры диспетчера ** Сигнал FrontR     \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 241, false);
 			}
 
@@ -3818,8 +3683,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[42];
 				s_txt8   += ("Тест гарнитуры диспетчера ** Сигнал LineL      \tOFF     \t< = " + readVals_all[42] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест гарнитуры диспетчера ** Сигнал LineL      \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 242, false);
 			}
 
@@ -3837,8 +3700,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[44];
 				s_txt8   += ("Тест гарнитуры диспетчера ** Сигнал mag radio  \tOFF     \t< = " + readVals_all[44] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест гарнитуры диспетчера ** Сигнал mag radio  \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 244, false);
 			}
 			if (coilArr_all[45] != false)
@@ -3847,8 +3708,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[45];
 				s_txt8   += ("Тест гарнитуры диспетчера ** Сигнал mag phone  \tOFF     \t< = " + readVals_all[45] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест гарнитуры диспетчера ** Сигнал mag phone  \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 245, false);
 			}
 			if (coilArr_all[46] != false)
@@ -3873,8 +3732,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[48];
 				s_txt8   += ("Тест гарнитуры диспетчера ** Сигнал ГГ Радио2  \tOFF     \t< = " + readVals_all[48] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест гарнитуры диспетчера ** Сигнал ГГ Радио2  \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 248, false);
 			}
 			if (coilArr_all[49] != false)
@@ -3892,8 +3749,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[50];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал FrontL             \tOFF     \t< = " + readVals_all[50] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал FrontL             \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 250, false);
 			}
 
@@ -3903,8 +3758,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[51];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал FrontR             \tOFF     \t< = " + readVals_all[51] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал FrontR             \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 251, false);
 			}
 
@@ -3914,8 +3767,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[52];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал LineL              \tOFF     \t< = " + readVals_all[52] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал LineL              \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 252, false);
 			}
 
@@ -3925,8 +3776,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[53];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал LineR              \tOFF     \t< = " + readVals_all[53] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал LineR              \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 253, false);
 			}
 			if (coilArr_all[54] != false)
@@ -3935,8 +3784,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[54];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал mag radio          \tOFF     \t< = " + readVals_all[54] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал mag radio          \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 254, false);
 			}
 			if (coilArr_all[55] != false)
@@ -3945,8 +3792,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[55];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал mag phone          \tOFF     \t< = " + readVals_all[55] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал mag phone          \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 255, false);
 			}
 			if (coilArr_all[56] != false)
@@ -3955,8 +3800,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[56];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал ГГС                \tOFF     \t< = " + readVals_all[56] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал ГГС                \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 256, false);
 			}
 			if (coilArr_all[57] != false)
@@ -3965,8 +3808,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[57];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал ГГ Радио1          \tOFF     \t< = " + readVals_all[57] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал ГГ Радио1          \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 257, false);
 			}
 			if (coilArr_all[58] != false)
@@ -3975,8 +3816,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[58];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал ГГ Радио2          \tOFF     \t< = " + readVals_all[58] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал ГГ Радио2          \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 258, false);
 			}
 			if (coilArr_all[59] != false)
@@ -3985,8 +3824,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[59];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал ГГС                \tON      \t< = " + readVals_all[59] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал ГГС                \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 259, false);
 			}
 
@@ -4005,8 +3842,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[61];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал LineR              \tON      \t< = " + readVals_all[61] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал LineR              \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 261, false);
 			}
 
@@ -4016,8 +3851,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[62];
 				s_txt8   += ("Тест МТТ (трубки) ** Сигнал Mag phone          \tON      \t< = " + readVals_all[62] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест МТТ (трубки) ** Сигнал Mag phone          \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 262, false);
 			}
 
@@ -4034,8 +3867,6 @@ namespace KamertonTest
 				error_list_reg(1566, 2, 64, 64);
 				s_txt8  += ("Тест микрофона PTT  (CTS)                       \t OFF    \t< = " + readVals_all[64] + ">\r\n");
 				s_txt48 += ("Тест микрофона PTT  (CTS)                       \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 264, false);
 			}
 			if (coilArr_all[65] != false)
@@ -4043,8 +3874,6 @@ namespace KamertonTest
 				error_list_reg(1570, 2, 65, 65);
 				s_txt8  += ("Тест МТТ (трубки) PTT    (CTS)                  \tON      \t< = " + readVals_all[65] + ">\r\n");
 				s_txt48 += ("Тест МТТ (трубки) PTT    (CTS)                  \tON      \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 265, false);
 			}
 			if (coilArr_all[66] != false)
@@ -4052,8 +3881,6 @@ namespace KamertonTest
 				error_list_reg(1574, 2, 66, 66);
 				s_txt8  += ("Тест микрофона PTT  (CTS)                       \tON      \t< = " + readVals_all[66] + ">\r\n");
 				s_txt48 += ("Тест микрофона PTT  (CTS)                       \tON      \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 266, false);
 			}
 			if (coilArr_all[67] != false)
@@ -4061,8 +3888,6 @@ namespace KamertonTest
 				error_list_reg(1578, 2, 67, 67);
 				s_txt8  += ("Тест МТТ (трубки) HangUp (DCD)                  \tOFF     \t< = " + readVals_all[67] + ">\r\n");
 				s_txt48 += ("Тест МТТ (трубки) HangUp (DCD)                  \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 267, false);
 			}
 			if (coilArr_all[68] != false)
@@ -4070,8 +3895,6 @@ namespace KamertonTest
 				error_list_reg(1582, 2, 68, 68);
 				s_txt8  += ("Тест МТТ (трубки) HangUp (DCD)                  \tON      \t< = " + readVals_all[68] + ">\r\n");
 				s_txt48 += ("Тест МТТ (трубки) HangUp (DCD)                  \tON      \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 268, false);
 			}
 			if (coilArr_all[69] != false)
@@ -4080,8 +3903,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[69];        // 
 				s_txt8   += ("Длительность импульса регулировки яркости дисплея\t< = " + readVals_all[69] + ">  " + temp_disp + " мкс\r\n");
 				s_txt48  += ("Длительность импульса регулировки яркости дисплея\t = " + temp_disp + " мкс\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 269, false);
 			}
 
@@ -4090,8 +3911,6 @@ namespace KamertonTest
 				error_list_reg(1590, 2, 70, 70);
 				s_txt8  += ("Команда PTT1 тангента ручная (CTS)              \tOFF     \t< = " + readVals_all[70] + ">\r\n");
 				s_txt48 += ("Команда PTT1 тангента ручная (CTS)              \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 270, false);
 			}
 
@@ -4100,8 +3919,6 @@ namespace KamertonTest
 				error_list_reg(1594, 2, 71, 71);
 				s_txt8  += ("Команда PTT2 тангента ручная (DCR)              \tOFF     \t< = " + readVals_all[71] + ">\r\n");
 				s_txt48 += ("Команда PTT2 тангента ручная (DCR)              \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 271, false);
 			}
 
@@ -4110,8 +3927,6 @@ namespace KamertonTest
 				error_list_reg(1598, 2, 72, 72);
 				s_txt8  += ("Команда PTT1 тангента ручная (CTS)              \tON      \t< = " + readVals_all[72] + ">\r\n");
 				s_txt48 += ("Команда PTT1 тангента ручная (CTS)              \tON      \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 272, false);
 			}
 
@@ -4127,8 +3942,6 @@ namespace KamertonTest
 				error_list_reg(1606, 2, 74, 74);
 				s_txt8  += ("Команда сенсор тангента ручная                  \tOFF     \t< = " + readVals_all[74] + ">\r\n");
 				s_txt48 += ("Команда сенсор тангента ручная                  \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 274, false);
 			}
 			if (coilArr_all[75] != false)
@@ -4143,8 +3956,6 @@ namespace KamertonTest
 				error_list_reg(1614, 2, 76, 76);
 				s_txt8 += ("Команда сенсор тангента ножная                  \tOFF     \t< = " + readVals_all[76] + ">\r\n");
 				s_txt48 += ("Команда сенсор тангента ножная                  \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res = myProtocol.writeCoil(slave, 276, false);
 			}
 			if (coilArr_all[77] != false)
@@ -4159,8 +3970,6 @@ namespace KamertonTest
 				error_list_reg(1622, 2, 78, 78);
 				s_txt8  += ("Команда PTT тангента ножная (CTS)               \tOFF     \t< = " + readVals_all[78] + ">\r\n");
 				s_txt48 += ("Команда PTT тангента ножная (CTS)               \tОтключен\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res      = myProtocol.writeCoil(slave, 278, false);
 			}
 			if (coilArr_all[79] != false)
@@ -4177,8 +3986,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[80];
 				s_txt8   += ("Тест ГГС ** Сигнал FrontL                      \tOFF     \t< = " + readVals_all[80] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал FrontL                      \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 280, false);
 			}
 
@@ -4188,8 +3995,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[81];
 				s_txt8   += ("Тест ГГС ** Сигнал FrontR                      \tOFF     \t< = " + readVals_all[81] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал FrontR                      \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 281, false);
 			}
 
@@ -4199,8 +4004,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[82];
 				s_txt8   += ("Тест ГГС ** Сигнал LineL                       \tOFF     \t< = " + readVals_all[82] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал LineL                       \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 282, false);
 			}
 
@@ -4218,8 +4021,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[84];
 				s_txt8 += ("Тест ГГС ** Сигнал mag radio                   \tOFF     \t< = " + readVals_all[84] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48 += ("Тест ГГС ** Сигнал mag radio                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res = myProtocol.writeCoil(slave, 284, false);
 			}
 			if (coilArr_all[85] != false)
@@ -4236,8 +4037,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[86];
 				s_txt8   += ("Тест ГГС ** Сигнал ГГС                         \tOFF     \t< = " + readVals_all[86] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал ГГС                         \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 286, false);
 			}
 			if (coilArr_all[87] != false)
@@ -4246,8 +4045,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[87];
 				s_txt8   += ("Тест ГГС ** Сигнал ГГ Радио1                   \tOFF     \t< = " + readVals_all[87] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал ГГ Радио1                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 287, false);
 			}
 			if (coilArr_all[88] != false)
@@ -4256,8 +4053,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[88];
 				s_txt8   += ("Тест ГГС ** Сигнал ГГ Радио2                   \tOFF     \t< = " + readVals_all[88] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал ГГ Радио2                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 288, false);
 			}
 			if (coilArr_all[89] != false)
@@ -4266,8 +4061,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[89];
 				s_txt8   += ("Тест ГГС ** Сигнал ГГС                         \t\tON    \t< = " + readVals_all[89] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал ГГС                         \t\tON    \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 289, false);
 			}
 
@@ -4277,8 +4070,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[90];
 				s_txt8   += ("Тест ГГС ** Сигнал FrontL                      \tON      \t< = " + readVals_all[90] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал FrontL                      \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 290, false);
 			}
 
@@ -4288,8 +4079,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[91];
 				s_txt8   += ("Тест ГГС ** Сигнал FrontR                      \tON      \t< = " + readVals_all[91] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал FrontR                      \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 291, false);
 			}
 
@@ -4299,8 +4088,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[92];
 				s_txt8   += ("Тест ГГС ** Сигнал mag phone                   \tON      \t< = " + readVals_all[92] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест ГГС ** Сигнал mag phone                   \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 292, false);
 			}
 
@@ -4318,8 +4105,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[94];
 				s_txt8   += ("Напряжение питания Радио1 не в норме                     \t< = " + readVals_all[94] + ">  " + temp_disp * 2.51 / 100 + " V\r\n");
 				s_txt48  += ("Напряжение питания Радио1 не в норме                     \t = " + temp_disp * 2.51 / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 294, false);
 			}
 			if (coilArr_all[95] != false)
@@ -4328,8 +4113,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[95];
 				s_txt8   += ("Напряжение питания Радио2 не в норме                     \t< = " + readVals_all[95] + ">  " + temp_disp * 2.51 / 100 + " V\r\n");
 				s_txt48  += ("Напряжение питания Радио2 не в норме                     \t = " + temp_disp * 2.51 / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 295, false);
 			}
 			if (coilArr_all[96] != false)
@@ -4346,8 +4129,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[97];
 				s_txt8   += ("Напряжение питания светодиода микрофона не в норме       \t< = " + readVals_all[97] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Напряжение питания светодиода микрофона не в норме       \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 297, false);
 			}
 			if (coilArr_all[98] != false)
@@ -4356,8 +4137,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[98];
 				s_txt8   += ("Тест микрофона ** Сигнал mag phone             \tON      \t< = " + readVals_all[98] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал mag phone             \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 298, false);
 			}
 			if (coilArr_all[99] != false)
@@ -4366,8 +4145,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[99];
 				s_txt8   += ("Тест микрофона ** Сигнал LineL                 \tON      \t< = " + readVals_all[99] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал LineL                 \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 299, false);
 			}
 
@@ -4377,8 +4154,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[100];
 				s_txt8   += ("Тест Радио1 ** Сигнал FrontL                   \tOFF     \t< = " + readVals_all[100] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал FrontL                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 300, false);
 			}
 
@@ -4388,8 +4163,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[101];
 				s_txt8   += ("Тест Радио1 ** Сигнал FrontR                   \tOFF     \t< = " + readVals_all[101] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал FrontR                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 301, false);
 			}
 
@@ -4399,8 +4172,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[102];
 				s_txt8   += ("Тест Радио1 ** Сигнал LineL                    \tOFF     \t< = " + readVals_all[102] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал LineL                    \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 302, false);
 			}
 
@@ -4426,8 +4197,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[105];
 				s_txt8   += ("Тест Радио1 ** Сигнал mag phone                \tOFF     \t< = " + readVals_all[105] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал mag phone                \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 305, false);
 			}
 			if (coilArr_all[106] != false)
@@ -4436,8 +4205,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[6];
 				s_txt8   += ("Тест Радио1 ** Сигнал ГГС                      \tOFF     \t< = " + readVals_all[106] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал ГГС                      \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 306, false);
 			}
 			if (coilArr_all[107] != false)
@@ -4446,8 +4213,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[107];
 				s_txt8   += ("Тест Радио1 ** Сигнал ГГ Радио1                \tOFF     \t< = " + readVals_all[107] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал ГГ Радио1                \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 307, false);
 			}
 			if (coilArr_all[108] != false)
@@ -4456,8 +4221,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[108];
 				s_txt8   += ("Тест Радио1 ** Сигнал ГГ Радио2                \tOFF     \t< = " + readVals_all[108] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал ГГ Радио2                \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 308, false);
 			}
 			if (coilArr_all[109] != false)
@@ -4466,8 +4229,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[109];
 				s_txt8   += ("Тест Радио1 ** Сигнал Radio1                   \tON      \t< = " + readVals_all[109] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио1 ** Сигнал Radio1                   \t\tON    \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 309, false);
 			}
 
@@ -4477,8 +4238,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[110];
 				s_txt8   += ("Тест Радио2 ** Сигнал FrontL                   \tOFF     \t< = " + readVals_all[110] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал FrontL                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 310, false);
 			}
 
@@ -4488,8 +4247,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[111];
 				s_txt8   += ("Тест Радио2 ** Сигнал FrontR                   \tOFF     \t< = " + readVals_all[111] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал FrontR                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 311, false);
 			}
 
@@ -4499,8 +4256,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[112];
 				s_txt8   += ("Тест Радио2 ** Сигнал LineL                    \tOFF     \t< = " + readVals_all[112] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал LineL                    \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 312, false);
 			}
 
@@ -4510,8 +4265,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[113];
 				s_txt8   += ("Тест Радио2 ** Сигнал LineR                    \tOFF     \t< = " + readVals_all[113] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал LineR                    \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 313, false);
 			}
 			if (coilArr_all[114] != false)
@@ -4528,8 +4281,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[115];
 				s_txt8   += ("Тест Радио2 ** Сигнал mag phone                \tOFF     \t< = " + readVals_all[115] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал mag phone                \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 315, false);
 			}
 			if (coilArr_all[116] != false)
@@ -4538,8 +4289,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[116];
 				s_txt8   += ("Тест Радио2 ** Сигнал ГГС                      \tOFF     \t< = " + readVals_all[116] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал ГГС                      \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 316, false);
 			}
 			if (coilArr_all[117] != false)
@@ -4564,8 +4313,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[119];
 				s_txt8   += ("Тест Радио2 ** Сигнал Радио2                   \tON      \t< = " + readVals_all[119] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест Радио2 ** Сигнал Радио2                   \tON      \t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 319, false);
 			}
 
@@ -4584,8 +4331,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[121];
 				s_txt8   += ("Тест микрофона ** Сигнал FrontR                \tOFF     \t< = " + readVals_all[121] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал FrontR                \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 321, false);
 			}
 
@@ -4604,8 +4349,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[123];
 				s_txt8   += ("Тест микрофона ** Сигнал LineR                 \tOFF     \t< = " + readVals_all[123] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал LineR                 \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 323, false);
 			}
 			if (coilArr_all[124] != false)
@@ -4614,8 +4357,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[124];
 				s_txt8   += ("Тест микрофона ** Сигнал mag radio             \tOFF     \t< = " + readVals_all[124] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал mag radio             \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 324, false);
 			}
 			if (coilArr_all[125] != false)
@@ -4632,8 +4373,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[126];
 				s_txt8   += ("Тест микрофона ** Сигнал ГГС                   \tOFF     \t< = " + readVals_all[126] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал ГГС                   \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 326, false);
 			}
 			if (coilArr_all[127] != false)
@@ -4642,8 +4381,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[127];
 				s_txt8   += ("Тест микрофона ** Сигнал ГГ Радио1             \tOFF     \t< = " + readVals_all[127] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал ГГ Радио1             \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 327, false);
 			}
 			if (coilArr_all[128] != false)
@@ -4652,8 +4389,6 @@ namespace KamertonTest
 				temp_disp = readVolt_all[128];
 				s_txt8   += ("Тест микрофона ** Сигнал ГГ Радио2             \tOFF     \t< = " + readVals_all[128] + ">  " + temp_disp / 100 + " V\r\n");
 				s_txt48  += ("Тест микрофона ** Сигнал ГГ Радио2             \tОтключен\t = " + temp_disp / 100 + " V\r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 328, false);
 			}
 			if (coilArr_all[129] != false)
@@ -4662,43 +4397,68 @@ namespace KamertonTest
 				temp_disp = readVolt_all[129];
 				s_txt8   += ("Код регулировки яркости дисплея не совпадает             \t< = " + readVals_all[129] + ">  " + temp_disp + " \r\n");
 				s_txt48  += ("Код регулировки яркости дисплея не совпадает             \t = " + temp_disp + " \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
                 res       = myProtocol.writeCoil(slave, 329, false);
 			}
 
 			if (coilArr_all[130] != false)
 			{
 				error_list_reg(1830, 1, 130, 130);
-				temp_disp = readVolt_all[129];
-				s_txt8   += ("Test Radio1 ** Signal mag radio                    ON  -       \t< = " + readVals_all[130] + ">  " + temp_disp + " \r\n");
-				s_txt48  += ("Test Radio1 ** Signal mag radio                    ON  -       \t = " + temp_disp + " \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
-                res       = myProtocol.writeCoil(slave, 329, false);
+				temp_disp = readVolt_all[130];
+                s_txt8   += ("Тест Radio1 ** сигнал  на выходе mag radio     \tON  -       \t< = " + readVals_all[130] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест Radio1 ** сигнал  на выходе mag radio     \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 330, false);
 			}
 
 			if (coilArr_all[131] != false)
 			{
 				error_list_reg(1834, 1, 131, 131);
-				temp_disp = readVolt_all[129];
-				s_txt8   += ("Test Radio2 ** Signal mag radio                    ON  -       \t< = " + readVals_all[131] + ">  " + temp_disp + " \r\n");
-				s_txt48  += ("Test Radio2 ** Signal mag radio                    ON  -       \t = " + temp_disp + " \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
-                res       = myProtocol.writeCoil(slave, 329, false);
+				temp_disp = readVolt_all[131];
+                s_txt8   += ("Тест Radio2 ** сигнал  на выходе mag radio     \tON  -       \t< = " + readVals_all[131] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест Radio2 ** сигнал  на выходе mag radio     \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 331, false);
 			}
 			if (coilArr_all[132] != false)
 			{
 				error_list_reg(1838, 1, 132, 132);
-				temp_disp = readVolt_all[129];
-				s_txt8   += ("Test GGS    ** Signal mag radio                    ON  -       \t< = " + readVals_all[132] + ">  " + temp_disp + " \r\n");
-				s_txt48  += ("Test GGS    ** Signal mag radio                    ON  -       \t = " + temp_disp + " \r\n");
-                timer_s_txt8.Start();
-                timer_s_txt48.Start();
-                res       = myProtocol.writeCoil(slave, 329, false);
+				temp_disp = readVolt_all[132];
+                s_txt8   += ("Тест ГГС ** сигнал  на выходе mag radio        \tON  -       \t< = " + readVals_all[132] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест ГГС ** сигнал  на выходе mag radio        \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 332, false);
 			}
 
+            if (coilArr_all[133] != false)
+            {
+                error_list_reg(1842, 1, 133, 133);
+                temp_disp = readVolt_all[133];
+                s_txt8   += ("Тест гарнитуры инструктора сигнал на выходе mag radio \tON  -       \t< = " + readVals_all[133] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест гарнитуры инструктора сигнал на выходе mag radio \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 333, false);
+            }
+
+            if (coilArr_all[134] != false)
+            {
+                error_list_reg(1846, 1, 134, 134);
+                temp_disp = readVolt_all[134];
+                s_txt8   += ("Тест гарнитуры диспетчера сигнал на выходе mag radio \tON  -       \t< = " + readVals_all[134] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест гарнитуры диспетчера сигнал на выходе mag radio \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 334, false);
+            }
+            if (coilArr_all[135] != false)
+            {
+                error_list_reg(1850, 1, 135, 135);
+                temp_disp = readVolt_all[135];
+                s_txt8   += ("Тест МТТ сигнал на выходе mag radio                  \tON  -       \t< = " + readVals_all[135] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест МТТ сигнал на выходе mag radio                  \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 335, false);
+            }
+            if (coilArr_all[136] != false)
+            {
+                error_list_reg(1854, 1, 136, 136);
+                temp_disp = readVolt_all[136];
+                s_txt8   += ("Тест микрофона сигнал на выходе mag radio            \tON  -       \t< = " + readVals_all[136] + ">  " + temp_disp + " \r\n");
+                s_txt48  += ("Тест микрофона сигнал на выходе mag radio            \tON  -       \t = " + temp_disp + " \r\n");
+                res       = myProtocol.writeCoil(slave, 336, false);
+            }
 			res = myProtocol.writeCoil(slave, 120, false);                      // Снять флаг общей ошибки теста
 
 		}
@@ -7537,7 +7297,6 @@ namespace KamertonTest
 							 if (Visual_N_Test != TestRepeatCount || TestRepeatStart == true)
 							 {
                                  s_txt7 = ("\r\n   Tест № " + TestRepeatCount + "\t   Дата:  "+ DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
-                                 timer_s_txt7.Start();
                                  Visual_N_Test = TestRepeatCount;
 								 TestRepeatStart = false;
 							 }
@@ -7687,16 +7446,12 @@ namespace KamertonTest
 									 // Обработка ошибки.
 									 s_txt48 += ("Ошибка! " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\t");
 									 s_txt8   = ("Ошибка! " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
-                                     timer_s_txt48.Start();
-                                     timer_s_txt8.Start();
                                      error_list();
 								 }
 								 Thread.Sleep(200);
 								 s_txt7 += ("Выполнение команды завершено" + "\r\n");
-                                 timer_s_txt7.Start();
                                  All_Test_run = false;
-                                // timer1.Stop();
-								 Thread.Sleep(200);
+ 								 Thread.Sleep(200);
 
 							 TestN++;
 							 if (radioButton1.Checked & TestN >= TestStep)                                    // Условие однократной проверки

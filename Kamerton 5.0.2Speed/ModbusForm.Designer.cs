@@ -496,10 +496,6 @@ namespace KamertonTest
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.timerPowerOff = new System.Windows.Forms.Timer(this.components);
             this.timerCloseForm = new System.Windows.Forms.Timer(this.components);
-            this.timer_s_txt7 = new System.Windows.Forms.Timer(this.components);
-            this.timer_s_txt8 = new System.Windows.Forms.Timer(this.components);
-            this.timer_s_txt9 = new System.Windows.Forms.Timer(this.components);
-            this.timer_s_txt48 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel1)).BeginInit();
             this.groupBox25.SuspendLayout();
@@ -5818,22 +5814,6 @@ namespace KamertonTest
             this.timerCloseForm.Interval = 200;
             this.timerCloseForm.Tick += new System.EventHandler(this.timerCloseForm_Tick);
             // 
-            // timer_s_txt7
-            // 
-            this.timer_s_txt7.Tick += new System.EventHandler(this.timer_s_txt7_Tick);
-            // 
-            // timer_s_txt8
-            // 
-            this.timer_s_txt8.Tick += new System.EventHandler(this.timer_s_txt8_Tick);
-            // 
-            // timer_s_txt9
-            // 
-            this.timer_s_txt9.Tick += new System.EventHandler(this.timer_s_txt9_Tick);
-            // 
-            // timer_s_txt48
-            // 
-            this.timer_s_txt48.Tick += new System.EventHandler(this.timer_s_txt48_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -5845,7 +5825,7 @@ namespace KamertonTest
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Программа тестирования платы  \" Аудио - 1\" версия 5.0";
+            this.Text = "Программа тестирования платы  \" Аудио - 1\" версия 5.0.2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.LocationChanged += new System.EventHandler(this.Form1_LocationChanged);
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).EndInit();
@@ -6386,10 +6366,6 @@ namespace KamertonTest
         private System.Windows.Forms.Label label189;
         private System.Windows.Forms.Button button102;
         private System.Windows.Forms.Button button103;
-        private System.Windows.Forms.Timer timer_s_txt7;
-        private System.Windows.Forms.Timer timer_s_txt8;
-        private System.Windows.Forms.Timer timer_s_txt9;
-        private System.Windows.Forms.Timer timer_s_txt48;
     }
 }
 

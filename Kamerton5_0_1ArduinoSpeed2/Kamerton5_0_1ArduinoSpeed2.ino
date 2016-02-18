@@ -8151,15 +8151,11 @@ modbus registers follow the following format
 	regBank.add(336);                         // "Test Microphone ** Signal mag radio                                     ON  - ";
 	regBank.add(337);                         // Свободен 
 
+	regBank.add(10081);                       // Адрес флагa индикации состояния сигнала CTS
+	regBank.add(10082);                       // Адрес флагa индикации состояния сигнала DSR
+	regBank.add(10083);                       // Адрес флагa индикации состояния сигнала DCD
 
-
-
-
-	regBank.add(10081);    // Адрес флагa индикации состояния сигнала CTS
-	regBank.add(10082);    // Адрес флагa индикации состояния сигнала DSR
-	regBank.add(10083);    // Адрес флагa индикации состояния сигнала DCD
-
-						 //Add Input registers 30001-30040 to the register bank
+						                      //Add Input registers 30001-30040 to the register bank
 
 	//regBank.add(30000);  // байт 0 отпр бит 0 - Камертон   бит "D"
 	//regBank.add(30001);  // байт 0 отпр бит 1 - Камертон   "1"

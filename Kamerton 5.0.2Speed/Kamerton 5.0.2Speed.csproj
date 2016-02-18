@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KamertonTest</RootNamespace>
-    <AssemblyName>Kamerton 5.0.2Speed</AssemblyName>
+    <AssemblyName>Kamerton 5.0.2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -17,7 +17,7 @@
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\Publish\</PublishUrl>
+    <PublishUrl>E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.0.2Speed\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,11 +27,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <ProductName>Kamerton 5.0.2Speed</ProductName>
+    <ProductName>Kamerton 5.0.2</ProductName>
     <PublisherName>Decima</PublisherName>
-    <SuiteName>Kamerton 5.0.2Speed</SuiteName>
+    <SuiteName>Kamerton 5.0.2</SuiteName>
     <MinimumRequiredVersion>1.0.1.1</MinimumRequiredVersion>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

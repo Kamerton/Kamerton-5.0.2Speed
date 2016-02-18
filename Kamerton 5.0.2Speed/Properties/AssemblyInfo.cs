@@ -6,11 +6,11 @@ using System.Resources;
 // Общие сведения об этой сборке предоставляются следующим набором 
 // атрибутов. Отредактируйте значения этих атрибутов, чтобы изменить
 // общие сведения об этой сборке.
-[assembly: AssemblyTitle("Kamerton 5.0.2Speed")]
-[assembly: AssemblyDescription("Kamerton 5.0.2Speed")]
+[assembly: AssemblyTitle("Kamerton 5.0.2")]
+[assembly: AssemblyDescription("Kamerton 5.0.2")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Decima")]
-[assembly: AssemblyProduct("Kamerton 5.0.2Speed")]
+[assembly: AssemblyProduct("Kamerton 5.0.2")]
 [assembly: AssemblyCopyright("Copyright © ООО Decima 2015")]
 [assembly: AssemblyTrademark("Decima")]
 [assembly: AssemblyCulture("")]
