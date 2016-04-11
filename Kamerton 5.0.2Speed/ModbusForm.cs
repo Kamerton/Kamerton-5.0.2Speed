@@ -89,7 +89,7 @@ namespace KamertonTest
 		#endregion
 
 		#region Set_variables
-		private Oscilloscope oscilloscope1 = Oscilloscope.CreateScope("Oscilloscope/Oscilloscope_settings.ini", "");
+	  	    private Oscilloscope oscilloscope1 = Oscilloscope.CreateScope("Oscilloscope/Oscilloscope_settings.ini", "");
 
 			private MbusMasterFunctions myProtocol;
 			private int slave;

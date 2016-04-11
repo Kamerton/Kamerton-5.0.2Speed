@@ -245,7 +245,7 @@ modbusDevice regBank;
 //Create the modbus slave protocol handler
 modbusSlave slave;
 
-//byte regs_in[5];                                    // Регистры работы с платой Камертон CPLL
+//byte regs_in[5];                                  // Регистры работы с платой Камертон CPLL
 byte regs_out[4];                                   // Регистры работы с платой Камертон
 byte regs_crc[1];                                   // Регистры работы с платой Камертон контрольная сумма
 byte regs_temp = 0;
