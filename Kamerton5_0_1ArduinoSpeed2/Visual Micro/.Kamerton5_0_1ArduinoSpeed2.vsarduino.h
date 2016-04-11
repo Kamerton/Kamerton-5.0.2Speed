@@ -103,7 +103,6 @@ void Reg_count_clear();
 void set_clock();
 void data_clock_exchange();
 void time_control();
-void time_control_get();
 void list_file();
 void load_list_files();
 void file_print_date();

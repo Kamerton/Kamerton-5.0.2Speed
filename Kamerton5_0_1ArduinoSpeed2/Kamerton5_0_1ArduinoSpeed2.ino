@@ -1,15 +1,20 @@
 /*
 
- Kamerton5_0.ino
- VisualStudio
+ Kamerton5_0_1ArduinoSpeed2.ino
+ Visual Studio 2010
  
  Программа тестирования модуля "Камертон" (Базовый вариант)
- Версия:      - 5_0
- Дата:        - 13.11.2015г.
+ Версия:      - 5_0_1
+ Дата:        - 11.04.2016г.
  Организация: - ООО "Децима"
  Автор:       - Мосейчук А.В.
- Версия: Обновленная версия от 17.09.2015г. Новая плата с учетом добавления 
+ Версия: Обновленная версия от 11.04.2016г.
+
+ Новая плата с учетом добавления 
  высоковольтного  модуля для испытания на пробой.
+ Высоковольтный модуль не реализован.
+
+
  Реализовано:
  -
  - прерывание 30мс,
@@ -36,15 +41,8 @@
 #include <modbusSlave.h>
 #include "MCP23017.h"
 #include <avr/pgmspace.h>
-#include <AH_AD9850.h>
 #include <avr/wdt.h>
 #include <stdlib.h> // div, div_t
-
-//CLK - D6, FQUP - D7,  BitData - D8, RESET - D9
-//AH_AD9850(int CLK, int FQUP, int BitData, int RESET);
-//AH_AD9850 AD9850(6, 7, 8, 9);
-//AH_AD9850 AD9850(23, 25, 27, 29);
-
 
 #define  ledPin13  13                               // Назначение светодиодов на плате
 #define  ledPin12  12                               // Назначение светодиодов на плате
@@ -121,9 +119,9 @@ unsigned long number_audio ;
 //---------------------------------------------------------------------------------------------------------
 
 //***************************** Назначение аналоговых входов   ****************************************
-int analog_tok            = 0;       //   Измерение тока питания платы Камертон
-int analog_12V            = 1;       //   Измерение напряжения питания 12в. платы Камертон
-int analog_tok_x10        = 2;       //   Измерение тока питания платы Камертон х 10
+int analog_tok            = 0;       // Измерение тока питания платы Аудио-1 (не реализовано)
+int analog_12V            = 1;       // Измерение напряжения питания 12в. платы Аудио-1
+int analog_tok_x10        = 2;       // Измерение тока питания платы Аудио-1 х 10  (не реализовано)
 int analog_mag_radio      = 3;       //
 int analog_mag_phone      = 4;       //
 int analog_gg_radio1      = 5;       //
@@ -133,7 +131,7 @@ int analog_LineL          = 8;       //
 int analog_LineR          = 9;       //
 int analog_FrontL         = 10;      //
 int analog_FrontR         = 11;      //
-int analog_W              = 12;      //
+int analog_W              = 12;      // 
 int analog_13             = 13;      // Измерение напряжения питания  12в.на разъемах  платы Камертон
 int analog_14             = 14;      // Измерение напряжения питания  12в.на разъемах  платы Камертон
 int analog_3_6            = 15;      // Измерение напряжения питания 3,6в. на разъемах платы Камертон
@@ -167,30 +165,29 @@ uint8_t month  = 1;
 uint16_t year  = 15 ;
 
 //------------------------------------------------------------------------------------------------------------
-MCP23017 mcp_Out1;           // Назначение портов расширения MCP23017  4 A - Out, B - Out
-MCP23017 mcp_Out2;                                  // Назначение портов расширения MCP23017  6 A - Out, B - Out
-MCP23017 mcp_Analog;                                // Назначение портов расширения MCP23017  5 A - Out, B - In
+MCP23017 mcp_Out1;                                                 // Назначение портов расширения MCP23017  4 A - Out, B - Out
+MCP23017 mcp_Out2;                                                 // Назначение портов расширения MCP23017  6 A - Out, B - Out
+MCP23017 mcp_Analog;                                               // Назначение портов расширения MCP23017  5 A - Out, B - In
 //----------------------------------------------------------------------------------------------
-const int adr_reg_ind_CTS      PROGMEM           = 10081;        // Адрес флагa индикации состояния сигнала CTS
-const int adr_reg_ind_DSR      PROGMEM           = 10082;        // Адрес флагa индикации состояния сигнала DSR
-const int adr_reg_ind_DCD      PROGMEM           = 10083;        // Адрес флагa индикации состояния сигнала DCD
+const int adr_reg_ind_CTS      PROGMEM           = 10081;          // Адрес флагa индикации состояния сигнала CTS
+const int adr_reg_ind_DSR      PROGMEM           = 10082;          // Адрес флагa индикации состояния сигнала DSR
+const int adr_reg_ind_DCD      PROGMEM           = 10083;          // Адрес флагa индикации состояния сигнала DCD
 
-// **************** Адреса внешней памяти для хранения даты. Применяется приформировании имени файла *************
+// **************** Адреса внешней памяти для хранения даты. Применяется при формировании имени файла *************
 //const int adr_temp_day         PROGMEM           = 240;          // Адрес хранения переменной день
 //const int adr_temp_mon         PROGMEM           = 241;          // Адрес хранения переменной месяц
 //const int adr_temp_year        PROGMEM           = 242;          // Адрес хранения переменной год  
 //const int adr_file_name_count  PROGMEM           = 243;          // Адрес хранения переменной счетчика номера файла
 //------------------------------------------------------------------------------------------------------------------
-int regcount_err        = 0;                                     // Переменная для хранения всех ошибок
+int regcount_err        = 0;                                       // Переменная для хранения всех ошибок
 
 //++++++++++++++++++++++ Работа с файлами +++++++++++++++++++++++++++++++++++++++
 //#define chipSelect SS
-#define chipSelect 49   // Основной
+#define chipSelect 49                                              // Настройка выбора SD
 SdFat sd;
 File myFile;
 SdFile file;
 Sd2Card card;
-//
 uint32_t cardSizeBlocks;
 uint16_t cardCapacityMB;
 
@@ -245,15 +242,15 @@ modbusDevice regBank;
 //Create the modbus slave protocol handler
 modbusSlave slave;
 
-//byte regs_in[5];                                  // Регистры работы с платой Камертон CPLL
-byte regs_out[4];                                   // Регистры работы с платой Камертон
-byte regs_crc[1];                                   // Регистры работы с платой Камертон контрольная сумма
+//byte regs_in[5];                                  // Регистры работы с платой Аудио-1 CPLL
+byte regs_out[4];                                   // Регистры работы с платой Аудио-1
+byte regs_crc[1];                                   // Регистры работы с платой Аудио-1 контрольная сумма
 byte regs_temp = 0;
 byte regs_temp1 = 0;
-byte Stop_Kam = 0;                                  // Флаг индикации чтения инф. из Камертона
-volatile bool prer_Kmerton_On = true;               // Флаг разрешение прерывания Камертон
+byte Stop_Kam = 0;                                  // Флаг индикации чтения инф. из платы Аудио-1
+volatile bool prer_Kmerton_On = true;               // Флаг разрешение прерывания Аудио-1
 bool test_repeat     = true;                        // Флаг повторения теста
-volatile bool prer_Kmerton_Run = false;             // Флаг разрешение прерывания Камертон
+volatile bool prer_Kmerton_Run = false;             // Флаг разрешение прерывания Аудио-1
 #define BUFFER_SIZEK 64                             // Размер буфера Камертон не более 128 байт
 #define BUFFER_SIZEKF 128                           // Размер буфера Serial2 не более 128 байт
 unsigned char bufferK;                              // Счетчик количества принимаемых байт
@@ -261,27 +258,27 @@ unsigned char bufferK;                              // Счетчик количества приним
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Текущее время 
-const unsigned int adr_kontrol_day        PROGMEM      = 40046; // адрес день
-const unsigned int adr_kontrol_month      PROGMEM      = 40047; // адрес месяц
-const unsigned int adr_kontrol_year       PROGMEM      = 40048; // адрес год
-const unsigned int adr_kontrol_hour       PROGMEM      = 40049; // адрес час
-const unsigned int adr_kontrol_minute     PROGMEM      = 40050; // адрес минута
-const unsigned int adr_kontrol_second     PROGMEM      = 40051; // адрес секунда
+const unsigned int adr_kontrol_day        PROGMEM      = 40046;  // адрес день
+const unsigned int adr_kontrol_month      PROGMEM      = 40047;  // адрес месяц
+const unsigned int adr_kontrol_year       PROGMEM      = 40048;  // адрес год
+const unsigned int adr_kontrol_hour       PROGMEM      = 40049;  // адрес час
+const unsigned int adr_kontrol_minute     PROGMEM      = 40050;  // адрес минута
+const unsigned int adr_kontrol_second     PROGMEM      = 40051;  // адрес секунда
 
 // Установка времени в контроллере
-const unsigned int adr_set_kontrol_day    PROGMEM      = 40052;   // адрес день
-const unsigned int adr_set_kontrol_month  PROGMEM      = 40053;   // адрес месяц
-const unsigned int adr_set_kontrol_year   PROGMEM      = 40054;   // адрес год
-const unsigned int adr_set_kontrol_hour   PROGMEM      = 40055;   // адрес час
-const unsigned int adr_set_kontrol_minute PROGMEM      = 40056;   // адрес минута
+const unsigned int adr_set_kontrol_day    PROGMEM      = 40052;  // адрес день
+const unsigned int adr_set_kontrol_month  PROGMEM      = 40053;  // адрес месяц
+const unsigned int adr_set_kontrol_year   PROGMEM      = 40054;  // адрес год
+const unsigned int adr_set_kontrol_hour   PROGMEM      = 40055;  // адрес час
+const unsigned int adr_set_kontrol_minute PROGMEM      = 40056;  // адрес минута
 
 // Время старта теста
-const unsigned int adr_Mic_Start_day      PROGMEM      = 40096; // адрес день
-const unsigned int adr_Mic_Start_month    PROGMEM      = 40097; // адрес месяц
-const unsigned int adr_Mic_Start_year     PROGMEM      = 40098; // адрес год
-const unsigned int adr_Mic_Start_hour     PROGMEM      = 40099; // адрес час
-const unsigned int adr_Mic_Start_minute   PROGMEM      = 40100; // адрес минута
-const unsigned int adr_Mic_Start_second   PROGMEM      = 40101; // адрес секунда
+const unsigned int adr_Mic_Start_day      PROGMEM      = 40096;  // адрес день
+const unsigned int adr_Mic_Start_month    PROGMEM      = 40097;  // адрес месяц
+const unsigned int adr_Mic_Start_year     PROGMEM      = 40098;  // адрес год
+const unsigned int adr_Mic_Start_hour     PROGMEM      = 40099;  // адрес час
+const unsigned int adr_Mic_Start_minute   PROGMEM      = 40100;  // адрес минута
+const unsigned int adr_Mic_Start_second   PROGMEM      = 40101;  // адрес секунда
 // Время окончания теста
 const unsigned int adr_Mic_Stop_day       PROGMEM       = 40102; // адрес день
 const unsigned int adr_Mic_Stop_month     PROGMEM       = 40103; // адрес месяц
@@ -360,42 +357,42 @@ const unsigned int adr_reg40062      PROGMEM       =    1100;  // Адрес хранения
 const unsigned int adr_reg40063      PROGMEM       =    1102;  // Адрес хранения длительности импульса яркости для передачи в программу ПК
 const unsigned int adr_reg40064      PROGMEM       =    1104;  // Адрес хранения величины сигнала резистором № 2
 
-const unsigned int adr_reg40065      PROGMEM       =    1106; // адрес ошибки
-const unsigned int adr_reg40066      PROGMEM       =    1108; // адрес ошибки
-const unsigned int adr_reg40067      PROGMEM       =    1110; // адрес ошибки
-const unsigned int adr_reg40068      PROGMEM       =    1112; // адрес ошибки
-const unsigned int adr_reg40069      PROGMEM       =    1114; // адрес ошибки
-const unsigned int adr_reg40070      PROGMEM       =    1116; // адрес ошибки
-const unsigned int adr_reg40071      PROGMEM       =    1118; // адрес ошибки
+const unsigned int adr_reg40065      PROGMEM       =    1106;  // адрес ошибки
+const unsigned int adr_reg40066      PROGMEM       =    1108;  // адрес ошибки
+const unsigned int adr_reg40067      PROGMEM       =    1110;  // адрес ошибки
+const unsigned int adr_reg40068      PROGMEM       =    1112;  // адрес ошибки
+const unsigned int adr_reg40069      PROGMEM       =    1114;  // адрес ошибки
+const unsigned int adr_reg40070      PROGMEM       =    1116;  // адрес ошибки
+const unsigned int adr_reg40071      PROGMEM       =    1118;  // адрес ошибки
 
-const unsigned int adr_reg40072      PROGMEM       =    1120; // адрес ошибки в %
-const unsigned int adr_reg40073      PROGMEM       =    1122; // адрес ошибки в %
-const unsigned int adr_reg40074      PROGMEM       =    1124; // адрес ошибки в %
-const unsigned int adr_reg40075      PROGMEM       =    1126; // адрес ошибки %
-const unsigned int adr_reg40076      PROGMEM       =    1128; // адрес ошибки %
-const unsigned int adr_reg40077      PROGMEM       =    1130; // адрес ошибки %
-const unsigned int adr_reg40078      PROGMEM       =    1132; // адрес ошибки %
-const unsigned int adr_reg40079      PROGMEM       =    1134; // адрес ошибки %
-const unsigned int adr_reg40080      PROGMEM       =    1136; // адрес ошибки %
-const unsigned int adr_reg40081      PROGMEM       =    1138; // адрес ошибки %
-const unsigned int adr_reg40082      PROGMEM       =    1140; // адрес ошибки %
-const unsigned int adr_reg40083      PROGMEM       =    1142; // адрес ошибки %
+const unsigned int adr_reg40072      PROGMEM       =    1120;  // адрес ошибки в %
+const unsigned int adr_reg40073      PROGMEM       =    1122;  // адрес ошибки в %
+const unsigned int adr_reg40074      PROGMEM       =    1124;  // адрес ошибки в %
+const unsigned int adr_reg40075      PROGMEM       =    1126;  // адрес ошибки %
+const unsigned int adr_reg40076      PROGMEM       =    1128;  // адрес ошибки %
+const unsigned int adr_reg40077      PROGMEM       =    1130;  // адрес ошибки %
+const unsigned int adr_reg40078      PROGMEM       =    1132;  // адрес ошибки %
+const unsigned int adr_reg40079      PROGMEM       =    1134;  // адрес ошибки %
+const unsigned int adr_reg40080      PROGMEM       =    1136;  // адрес ошибки %
+const unsigned int adr_reg40081      PROGMEM       =    1138;  // адрес ошибки %
+const unsigned int adr_reg40082      PROGMEM       =    1140;  // адрес ошибки %
+const unsigned int adr_reg40083      PROGMEM       =    1142;  // адрес ошибки %
 
 // Время ошибки на включение
-const unsigned int adr_reg40084      PROGMEM       =    1144; // адрес день adr_Mic_On_day 
-const unsigned int adr_reg40085      PROGMEM       =    1146; // адрес месяц adr_Mic_On_month  
-const unsigned int adr_reg40086      PROGMEM       =    1148; // адрес год adr_Mic_On_year  
-const unsigned int adr_reg40087      PROGMEM       =    1150; // адрес час adr_Mic_On_hour 
-const unsigned int adr_reg40088      PROGMEM       =    1152; // адрес минута adr_Mic_On_minute 
-const unsigned int adr_reg40089      PROGMEM       =    1154; // адрес секунда  adr_Mic_On_second    
+const unsigned int adr_reg40084      PROGMEM       =    1144;  // адрес день adr_Mic_On_day 
+const unsigned int adr_reg40085      PROGMEM       =    1146;  // адрес месяц adr_Mic_On_month  
+const unsigned int adr_reg40086      PROGMEM       =    1148;  // адрес год adr_Mic_On_year  
+const unsigned int adr_reg40087      PROGMEM       =    1150;  // адрес час adr_Mic_On_hour 
+const unsigned int adr_reg40088      PROGMEM       =    1152;  // адрес минута adr_Mic_On_minute 
+const unsigned int adr_reg40089      PROGMEM       =    1154;  // адрес секунда  adr_Mic_On_second    
 
 // Время ошибки на выключение
-const unsigned int adr_reg40090      PROGMEM       =    1156; // адрес день adr_Mic_Off_day    
-const unsigned int adr_reg40091      PROGMEM       =    1158; // адрес месяц  adr_Mic_Off_month 
-const unsigned int adr_reg40092      PROGMEM       =    1160; // адрес год adr_Mic_Off_year  
-const unsigned int adr_reg40093      PROGMEM       =    1162; // адрес час adr_Mic_Off_hour   
-const unsigned int adr_reg40094      PROGMEM       =    1164; // адрес минута adr_Mic_Off_minute   
-const unsigned int adr_reg40095      PROGMEM       =    1166; // адрес секунда adr_Mic_Off_second    
+const unsigned int adr_reg40090      PROGMEM       =    1156;  // адрес день adr_Mic_Off_day    
+const unsigned int adr_reg40091      PROGMEM       =    1158;  // адрес месяц  adr_Mic_Off_month 
+const unsigned int adr_reg40092      PROGMEM       =    1160;  // адрес год adr_Mic_Off_year  
+const unsigned int adr_reg40093      PROGMEM       =    1162;  // адрес час adr_Mic_Off_hour   
+const unsigned int adr_reg40094      PROGMEM       =    1164;  // адрес минута adr_Mic_Off_minute   
+const unsigned int adr_reg40095      PROGMEM       =    1166;  // адрес секунда adr_Mic_Off_second    
 	
 // Время старта теста
 const unsigned int adr_reg40096      PROGMEM       =    1168;  // адрес день  adr_Mic_Start_day    
@@ -784,17 +781,16 @@ const unsigned int adr_reg40539      PROGMEM       =    1868;  //
 const  int adr_set_USB                     = 180;  
 
 //Новые пороги две ячейки, 2 байта
-const  int adr_int_porog_instruktor            = 201;      // 201,203 уровень звука, 206 - 276   пороги
-const  int adr_int_porog_dispatcher            = 277;      // 277,279 уровень звука, 282 - 352   пороги
-const  int adr_int_porog_MTT                   = 353;      // 353,355 уровень звука, 358 - 428   пороги
-const  int adr_int_porog_Microphone            = 429;      // 429,431 уровень звука, 434 - 504   пороги
-const  int adr_int_porog_GGS                   = 505;      // 505,507 уровень звука, 510 - 580   пороги
-const  int adr_int_porog_Radio1                = 581;      // 581,584 уровень звука, 586 - 656   пороги
-const  int adr_int_porog_Radio2                = 657;      // 657,659 уровень звука, 662 - 734   пороги
+const  int adr_int_porog_instruktor            = 201;          // 201,203 уровень звука, 206 - 276   пороги
+const  int adr_int_porog_dispatcher            = 277;          // 277,279 уровень звука, 282 - 352   пороги
+const  int adr_int_porog_MTT                   = 353;          // 353,355 уровень звука, 358 - 428   пороги
+const  int adr_int_porog_Microphone            = 429;          // 429,431 уровень звука, 434 - 504   пороги
+const  int adr_int_porog_GGS                   = 505;          // 505,507 уровень звука, 510 - 580   пороги
+const  int adr_int_porog_Radio1                = 581;          // 581,584 уровень звука, 586 - 656   пороги
+const  int adr_int_porog_Radio2                = 657;          // 657,659 уровень звука, 662 - 734   пороги
 
-//byte por_buffer[250] ;
-int por_int_buffer[40] ;                                   // Буфер хранения временной информации уровней порогов                      
-const unsigned int porog_default[]    PROGMEM  = {  // 270 ячеек
+int por_int_buffer[40] ;                                       // Буфер хранения временной информации уровней порогов                      
+const unsigned int porog_default[]    PROGMEM  = {             // 270 ячеек
 //++++++++++++++++  Test headset instructor ++++++++++++++++++++++++++++
 	44,  // [1] resistor(1, 25);     Установить уровень сигнала 30 мв
 	44,  // [2] resistor(2, 25);     Установить уровень сигнала 30 мв
@@ -2202,9 +2198,6 @@ void UpdateRegs()                                        // Обновить регистры
 			test_repeat = true;
 		 }
 
-
-	  //*******************************************************
-
 	regBank.set(adr_reg_ind_CTS, !mcp_Analog.digitalRead(CTS));
 	regBank.set(adr_reg_ind_DSR, !mcp_Analog.digitalRead(DSR));
 	regBank.set(adr_reg_ind_DCD, !mcp_Analog.digitalRead(DCD));
@@ -2311,15 +2304,6 @@ void time_control() // Программа записи текущего времени в регистры для передачи
 	regBank.set(adr_kontrol_minute, now.minute());
 	regBank.set(adr_kontrol_second, now.second());
 }
-void time_control_get()   // Тестовая программа проверки содержания регистров времени
-{
-  for (unsigned int i = 0; i < 6; i++)     // 
-	{
-	 //  Serial.print(regBank.get(40046+i));   
-	 //  Serial.print(" "); 
-	}
-//Serial.println();   
-}
 
 void list_file()
 {
@@ -2360,7 +2344,7 @@ void load_list_files()
 		   Serial2.flush();
 		 }
 		delay(100);
-	//	Serial2.println("Filesend");
+	//	Serial2.println("Files end");
 	//	Serial.println("Files end");
   regBank.set(adr_control_command,0);
 }
@@ -7441,8 +7425,7 @@ void i2c_test_int()
 
 void test_RS232()
 {
-
-	regBank.set(adr_control_command,0);                                             // Завершить программу    
+	regBank.set(adr_control_command,0);                                         // Завершить программу    
 	delay(100);
 }
 void set_USB0()
@@ -7451,22 +7434,21 @@ void set_USB0()
 	 // true  - Включает реле в положение RS232 
 	 // false - Включает реле в положение USB 
 	
-	  byte usb_rs232 = i2c_eeprom_read_byte(deviceaddress, adr_set_USB);  // Реле переключения USB - RS232 
+	  byte usb_rs232 = i2c_eeprom_read_byte(deviceaddress, adr_set_USB);    // Реле переключения USB - RS232 
 
 	  if (usb_rs232 == 0)
 		  {
 			  regBank.set(12,false);
-			  mcp_Out1.digitalWrite(11, false);           //  Реле переключения USB - RS232 
-
+			  mcp_Out1.digitalWrite(11, false);                             //  Реле переключения USB - RS232 
+			  Serial.println("Serial 2 - USB");
 		  }
 	  else
 		  {
 			 regBank.set(12,true);
-			 mcp_Out1.digitalWrite(11, true);            //  Реле переключения USB - RS232 
+			 mcp_Out1.digitalWrite(11, true);                               //  Реле переключения USB - RS232 
+			 Serial.println("Serial 2 - RS232");
 		  }
-	  Serial.println(regBank.get(12));
-	  
-	regBank.set(adr_control_command,0);                                // Завершить программу    
+	regBank.set(adr_control_command,0);                                     // Завершить программу    
 	delay(100);
 }
 
@@ -7492,11 +7474,11 @@ void read_porog_eeprom(int adr_eeprom, int step_mem )                       //
 		 
 }
 
-void default_mem_porog()                             // Запись заводских установок уровней порога
+void default_mem_porog()                                                    // Запись заводских установок уровней порога
 {
-	int _step_mem = 266;                             // Длина блока с учетом хранения двухбайтных чисел
-	int _u_porog  = 0;                               // Временное хранения содержимого регистра.
-	int i_k       = 0;                               // Смещение адреса блока памяти
+	int _step_mem = 266;                                                    // Длина блока с учетом хранения двухбайтных чисел
+	int _u_porog  = 0;                                                      // Временное хранения содержимого регистра.
+	int i_k       = 0;                                                      // Смещение адреса блока памяти
 	for (int i = 0; i < _step_mem;i++)                    
 		{
 			_u_porog = pgm_read_word_near(porog_default+i);
@@ -9048,21 +9030,21 @@ void file_del_SD()
 
 void setup()
 {
-	wdt_disable();                                     // бесполезная строка до которой не доходит выполнение при bootloop
+	wdt_disable();                                                 // бесполезная строка до которой не доходит выполнение при bootloop
 	Wire.begin();
-	if (!RTC.begin())                                  // Настройка часов 
+	if (!RTC.begin())                                              // Настройка часов 
 		{
 			Serial.println("RTC failed");
 			while(1);
 		};
-	setup_mcp();                                      // Настроить порты расширения  
-	mcp_Analog.digitalWrite(DTR, HIGH);               // Разрешение вывода (обмена)информации с Камертоном
+	setup_mcp();                                                   // Настроить порты расширения  MCP23017
+	mcp_Analog.digitalWrite(DTR, HIGH);                            // Разрешение вывода (обмена)информации с модулем Аудио-1
 	mcp_Analog.digitalWrite(Front_led_Blue, LOW); 
 	mcp_Analog.digitalWrite(Front_led_Red, HIGH); 
-	Serial.begin(9600);                               // Подключение к USB ПК
-	Serial1.begin(115200);                            // Подключение к звуковому модулю Камертон
-	slave.setSerial(3,57600);                        // Подключение к протоколу MODBUS компьютера Serial3 
-	Serial2.begin(115200);                            // 
+	Serial.begin(9600);                                            // Подключение к USB ПК
+	Serial1.begin(115200);                                         // Подключение к звуковому модулю Камертон
+	slave.setSerial(3,57600);                                      // Подключение к протоколу MODBUS компьютера Serial3 
+	Serial2.begin(115200);                                         // 
 	Serial.println(" ");
 	Serial.println(" ***** Start system  *****");
 	Serial.println("Kamerton5_0_1ArduinoSpeed2 ");
@@ -9073,47 +9055,36 @@ void setup()
 	pinMode(ledPin12, OUTPUT);  
 	pinMode(ledPin11, OUTPUT);  
 	pinMode(ledPin10, OUTPUT);  
-	pinMode(kn1Nano, OUTPUT);                        // Назначение кнопок управления Nano генератор качения
-	pinMode(kn2Nano, OUTPUT);                        // Назначение кнопок управления Nano генератор 1000 гц
-	pinMode(kn3Nano, OUTPUT);                        // Назначение кнопок управления Nano генератор 2000 гц
-	pinMode(InNano12, INPUT);                        // Назначение входов - индикация генератор 1000 или 2000 гц
-	pinMode(InNano13, INPUT);                        // Назначение входов - индикация генератор качения 
-	digitalWrite(InNano12, HIGH);                    // включение подтягивающего резистора
+	pinMode(kn1Nano, OUTPUT);                                     // Назначение кнопок управления Nano генератор качения
+	pinMode(kn2Nano, OUTPUT);                                     // Назначение кнопок управления Nano генератор 1000 гц
+	pinMode(kn3Nano, OUTPUT);                                     // Назначение кнопок управления Nano генератор 2000 гц
+	pinMode(InNano12, INPUT);                                     // Назначение входов - индикация генератор 1000 или 2000 гц
+	pinMode(InNano13, INPUT);                                     // Назначение входов - индикация генератор качения 
+	digitalWrite(InNano12, HIGH);                                 // включение подтягивающего резистора
 
-	//AD9850.reset();                                  //reset module
-	//delay(500);
-	//AD9850.powerDown();                              //set signal output to LOW
-	//delay(100);
-	//AD9850.set_frequency(0,0,1000);                   //set power=UP, phase=0, 1kHz frequency
-	//delay(1000); 
-
-	// DateTime set_time = DateTime(15, 6, 15, 10, 51, 0); // Занести данные о времени в строку "set_time"
-	// RTC.adjust(set_time);                                // Записа
+	// DateTime set_time = DateTime(15, 6, 15, 10, 51, 0);        // Занести данные о времени в строку "set_time"
+	// RTC.adjust(set_time);                                      // Записать дату и время
 	serial_print_date();
 	Serial.println(" ");
 
-	setup_resistor();                               // Начальные установки резистора
+	setup_resistor();                                             // Начальные установки резистора
 
-	setup_regModbus();                              // Настройка регистров MODBUS
+	setup_regModbus();                                            // Настройка регистров MODBUS
 
-	regs_out[0]= 0x2B;                              // Код первого байта подключения к Камертону 43
-	regs_out[1]= 0xC4;                              // 196 Изменять в реальной схеме
-	regs_out[2]= 0x7F;                              // 127 Изменять в реальной схеме
+	regs_out[0]= 0x2B;                                            // Код первого байта подключения к Камертону 43
+	regs_out[1]= 0xC4;                                            // 196 Изменять в реальной схеме
+	regs_out[2]= 0x7F;                                            // 127 Изменять в реальной схеме
 
-	regBank.set(21,0);                              // XP2-2     sensor "Маг."  
-	regBank.set(22,0);                              // XP5-3     sensor "ГГC."
-	regBank.set(23,0);                              // XP3-3     sensor "ГГ-Радио1."
-	regBank.set(24,0);                              // XP4-3     sensor "ГГ-Радио2."
-	//regBank.set(8,1);                               // Включить питание Камертон
-	regBank.set(40,0);                              // Осциллограф отключить
-
-	UpdateRegs();                                   // Обновить информацию в регистрах
-
-
-//  clear_reg_eeprom(); // Очистить регистры в памяти
+	regBank.set(21,0);                                            // XP2-2     sensor "Маг."  
+	regBank.set(22,0);                                            // XP5-3     sensor "ГГC."
+	regBank.set(23,0);                                            // XP3-3     sensor "ГГ-Радио1."
+	regBank.set(24,0);                                            // XP4-3     sensor "ГГ-Радио2."
+	//regBank.set(8,1);                                           // Включить питание Камертон
+	regBank.set(40,0);                                            // Осциллограф отключить
+	UpdateRegs();                                                 // Обновить информацию в регистрах
 
 	Serial.println("Initializing SD card...");
-	pinMode(49, OUTPUT);//    заменить 
+	pinMode(49, OUTPUT);                                          // Настройка выбора SD
 	if (!sd.begin(chipSelect)) 
 		{
 			Serial.println("initialization SD failed!");
@@ -9125,27 +9096,27 @@ void setup()
 			regBank.set(125,true); 
 		}
 
-	SdFile::dateTimeCallback(dateTime);             // Настройка времени записи файла
-	regBank.set(40120,0);                            // 
-	regBank.set(adr_reg_count_err,0);                // Обнулить данные счетчика всех ошибок
-	MsTimer2::set(30, flash_time);                   // 30ms период таймера прерывани
-	resistor(1, 200);                                // Установить уровень сигнала
-	resistor(2, 200);                                // Установить уровень сигнала
-	preob_num_str();                                 // Записать начальное имя файла 
-	list_file();                                     // Вывод списка файлов в СОМ порт  
+	SdFile::dateTimeCallback(dateTime);                          // Настройка времени записи файла
+	regBank.set(40120,0);                                        // Сбросить все команды на выполнение
+	regBank.set(adr_reg_count_err,0);                            // Обнулить данные счетчика всех ошибок
+	MsTimer2::set(30, flash_time);                               // 30ms период таймера прерывани
+	resistor(1, 200);                                            // Установить уровень сигнала
+	resistor(2, 200);                                            // Установить уровень сигнала
+	preob_num_str();                                             // Записать начальное имя файла 
+	//list_file();                                               // Вывод списка файлов в СОМ порт  
 	//controlFileName();
 	//default_mem_porog();
 	prer_Kmerton_On = true;                                      // Разрешить прерывания на камертон
-	clear_serial2();
-	Serial.println("Clear memory");                              //
+	clear_serial2();                                             // 
+
+	Serial.println("Clear memory and registry");                 //
 	for (int i = 120; i <= 131; i++)                             // Очистить флаги ошибок
-	{
-	   regBank.set(i,0);   
-	}
-	
-	Reg_count_clear();
-	Serial.println("Clear memory Ok!");                             //
-	//i2c_eeprom_write_byte(deviceaddress, adr_int_porog_instruktor + 0, 56);
+		{
+		   regBank.set(i,0);   
+		}
+	Reg_count_clear();                                           // Очистить счетчики ошибок
+	Serial.println("Clear Ok!");                                 //
+	// ------------  Настройка быстродействия АЦП --------------------------
 	sbi(ADCSRA,ADPS2) ;                                          // Регистр ADCSRA бит 2 = 1
 	cbi(ADCSRA,ADPS1) ;                                          // Регистр ADCSRA бит 1 = 0
 	cbi(ADCSRA,ADPS0) ;                                          // Регистр ADCSRA бит 0 = 0
