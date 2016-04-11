@@ -122,8 +122,14 @@ namespace KamertonTest
 			bool Serial_COM2              = false;                                   // Признак какой серийный порт подключен USB 0  или RS232
 			bool Serial_COM2_Enable       = false;                                   // Признак наличия серийного КОМ порта
 			bool Oscilloscope_run         = false;                                   // Признак передачи информации в осциллограф
+            bool radio_on                 = false;                                   // Признак включения радиопередачи
+            bool radio_off                = false;                                   // Признак выключения радиопередачи
+            bool set_display              = false;                                   // Признак 
+            bool set_sound_level          = false;                                   // Признак 
             bool  Message_show            = true;                                    // Разрешить показ сообщения 
-			ushort[] porog_min_all        = new ushort[200];
+            short tempK                   = 0;
+            int tempK_lev                 = 0;
+            ushort[] porog_min_all        = new ushort[200];
 			ushort[] porog_max_all        = new ushort[200];
 			ushort[] readVals_all         = new ushort[200];
 			ushort[] readVals_byte        = new ushort[145];
@@ -272,6 +278,7 @@ namespace KamertonTest
 			cTrigLevel2.Value     = 128;
 			serial_connect();
 			serial_connect2();
+           // tempK_lev = short.Parse(textBox5.Text, CultureInfo.CurrentCulture)*5;                    // Установка уровня входного сигнала
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;//убираем рамки 
 			this.WindowState     = FormWindowState.Maximized;//и только потом расширяем форму на весь экран 
 			Form_Height          = this.Height; //считываем размеры нашей формы 
@@ -1681,6 +1688,24 @@ namespace KamertonTest
 				label35.Text = "";
 				label36.Text = "";
 
+
+               if(radio_on == false)                                                       // Признак выключения радиопередачи
+               {
+                   button92.Enabled   = true;
+                   groupBox28.Enabled = true;
+               }
+               if (radio_off == false)                                                       // Признак выключения радиопередачи
+               {
+                   button102.Enabled  = true;
+                   groupBox28.Enabled = true;
+               }
+
+               if (set_sound_level == false)
+                {
+                   button24.Enabled = true;
+                }
+
+
 				// ***** Обновить информацию из  модуля Аудио-1 *****************
 				if (byte_set_ready)
 				{
@@ -2917,59 +2942,15 @@ namespace KamertonTest
 
         private void button92_Click(object sender, EventArgs e)                      // Кнопка Радиопередача вкл.
         {
-            button92.Enabled = false;
+            button92.Enabled   = false;
             groupBox28.Enabled = false;
-            stop_bw_set_byte();
-            while (byte_set_run) { };
-           // Thread.Sleep(1000);
-            slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
-  
-            if ((myProtocol != null))
-            {
-                startCoil = 41;                                                     // Регистр 41 управления кнопкой 
-                res = myProtocol.writeCoil(slave, startCoil, true);                 // Включить кнопку Радиопередача
-                startWrReg = 120;                                                   // 
-                res = myProtocol.writeSingleRegister(slave, startWrReg, 52);        // 
-                test_end1();
-            }
-            else
-            {
-                Com2_SUCCESS = false;
-                toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-                toolStripStatusLabel4.ForeColor = Color.Red;
-                Thread.Sleep(100);
-            }
-           button92.Enabled = true;
-           groupBox28.Enabled = true;
-           timer_param_set2.Start();
+            radio_on           = true;                                               // Признак включения радиопередачи
         }
         private void button102_Click(object sender, EventArgs e)                     // Кнопка Радиопередача откл.
         {
               button102.Enabled = false;
               groupBox28.Enabled = false;
-              stop_bw_set_byte();
-              while (byte_set_run) { };
-              slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
-
-            if ((myProtocol != null))
-            {
-                startCoil = 41;                                                     // Регистр 41 управления кнопкой 
-                res = myProtocol.writeCoil(slave, startCoil, false);                // Выключить кнопку Радиопередача
-                startWrReg = 120;                                                   // 
-                res = myProtocol.writeSingleRegister(slave, startWrReg, 52);        // 
-                test_end1();
-            }
-            else
-            {
-                Com2_SUCCESS = false;
-                toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-                toolStripStatusLabel4.ForeColor = Color.Red;
-                Thread.Sleep(100);
-            }
-            button102.Enabled = true;
-            groupBox28.Enabled = true;
-            timer_param_set2.Start();
-
+              radio_off = true; 
         }
         private void button83_Click(object sender, EventArgs e)                      // Кнопка    ГГС (mute) вкл.
         {
@@ -5189,83 +5170,57 @@ namespace KamertonTest
             textBox48.SelectionStart = textBox48.Text.Length;
             textBox48.ScrollToCaret();
         }
-		private void richTextBox2_TextChanged(object sender, EventArgs e)    // 
+		private void richTextBox2_TextChanged(object sender, EventArgs e) 
 		{
 			richTextBox2.SelectionStart = richTextBox2.Text.Length;
 			richTextBox2.ScrollToCaret();
 		}
-   
-
-
-
-		private void button24_Click(object sender, EventArgs e)                       // Установка уровня входного сигнала резисторами
+ 
+		private void button24_Click(object sender, EventArgs e)                        // Установка уровня входного сигнала резисторами
 		{
 			button24.Enabled = false;
+            tempK_lev = short.Parse(textBox5.Text, CultureInfo.CurrentCulture) * 5;   // Установка уровня входного сигнала
+            set_sound_level = true;
+            textBox4.BackColor = Color.White;
+/*
 			stop_bw_set_byte();
-            while (byte_set_run) { };
+            while (byte_set_run) {};
 			short[] writeVals = new short[12];
-			short[] MSK = new short[2];
-			MSK[0] = 5;
-			ushort[] readVals = new ushort[125];
-			bool[] coilVals = new bool[200];
-			bool[] coilArr = new bool[20];
 			textBox4.BackColor = Color.White;
-			writeVals[1] = short.Parse(textBox4.Text, CultureInfo.CurrentCulture);   // Установка уровня входного сигнала
-			int tempK = writeVals[1] * 5;                                            // Установка уровня входного сигнала
-			if (tempK > 250)
-			{
-				label72.Text = "<";
-				tempK = 250;
-				textBox4.Text = "50";
-				textBox4.BackColor = Color.Red;
-			}
-			else
-			{
-				label72.Text = "=";
-				textBox4.BackColor = Color.White;
-			}
-			startWrReg = 60;                                                          // 40060 Адрес хранения величины сигнала
-			res = myProtocol.writeSingleRegister(slave, startWrReg, (short)tempK);
+			writeVals[1] = short.Parse(textBox4.Text, CultureInfo.CurrentCulture);    // Установка уровня входного сигнала
+			int tempK = writeVals[1] * 5;                                             // Установка уровня входного сигнала
+          	startWrReg = 60;                                                          // 40060 Адрес хранения величины сигнала
+			res = myProtocol.writeSingleRegister(slave, startWrReg, (short)tempK_lev);
 			startWrReg = 120;                                                         // 
 			res = myProtocol.writeSingleRegister(slave, startWrReg, 40);              // Установить резистором №1,№2  уровень сигнала
 			timer_param_set2.Start();
+
+            */
 		}
 		private void button25_Click(object sender, EventArgs e)                       // Проверка яркости экрана
 			{
 			button25.Enabled = false;
-			stop_bw_set_byte();
-            while (byte_set_run) { };
+            textBox5.BackColor = Color.White;
+            stop_bw_set_byte();
+            while (byte_set_run) {};
 			short[] writeVals = new short[12];
 			short[] readVals = new short[4];
 			bool[] coilVals = new bool[200];
 			bool[] coilArr = new bool[20];
 
-			//  slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
-
-			textBox5.BackColor = Color.White;
-			writeVals[1] = short.Parse(textBox5.Text, CultureInfo.CurrentCulture);   // Установка уровня входного сигнала
-			int tempK = writeVals[1];                                                // Установка уровня входного сигнала
-			if(tempK > 127)
-				{
-				label39.Text = "<";
-				tempK = 127;
-				textBox5.Text = "127";
-				textBox5.BackColor = Color.Red;
-				}
-			else
-				{
-				label39.Text = "=";
-				textBox5.BackColor = Color.White;
-				}
-			startWrReg = 61;                                                                       // 40061 Адрес хранения величины сигнала
+			//textBox5.BackColor = Color.White;
+      //      tempK_lev = short.Parse(textBox5.Text, CultureInfo.CurrentCulture);                    // Установка уровня входного сигнала
+		//	startWrReg = 61;                                                                       // 40061 Адрес хранения величины сигнала
 			if((myProtocol != null))
 				{
-
-				res = myProtocol.writeSingleRegister(slave, startWrReg, (short)tempK);
-
-				startWrReg = 120;                                                                      // 
+                startWrReg = 61;  
+                res = myProtocol.writeSingleRegister(slave, startWrReg, tempK);
+ 				startWrReg = 120;                                                                      // 
 				res = myProtocol.writeSingleRegister(slave, startWrReg, 18);                        // 
 				test_end1();
+
+
+
 				startRdReg = 62;
 				numRdRegs = 2;
 				res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);     // 40062
@@ -5312,14 +5267,48 @@ namespace KamertonTest
 		private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			// Проверка на ввод только цифр
-			if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
-				e.Handled = true;  
+            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+
+                tempK = short.Parse(textBox5.Text, CultureInfo.CurrentCulture);   // Установка уровня входного сигнала
+                if (tempK > 127)
+                {
+                    label39.Text = "<";
+                    tempK = 127;
+                    textBox5.Text = "127";
+                    textBox5.BackColor = Color.Red;
+                }
+                else
+                {
+                    label39.Text = "=";
+                    textBox5.BackColor = Color.White;
+                }
+            }
+
+
 		}
 		private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			// Проверка на ввод только цифр
-			if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
-				e.Handled = true;
+            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+                tempK_lev = (short.Parse(textBox4.Text, CultureInfo.CurrentCulture)*5) ;   // Установка уровня входного сигнала
+ 
+                if (tempK_lev > 250)
+                {
+                    label72.Text = "<";
+                    tempK_lev = 250;
+                    textBox4.Text = "50";
+                    textBox4.BackColor = Color.Red;
+                }
+                else
+                {
+                    label72.Text = "=";
+                    textBox4.BackColor = Color.White;
+                }
+            }
 		}
 		private void comboBox4_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -7702,290 +7691,337 @@ namespace KamertonTest
 			 byte_set_run = true;
 			 coil_Button[8] = true;
 			 do
-			 {
-				 startRdReg = 46;                                                                    // 40046 Адрес дата/время контроллера  
-				 numRdRegs = 6;
-				 res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;                                                          // Признак выполнения контроля связи MODBUS
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					 //toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5 УСТАНОВЛЕНА !");     // 
-					 toolStripStatusLabel2.Text = (readVals[0] + "." + readVals[1] + "." + readVals[2] + "   " + readVals[3] + ":" + readVals[4] + ":" + readVals[5]);
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-				   //  Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR(byte_set1) ";
-					// toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
+             {
+                 startRdReg = 46;                                                                      // 40046 Адрес дата/время контроллера  
+                 numRdRegs = 6;
+                 res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;                                                            // Признак выполнения контроля связи MODBUS
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                     //toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5 УСТАНОВЛЕНА !");     // 
+                     toolStripStatusLabel2.Text = (readVals[0] + "." + readVals[1] + "." + readVals[2] + "   " + readVals[3] + ":" + readVals[4] + ":" + readVals[5]);
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     //  Com2_SUCCESS               = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR(byte_set1) ";
+                     // toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
 
-				 
-				 ushort[] writeVals = new ushort[20];
-				 ushort[] readVolt  = new ushort[10];
-				 numRdRegs          = 4;
-				
-				 startWrReg = 120;
-				 res = myProtocol.writeSingleRegister(slave, startWrReg, 17);                         // Провести измерение питания
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {  
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					// Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set2)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-				 test_end1();
- 
-				 // *********************** Проверить питание ********************************
-				 writeVals[0] = 150;                                                  //  Адрес блока регистров для передачи в ПК уровней порогов.
-				 writeVals[1] = 1684;                                                 //  Адрес блока памяти  для передачи в ПК уровней порогов.
-				 writeVals[2] = 10;                                                   //  Длина блока регистров для передачи в ПК уровней порогов.
-			 
-			  
-				 startWrReg = 124;                                                    //  Отправить параметры блока получения данных из памяти 
-				 int numWrRegs = 3;                                                   //
-				 res = myProtocol.writeMultipleRegisters(slave, startWrReg, writeVals, numWrRegs);
-				 test_end1();
+                 if (radio_on)
+                 {
+                     if ((myProtocol != null))
+                     {
+                         startCoil = 41;                                                     // Регистр 41 управления кнопкой 
+                         res = myProtocol.writeCoil(slave, startCoil, true);                 // Включить кнопку Радиопередача
+                         startWrReg = 120;                                                   // 
+                         res = myProtocol.writeSingleRegister(slave, startWrReg, 52);        // 
+                         test_end1();
+                     }
+                     else
+                     {
+                         Com2_SUCCESS = false;
+                         toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                         toolStripStatusLabel4.ForeColor = Color.Red;
+                         Thread.Sleep(100);
+                     }
+                     radio_on = false;                                                       // Признак выключения радиопередачи
+                 }
 
-				 startWrReg = 120;
-				 res = myProtocol.writeSingleRegister(slave, startWrReg, 15);        // Передать информацию в регистры
-				 test_end1();
+                 if (radio_off)
+                 {
+                     if ((myProtocol != null))
+                     {
+                         startCoil = 41;                                                     // Регистр 41 управления кнопкой 
+                         res = myProtocol.writeCoil(slave, startCoil, false);                // Выключить кнопку Радиопередача
+                         startWrReg = 120;                                                   // 
+                         res = myProtocol.writeSingleRegister(slave, startWrReg, 52);        // 
+                         test_end1();
+                     }
+                     else
+                     {
+                         Com2_SUCCESS = false;
+                         toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                         toolStripStatusLabel4.ForeColor = Color.Red;
+                         Thread.Sleep(100);
+                     }
+                     radio_off = false;
+                 }
+                 if( set_sound_level)
+                 {
+                     startWrReg = 60;                                                          // 40060 Адрес хранения величины сигнала
+                     res = myProtocol.writeSingleRegister(slave, startWrReg, (short)tempK_lev);
+                     startWrReg = 120;                                                         // 
+                     res = myProtocol.writeSingleRegister(slave, startWrReg, 40);              // Установить резистором №1,№2  уровень сигнала
+                     set_sound_level = false;
+                 }
 
-				 startRdReg = 150;
-				 numRdRegs = 10;     
-				 res = myProtocol.readMultipleRegisters(slave, startRdReg, readVolt, numRdRegs);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 s12_Radio2  = readVolt[0] * 2.61 / 100;
-					 s12_Power   = readVolt[2] * 2.61 / 100;
-					 s12_GGS     = readVolt[4] * 2.61 / 100;
-					 s12_Radio1  = readVolt[6] * 2.61 / 100;
-					 s12_Led_Mic = readVolt[8] / 100;
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set3)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");          // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-				 
+                 ushort[] writeVals = new ushort[20];
+                 ushort[] readVolt = new ushort[10];
+                 numRdRegs = 4;
 
-				 //-----------------------------------------------------------------------------------------
-				 //****************************** Получить состояние регистров Аудио-1 ***************************
+                 startWrReg = 120;
+                 res = myProtocol.writeSingleRegister(slave, startWrReg, 17);                         // Провести измерение питания
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     // Com2_SUCCESS               = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set2)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+                 test_end1();
 
-				 byte_set_ready = false;
-				 startRdReg = 1;
-				 numRdRegs = 7;
-				 res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals_byte, numRdRegs);         //  Считать число из регистров по адресу  40001 -40007
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					 byte_set_ready = true;
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set4)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");       // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-
-				 // -------------------------------------------------------------------------------------------------------
-				 //********************* Передать  состояние кнопок в Камертон 5.0 ********************************
+                 // *********************** Проверить питание ********************************
+                 writeVals[0] = 150;                                                  //  Адрес блока регистров для передачи в ПК уровней порогов.
+                 writeVals[1] = 1684;                                                 //  Адрес блока памяти  для передачи в ПК уровней порогов.
+                 writeVals[2] = 10;                                                   //  Длина блока регистров для передачи в ПК уровней порогов.
 
 
-				 bool[] coilArr = new bool[64];
-				 startCoil = 1;
-				 numCoils = 24;
+                 startWrReg = 124;                                                    //  Отправить параметры блока получения данных из памяти 
+                 int numWrRegs = 3;                                                   //
+                 res = myProtocol.writeMultipleRegisters(slave, startWrReg, writeVals, numWrRegs);
+                 test_end1();
 
-				 res = myProtocol.forceMultipleCoils(slave, startCoil, coil_Button, numCoils);              // 15 (0F) Записать бит false или true  по адресу 0-9999 
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set5)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");         // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
+                 startWrReg = 120;
+                 res = myProtocol.writeSingleRegister(slave, startWrReg, 15);        // Передать информацию в регистры
+                 test_end1();
 
-				 //  Thread.Sleep(50);
-
-				 for (int i_coil = 0; i_coil < 16; i_coil++)
-				 {
-					 coilArr[i_coil] = coil_Button[24 + i_coil];
-				 }
-
-				 startCoil = 25;
-				 numCoils = 9;
-				 res = myProtocol.forceMultipleCoils(slave, startCoil, coilArr, numCoils);                  // 
-
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set6)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-				 //  Thread.Sleep(50);
+                 startRdReg = 150;
+                 numRdRegs = 10;
+                 res = myProtocol.readMultipleRegisters(slave, startRdReg, readVolt, numRdRegs);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     s12_Radio2 = readVolt[0] * 2.61 / 100;
+                     s12_Power = readVolt[2] * 2.61 / 100;
+                     s12_GGS = readVolt[4] * 2.61 / 100;
+                     s12_Radio1 = readVolt[6] * 2.61 / 100;
+                     s12_Led_Mic = readVolt[8] / 100;
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set3)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");          // Обработка ошибки.
+                     e.Cancel = true;
+                 }
 
 
-				 //-----------------------------------------------------------------------
+                 //-----------------------------------------------------------------------------------------
+                 //****************************** Получить состояние регистров Аудио-1 ***************************
 
-				 //*********    Считывание состояния реле и оптронов  ******************
+                 byte_set_ready = false;
+                 startRdReg = 1;
+                 numRdRegs = 7;
+                 res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals_byte, numRdRegs);         //  Считать число из регистров по адресу  40001 -40007
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                     byte_set_ready = true;
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set4)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");       // Обработка ошибки.
+                     e.Cancel = true;
+                 }
 
-				 Status_Rele_ready = false;
-
-				 startCoil = 1;  //  mb.Coil(1-8);   Отображение соостояния реле 1-8
-				 numCoils = 8;
-				 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					 for (int i_coil = 0; i_coil < 8; i_coil++)
-					 {
-						 coilArr_Status_Rele[i_coil] = coilArr[i_coil];
-					 }
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set7)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-				 Thread.Sleep(50);
-
-				 startCoil = 9;  //  regBank.add(9-16);   Отображение соостояния реле 9-16
-				 numCoils = 8;
-				 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					 for (int i_coil = 0; i_coil < 8; i_coil++)
-					 {
-						 coilArr_Status_Rele[i_coil + 8] = coilArr[i_coil];
-					 }
-
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set8)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-
-				 //  Thread.Sleep(50);
-
-				 startCoil = 17;  //  regBank.add(17-24);   Отображение соостояния реле 17-24
-				 numCoils = 8;
-				 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					 for (int i_coil = 0; i_coil < 8; i_coil++)
-					 {
-						 coilArr_Status_Rele[i_coil + 16] = coilArr[i_coil];
-					 }
-
-				 }
-
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set9)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-				 //  Thread.Sleep(50);
-
-				 startCoil = 25;  //  regBank.add(00009-16);   Отображение соостояния реле 25-32
-				 numCoils = 8;
-				 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					 for (int i_coil = 0; i_coil < 8; i_coil++)
-					 {
-						 coilArr_Status_Rele[i_coil + 24] = coilArr[i_coil];
-					 }
-
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set10)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-
-				 //   Thread.Sleep(50);
-
-				 startCoil = 81;  // Флаг 
-				 numCoils = 3;
-				 res = myProtocol.readInputDiscretes(slave, startCoil, coilArrFlag, numCoils);
-				 if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				 {
-					 MODBUS_SUCCESS = true;
-					 toolStripStatusLabel1.Text = "    MODBUS ON    ";
-				 }
-				 else
-				 {
-					 MODBUS_SUCCESS             = false;
-					 Com2_SUCCESS               = false;
-					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set11)  ";
-					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-					 e.Cancel                   = true;
-				 }
-
-				 //   Thread.Sleep(50);
-				 Status_Rele_ready = true;
-				 //----------------------------------------------------------------------------------------------------
+                 // -------------------------------------------------------------------------------------------------------
+                 //********************* Передать  состояние кнопок в Камертон 5.0 ********************************
 
 
-				 if (bw_set_byte.CancellationPending)
-				 {
-					 e.Cancel = true;
-				 }
+                 bool[] coilArr = new bool[64];
+                 startCoil = 1;
+                 numCoils = 24;
 
-				 bw_set_byte.ReportProgress(i);
-				 i++;
-				 if (i > 100) i = 0;
-				 data += 50;
-				 if (data > 1000) data = 50;
-				 // Thread.Sleep(50);
-			 } while (!e.Cancel);
+                 res = myProtocol.forceMultipleCoils(slave, startCoil, coil_Button, numCoils);              // 15 (0F) Записать бит false или true  по адресу 0-9999 
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set5)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");         // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+
+                 //  Thread.Sleep(50);
+
+                 for (int i_coil = 0; i_coil < 16; i_coil++)
+                 {
+                     coilArr[i_coil] = coil_Button[24 + i_coil];
+                 }
+
+                 startCoil = 25;
+                 numCoils = 9;
+                 res = myProtocol.forceMultipleCoils(slave, startCoil, coilArr, numCoils);                  // 
+
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set6)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+                 //  Thread.Sleep(50);
+
+
+                 //-----------------------------------------------------------------------
+
+                 //*********    Считывание состояния реле и оптронов  ******************
+
+                 Status_Rele_ready = false;
+
+                 startCoil = 1;  //  mb.Coil(1-8);   Отображение соостояния реле 1-8
+                 numCoils = 8;
+                 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                     for (int i_coil = 0; i_coil < 8; i_coil++)
+                     {
+                         coilArr_Status_Rele[i_coil] = coilArr[i_coil];
+                     }
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set7)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+                 Thread.Sleep(50);
+
+                 startCoil = 9;  //  regBank.add(9-16);   Отображение соостояния реле 9-16
+                 numCoils = 8;
+                 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                     for (int i_coil = 0; i_coil < 8; i_coil++)
+                     {
+                         coilArr_Status_Rele[i_coil + 8] = coilArr[i_coil];
+                     }
+
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set8)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+
+                 //  Thread.Sleep(50);
+
+                 startCoil = 17;  //  regBank.add(17-24);   Отображение соостояния реле 17-24
+                 numCoils = 8;
+                 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                     for (int i_coil = 0; i_coil < 8; i_coil++)
+                     {
+                         coilArr_Status_Rele[i_coil + 16] = coilArr[i_coil];
+                     }
+
+                 }
+
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set9)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+                 //  Thread.Sleep(50);
+
+                 startCoil = 25;  //  regBank.add(00009-16);   Отображение соостояния реле 25-32
+                 numCoils = 8;
+                 res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                     for (int i_coil = 0; i_coil < 8; i_coil++)
+                     {
+                         coilArr_Status_Rele[i_coil + 24] = coilArr[i_coil];
+                     }
+
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set10)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+
+                 //   Thread.Sleep(50);
+
+                 startCoil = 81;  // Флаг 
+                 numCoils = 3;
+                 res = myProtocol.readInputDiscretes(slave, startCoil, coilArrFlag, numCoils);
+                 if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                 {
+                     MODBUS_SUCCESS = true;
+                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                 }
+                 else
+                 {
+                     MODBUS_SUCCESS = false;
+                     Com2_SUCCESS = false;
+                     toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set11)  ";
+                     toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     e.Cancel = true;
+                 }
+
+                 //   Thread.Sleep(50);
+                 Status_Rele_ready = true;
+                 //----------------------------------------------------------------------------------------------------
+
+
+                 if (bw_set_byte.CancellationPending)
+                 {
+                     e.Cancel = true;
+                 }
+
+                 bw_set_byte.ReportProgress(i);
+                 i++;
+                 if (i > 100) i = 0;
+                 data += 50;
+                 if (data > 1000) data = 50;
+                 // Thread.Sleep(50);
+             } while (!e.Cancel);
 			 Thread.Sleep(50);
 			 e.Result = data;
 			 byte_set_run = false;

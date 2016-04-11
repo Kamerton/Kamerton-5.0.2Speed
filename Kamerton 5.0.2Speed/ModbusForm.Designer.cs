@@ -496,6 +496,7 @@ namespace KamertonTest
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.timerPowerOff = new System.Windows.Forms.Timer(this.components);
             this.timerCloseForm = new System.Windows.Forms.Timer(this.components);
+            this.label79 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel1)).BeginInit();
             this.groupBox25.SuspendLayout();
@@ -2003,6 +2004,7 @@ namespace KamertonTest
             // 
             this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage5.Controls.Add(this.label79);
             this.tabPage5.Controls.Add(this.groupBox28);
             this.tabPage5.Controls.Add(this.groupBox15);
             this.tabPage5.Controls.Add(this.label43);
@@ -2659,7 +2661,7 @@ namespace KamertonTest
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(673, 23);
+            this.label39.Location = new System.Drawing.Point(673, 26);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(13, 13);
             this.label39.TabIndex = 60;
@@ -2701,7 +2703,7 @@ namespace KamertonTest
             // button25
             // 
             this.button25.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button25.Location = new System.Drawing.Point(555, 20);
+            this.button25.Location = new System.Drawing.Point(555, 21);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(112, 23);
             this.button25.TabIndex = 58;
@@ -5814,6 +5816,17 @@ namespace KamertonTest
             this.timerCloseForm.Interval = 200;
             this.timerCloseForm.Tick += new System.EventHandler(this.timerCloseForm_Tick);
             // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label79.Location = new System.Drawing.Point(543, 3);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(231, 15);
+            this.label79.TabIndex = 67;
+            this.label79.Text = "Максимальное значение не более 127";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -6366,6 +6379,7 @@ namespace KamertonTest
         private System.Windows.Forms.Label label189;
         private System.Windows.Forms.Button button102;
         private System.Windows.Forms.Button button103;
+        private System.Windows.Forms.Label label79;
     }
 }
 
