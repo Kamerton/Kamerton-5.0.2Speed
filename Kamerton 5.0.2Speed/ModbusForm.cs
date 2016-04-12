@@ -124,6 +124,8 @@ namespace KamertonTest
 			bool Oscilloscope_run         = false;                                   // Признак передачи информации в осциллограф
             bool radio_on                 = false;                                   // Признак включения радиопередачи
             bool radio_off                = false;                                   // Признак выключения радиопередачи
+            bool ggs_mute_on              = false;                                   // Признак включения ggs_mute
+            bool ggs_mute_off             = false;                                   // Признак выключения ggs_mute
             bool set_display              = false;                                   // Признак уровня яркости
             bool set_sound_level          = false;                                   // Признак установки уровня сигнала
             bool  Message_show            = true;                                    // Разрешить показ сообщения 
@@ -1691,6 +1693,16 @@ namespace KamertonTest
 				label35.Text = "";
 				label36.Text = "";
 
+                if (ggs_mute_on == false)                                                       // Признак выключения радиопередачи
+                {
+                    button83.Enabled = true;
+                    groupBox28.Enabled = true;
+                }
+                if (ggs_mute_off == false)                                                       // Признак выключения радиопередачи
+                {
+                    button90.Enabled = true;
+                    groupBox28.Enabled = true;
+                }
 
                if(radio_on == false)                                                       // Признак выключения радиопередачи
                {
@@ -2968,14 +2980,16 @@ namespace KamertonTest
         }
         private void button102_Click(object sender, EventArgs e)                     // Кнопка Радиопередача откл.
         {
-              button102.Enabled = false;
-              groupBox28.Enabled = false;
-              radio_off = true; 
+            button102.Enabled  = false;
+            groupBox28.Enabled = false;
+            radio_off          = true; 
         }
         private void button83_Click(object sender, EventArgs e)                      // Кнопка    ГГС (mute) вкл.
         {
-            button83.Enabled = false;
+            button83.Enabled   = false;
             groupBox28.Enabled = false;
+            ggs_mute_on        = true;
+/*
             stop_bw_set_byte();
             while (byte_set_run) { };
             slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
@@ -2998,11 +3012,14 @@ namespace KamertonTest
             button83.Enabled = true;
             groupBox28.Enabled = true;
             timer_param_set2.Start();
+            */
         }
         private void button90_Click(object sender, EventArgs e)                      // Кнопка    ГГС (mute) откл.
         {
-            button90.Enabled = false;
+            button90.Enabled   = false;
             groupBox28.Enabled = false;
+            ggs_mute_off       = true;
+            /*
             stop_bw_set_byte();
             while (byte_set_run) { };
             // Thread.Sleep(1000);
@@ -3026,6 +3043,7 @@ namespace KamertonTest
             button90.Enabled = true;
             groupBox28.Enabled = true;
             timer_param_set2.Start();
+            */
         }
 
 
@@ -7656,14 +7674,14 @@ namespace KamertonTest
 			 coil_Button[8] = true;
 			 do
              {
-                 startRdReg = 46;                                                                      // 40046 Адрес дата/время контроллера  
+                 startRdReg = 46;                                                                        // 40046 Адрес дата/время контроллера  
                  numRdRegs = 6;
                  res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);
                  if ((res == BusProtocolErrors.FTALK_SUCCESS))
                  {
-                     MODBUS_SUCCESS = true;                                                            // Признак выполнения контроля связи MODBUS
+                     MODBUS_SUCCESS = true;                                                              // Признак выполнения контроля связи MODBUS
                      toolStripStatusLabel1.Text = "    MODBUS ON    ";
-                     //toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5 УСТАНОВЛЕНА !");     // 
+                     //toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5 УСТАНОВЛЕНА !");       // 
                      toolStripStatusLabel2.Text = (readVals[0] + "." + readVals[1] + "." + readVals[2] + "   " + readVals[3] + ":" + readVals[4] + ":" + readVals[5]);
                  }
                  else
@@ -7675,14 +7693,15 @@ namespace KamertonTest
                      e.Cancel = true;
                  }
 
-                 if (radio_on)
+                 
+                 if (ggs_mute_on)
                  {
                      if ((myProtocol != null))
                      {
-                         startCoil = 41;                                                     // Регистр 41 управления кнопкой 
-                         res = myProtocol.writeCoil(slave, startCoil, true);                 // Включить кнопку Радиопередача
-                         startWrReg = 120;                                                   // 
-                         res = myProtocol.writeSingleRegister(slave, startWrReg, 52);        // 
+                         startCoil = 42;                                                                  // Регистр 42 управления кнопкой 
+                         res = myProtocol.writeCoil(slave, startCoil, true);                              // Включить кнопку ГГС (mute) вкл.
+                         startWrReg = 120;                                                                // 
+                         res = myProtocol.writeSingleRegister(slave, startWrReg, 53);                     // 
                          test_end1();
                      }
                      else
@@ -7692,17 +7711,56 @@ namespace KamertonTest
                          toolStripStatusLabel4.ForeColor = Color.Red;
                          Thread.Sleep(100);
                      }
-                     radio_on = false;                                                       // Признак выключения радиопередачи
+                     ggs_mute_on = false;                                                                 // Признак включения ggs_mute
+                 }
+            
+                 if (ggs_mute_off)
+                 {
+                     if ((myProtocol != null))
+                     {
+                         startCoil = 42;                                                                  // Регистр 42 управления кнопкой 
+                         res = myProtocol.writeCoil(slave, startCoil, false);                             // Выключить кнопку ГГС (mute) выкл.
+                         startWrReg = 120;                                                                // 
+                         res = myProtocol.writeSingleRegister(slave, startWrReg, 53);                     // 
+                         test_end1();
+                     }
+                     else
+                     {
+                         Com2_SUCCESS = false;
+                         toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                         toolStripStatusLabel4.ForeColor = Color.Red;
+                         Thread.Sleep(100);
+                     }
+                     ggs_mute_off = false;                                                                // Признак выключения ggs_mute
+                 }
+               if (radio_on)
+                 {
+                     if ((myProtocol != null))
+                     {
+                         startCoil = 41;                                                                  // Регистр 41 управления кнопкой 
+                         res = myProtocol.writeCoil(slave, startCoil, true);                              // Включить кнопку Радиопередача
+                         startWrReg = 120;                                                                // 
+                         res = myProtocol.writeSingleRegister(slave, startWrReg, 52);                     // 
+                         test_end1();
+                     }
+                     else
+                     {
+                         Com2_SUCCESS = false;
+                         toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                         toolStripStatusLabel4.ForeColor = Color.Red;
+                         Thread.Sleep(100);
+                     }
+                     radio_on = false;                                                                    // Признак выключения радиопередачи
                  }
 
                  if (radio_off)
                  {
                      if ((myProtocol != null))
                      {
-                         startCoil = 41;                                                     // Регистр 41 управления кнопкой 
-                         res = myProtocol.writeCoil(slave, startCoil, false);                // Выключить кнопку Радиопередача
-                         startWrReg = 120;                                                   // 
-                         res = myProtocol.writeSingleRegister(slave, startWrReg, 52);        // 
+                         startCoil = 41;                                                                  // Регистр 41 управления кнопкой 
+                         res = myProtocol.writeCoil(slave, startCoil, false);                             // Выключить кнопку Радиопередача
+                         startWrReg = 120;                                                                // 
+                         res = myProtocol.writeSingleRegister(slave, startWrReg, 52);                     // 
                          test_end1();
                      }
                      else
