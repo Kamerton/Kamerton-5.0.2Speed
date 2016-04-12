@@ -307,9 +307,9 @@ namespace KamertonTest
 					if (Tab_index == 2)
 					{
 						Tab_index = 0;
-						timer_byte_set.Stop();
+					//	timer_byte_set.Stop();
 						stop_bw_set_byte();
-						stop_DoWorkAll_Test1();
+						//stop_DoWorkAll_Test1();
 						Thread.Sleep(300);
 						while (byte_set_run) { };
 						Thread.Sleep(100);
@@ -379,10 +379,10 @@ namespace KamertonTest
 					if (Tab_index == 2)                                                    // Если включен режим set_byte - отключить
 					{
 						Tab_index = 1;
-						timer_byte_set.Stop();
+						//timer_byte_set.Stop();
 						stop_bw_set_byte();
 						Thread.Sleep(300);
-						while (byte_set_run) { };
+						while (byte_set_run) {};
 						if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
 						{
 							//Thread.Sleep(1500);
@@ -467,9 +467,9 @@ namespace KamertonTest
 					{
 						timer1.Stop();
 						stop_test_modbus1();                                                             // Отключить сканирование MODBUS 
-						Thread.Sleep(100);
-						startCoil = 8;                                                                   // Управление питанием платы Аудио-1
-						Thread.Sleep(1000);
+					//	Thread.Sleep(100);
+					//	startCoil = 8;                                                                   // Управление питанием платы Аудио-1
+						Thread.Sleep(500);
 						start_bw_set_byte();
 					}
 
@@ -481,10 +481,10 @@ namespace KamertonTest
 					if (Tab_index == 2)
 					{
 						Tab_index = 3;
-						timer_byte_set.Stop();
+						//timer_byte_set.Stop();
 						stop_bw_set_byte();
 						Thread.Sleep(300);
-						while (byte_set_run) { };
+						while (byte_set_run) {};
 						if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
 						{
 							//Thread.Sleep(1500);
@@ -564,10 +564,10 @@ namespace KamertonTest
 					if (Tab_index == 2)
 					{
 						Tab_index = 4;
-						timer_byte_set.Stop();
+						//timer_byte_set.Stop();
 						stop_bw_set_byte();
 						Thread.Sleep(300);
-						while (byte_set_run) { };
+						while (byte_set_run) {};
 						timer1.Stop();
 						Thread.Sleep(1500);
 						if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
@@ -628,10 +628,10 @@ namespace KamertonTest
 					if(Tab_index == 2)
 						{
 							Tab_index = 5;
-							timer_byte_set.Stop();
+							//timer_byte_set.Stop();
 							stop_bw_set_byte();
 							Thread.Sleep(300);
-							while(byte_set_run) { };
+							while(byte_set_run) {};
 							Thread.Sleep(100);
 							if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
 							{
@@ -7876,10 +7876,10 @@ namespace KamertonTest
                  res = myProtocol.readMultipleRegisters(slave, startRdReg, readVolt, numRdRegs);
                  if ((res == BusProtocolErrors.FTALK_SUCCESS))
                  {
-                     s12_Radio2 = readVolt[0] * 2.61 / 100;
-                     s12_Power = readVolt[2] * 2.61 / 100;
-                     s12_GGS = readVolt[4] * 2.61 / 100;
-                     s12_Radio1 = readVolt[6] * 2.61 / 100;
+                     s12_Radio2  = readVolt[0] * 2.61 / 100;
+                     s12_Power   = readVolt[2] * 2.61 / 100;
+                     s12_GGS     = readVolt[4] * 2.61 / 100;
+                     s12_Radio1  = readVolt[6] * 2.61 / 100;
                      s12_Led_Mic = readVolt[8] / 100;
                  }
                  else
@@ -10720,8 +10720,3 @@ namespace KamertonTest
 		public static callbackEvent callbackEventHandler;
 	}
  }
-
-
-
-
-

@@ -159,6 +159,7 @@ namespace KamertonTest
             this.Label9 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label79 = new System.Windows.Forms.Label();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
             this.button83 = new System.Windows.Forms.Button();
             this.button90 = new System.Windows.Forms.Button();
@@ -496,7 +497,6 @@ namespace KamertonTest
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.timerPowerOff = new System.Windows.Forms.Timer(this.components);
             this.timerCloseForm = new System.Windows.Forms.Timer(this.components);
-            this.label79 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel1)).BeginInit();
             this.groupBox25.SuspendLayout();
@@ -2032,6 +2032,17 @@ namespace KamertonTest
             this.tabPage5.Size = new System.Drawing.Size(984, 615);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Байты обмена с Аудио-1";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label79.Location = new System.Drawing.Point(543, 3);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(231, 15);
+            this.label79.TabIndex = 67;
+            this.label79.Text = "Максимальное значение не более 127";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox28
             // 
@@ -3744,11 +3755,11 @@ namespace KamertonTest
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label29.Location = new System.Drawing.Point(145, 197);
+            this.label29.Location = new System.Drawing.Point(134, 197);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(69, 20);
+            this.label29.Size = new System.Drawing.Size(83, 20);
             this.label29.TabIndex = 9;
-            this.label29.Text = "< CRC >";
+            this.label29.Text = "|_ CRC  _|";
             // 
             // label27
             // 
@@ -3836,7 +3847,7 @@ namespace KamertonTest
             this.label31.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label31.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label31.Location = new System.Drawing.Point(76, 78);
+            this.label31.Location = new System.Drawing.Point(76, 64);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(138, 20);
             this.label31.TabIndex = 8;
@@ -3847,7 +3858,7 @@ namespace KamertonTest
             this.label30.BackColor = System.Drawing.SystemColors.Window;
             this.label30.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label30.Location = new System.Drawing.Point(76, 45);
+            this.label30.Location = new System.Drawing.Point(76, 30);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(138, 20);
             this.label30.TabIndex = 7;
@@ -3857,11 +3868,11 @@ namespace KamertonTest
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label28.Location = new System.Drawing.Point(145, 21);
+            this.label28.Location = new System.Drawing.Point(135, 86);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(69, 20);
+            this.label28.Size = new System.Drawing.Size(79, 20);
             this.label28.TabIndex = 6;
-            this.label28.Text = "< CRC >";
+            this.label28.Text = "|_ CRC _|";
             // 
             // label23
             // 
@@ -3877,7 +3888,7 @@ namespace KamertonTest
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label22.Location = new System.Drawing.Point(10, 78);
+            this.label22.Location = new System.Drawing.Point(10, 64);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(60, 20);
             this.label22.TabIndex = 1;
@@ -3887,7 +3898,7 @@ namespace KamertonTest
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label21.Location = new System.Drawing.Point(10, 45);
+            this.label21.Location = new System.Drawing.Point(10, 32);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(60, 20);
             this.label21.TabIndex = 0;
@@ -5815,17 +5826,6 @@ namespace KamertonTest
             // 
             this.timerCloseForm.Interval = 200;
             this.timerCloseForm.Tick += new System.EventHandler(this.timerCloseForm_Tick);
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label79.Location = new System.Drawing.Point(543, 3);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(231, 15);
-            this.label79.TabIndex = 67;
-            this.label79.Text = "Максимальное значение не более 127";
-            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 

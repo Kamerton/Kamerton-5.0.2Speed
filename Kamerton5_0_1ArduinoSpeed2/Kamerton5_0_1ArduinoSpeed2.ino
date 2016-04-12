@@ -1948,37 +1948,21 @@ void Stop_Kamerton ()                  //Если не приходит информация с Камертона
 
 void calculateCRC_Out()                // Вычисление контрольной суммы ниблов байта
 { 
-byte temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7, crc;
-  temp0 = regs_out[0];                 // записать  1 байт в temp0
-  temp0 = temp0&0xF0;                  // Наложить маску F0 на старший нибл 1 байта XXXX0000
-  temp1 = temp0>>4;                    // Переместить старший нибл в младший 0000XXXX(Первый блок готов в temp1)
+// Байт из regs_out[0] передается без изменений,в вычислении контрольной суммы не применяется; 
 
-  temp2 = regs_out[1];                 // записать   2 байт в temp2
-  temp2 = temp2&0xF0;                  // Наложить маску F0 на старший нибл 2 байта XXXX0000
-  temp3 = temp2>>4;                    // Переместить старший нибл 2 байта в младший 0000XXXX(Второй блок готов в temp3)
-  temp4 = regs_out[1];                 // записать 2 байт в temp4
+  byte temp1, temp2, temp3, temp4, crc;
+  temp1 = regs_out[1];                 // записать  1 байт в temp1
+  temp1 = temp1&0xF0;                  // Наложить маску F0 на старший нибл 1 байта XXXX0000
+  temp2 = temp1>>4;                    // Переместить старший нибл в младший 0000XXXX(Первый блок готов в temp2)
+ 
+  temp3 = regs_out[2];                 // записать 2 байт в temp3
+  temp3 = temp3&0xF0;                  // Наложить маску F0 на старший нибл 2 байта XXXX0000
+  temp3 = temp3>>4;                    // Переместить старший нибл в младший 0000XXXX(Второй блок готов в temp3)
+  temp4 = regs_out[2];                 // записать 2 байт в temp4
   temp4 = temp4&0x0F;                  // Наложить маску 0F на младший нибл 2 байта 0000XXXX(Третий блок готов в temp4)
-  
-  temp5 = regs_out[2];                 // записать 3 байт в temp5
-  temp5 = temp5&0xF0;                  // Наложить маску F0 на старший нибл 2 байта XXXX0000
-  temp6 = temp5>>4;                    // Переместить старший нибл в младший 0000XXXX(Четвертый блок готов в temp6)
-
-
-
-
-
-  //  byte temp1, temp2, temp3, temp4, crc;
-// temp1 = regs_out[1];                 // записать  
-// temp1 = temp1&0xF0;                  // Наложить маску F0 на старший нибл 1 байта
-//  temp2 = temp1>>4;                    // Переместить старший нибл в младший
-  //temp3 = regs_out[2];                 // записать
-  //temp3 = temp3&0xF0;                  // Наложить маску F0 на старший нибл 2 байта
-  //temp3 = temp3>>4;                    // Переместить старший нибл в младший
-  //temp4 = regs_out[2];                 // записать
-  //temp4 = temp4&0x0F;                  // Наложить маску 0F на младший нибл 2 байта
-  crc =  temp2 ^  temp3 ^  temp4  ;
-  crc = crc&0x0F;                      // Наложить маску F0 на младший нибл 2 байта
-  regs_out[1]= temp1 | crc;
+  crc =  temp2 ^  temp3 ^  temp4  ;    // Сложить ниблы трех блоков
+  crc = crc&0x0F;                      // Наложить маску 0F на младший нибл crc
+  regs_out[1]= temp1 | crc;            // Получить 2 байт с ниблом контрольной суммы
 }
 void calculateCRC_In()                 // Вычисление контрольной суммы ниблов байта
 { 
@@ -5934,10 +5918,6 @@ void set_ggs_mute()
 	{
 		bitClear(regs_out[1], 4);
 	}
-	Serial.println(regs_out[0],BIN);
-	Serial.println(regs_out[1],BIN);
-	Serial.println(regs_out[2],BIN);
-	Serial.println(regs_out[3],BIN);
 	regBank.set(adr_control_command,0);  
 }
 void set_radio_send1()
