@@ -146,10 +146,10 @@ namespace KamertonTest
 			string binaryResult           = "";
 			bool[] Dec_bin                = new bool[64];
 			bool[] coilArr_Status_Rele    = new bool[64];
-			bool[] coil_Status_Rele1_8    = new bool[10];
-			bool[] coil_Status_Rele9_16   = new bool[10];
-			bool[] coil_Status_Rele17_24  = new bool[10];
-			bool[] coil_Status_Rele25_32  = new bool[10];
+            //bool[] coil_Status_Rele1_8    = new bool[10];
+            //bool[] coil_Status_Rele9_16   = new bool[10];
+            //bool[] coil_Status_Rele17_24  = new bool[10];
+            //bool[] coil_Status_Rele25_32  = new bool[10];
 			bool[] coilArrFlag            = new bool[4];
 			double s12_Power              = 0;
 			double s12_GGS                = 0;
@@ -307,7 +307,7 @@ namespace KamertonTest
 					if (Tab_index == 2)
 					{
 						Tab_index = 0;
-					//	timer_byte_set.Stop();
+						timer_byte_set.Stop();
 						stop_bw_set_byte();
 						//stop_DoWorkAll_Test1();
 						Thread.Sleep(300);
@@ -379,7 +379,7 @@ namespace KamertonTest
 					if (Tab_index == 2)                                                    // Если включен режим set_byte - отключить
 					{
 						Tab_index = 1;
-						//timer_byte_set.Stop();
+						timer_byte_set.Stop();
 						stop_bw_set_byte();
 						Thread.Sleep(300);
 						while (byte_set_run) {};
@@ -468,8 +468,10 @@ namespace KamertonTest
 						timer1.Stop();
 						stop_test_modbus1();                                                             // Отключить сканирование MODBUS 
 					//	Thread.Sleep(100);
-					//	startCoil = 8;                                                                   // Управление питанием платы Аудио-1
-						Thread.Sleep(500);
+                        //coil_Button[8] = true;                                                           // Включить питание +12в.
+                        //startCoil      = 8;                                                              // Управление питанием платы Аудио-1
+                        //res            = myProtocol.writeCoil(slave, startCoil, true);                   // Включить питание платы Аудио-1
+                        Thread.Sleep(500);
 						start_bw_set_byte();
 					}
 
@@ -1665,6 +1667,7 @@ namespace KamertonTest
 		#region timer all
 		private void timer_byte_set_Tick(object sender, EventArgs e)
 		{
+            /*
 
 			int i;
 
@@ -1704,12 +1707,12 @@ namespace KamertonTest
                     groupBox28.Enabled = true;
                 }
 
-               if(radio_on == false)                                                       // Признак выключения радиопередачи
+               if(radio_on == false)                                                            // Признак выключения радиопередачи
                {
                    button92.Enabled   = true;
                    groupBox28.Enabled = true;
                }
-               if (radio_off == false)                                                       // Признак выключения радиопередачи
+               if (radio_off == false)                                                          // Признак выключения радиопередачи
                {
                    button102.Enabled  = true;
                    groupBox28.Enabled = true;
@@ -2444,6 +2447,8 @@ namespace KamertonTest
 				toolStripStatusLabel4.ForeColor = Color.Red;
 				//  Thread.Sleep(100);
 			}
+
+            */
 		}
 		private void timer1_Tick(object sender, EventArgs e)
 			{
@@ -7665,35 +7670,38 @@ namespace KamertonTest
 		 {
 			 timer_param_set2.Stop();
 			 BackgroundWorker bw_set_byte = (BackgroundWorker)sender;
-			 int iterations = (int)e.Argument + 1;
-			 int i = 0;
-			 int data = 0;
-			 short[] readVals = new short[125];
-			 toolStripStatusLabel2.Text = "";
-			 byte_set_run = true;
-			 coil_Button[8] = true;
+			 int iterations               = (int)e.Argument + 1;
+			 int i                        = 0;
+			 int data                     = 0;
+			 short[] readVals             = new short[125];
+             ushort[] writeVals           = new ushort[20];
+             ushort[] readVolt            = new ushort[10];
+			 toolStripStatusLabel2.Text   = "";
+             coil_Button[8] = true;                                              // Управление питанием платы Аудио-1
+             startCoil = 8;                                                      // Управление питанием платы Аудио-1
+             res = myProtocol.writeCoil(slave, startCoil, true);                 // Включить питание платы Аудио-1
+             byte_set_run                 = true;
 			 do
              {
-                 startRdReg = 46;                                                                        // 40046 Адрес дата/время контроллера  
+                 startRdReg = 46;                                                                             // 40046 Адрес дата/время контроллера  
                  numRdRegs = 6;
                  res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);
                  if ((res == BusProtocolErrors.FTALK_SUCCESS))
-                 {
-                     MODBUS_SUCCESS = true;                                                              // Признак выполнения контроля связи MODBUS
-                     toolStripStatusLabel1.Text = "    MODBUS ON    ";
-                     //toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5 УСТАНОВЛЕНА !");       // 
-                     toolStripStatusLabel2.Text = (readVals[0] + "." + readVals[1] + "." + readVals[2] + "   " + readVals[3] + ":" + readVals[4] + ":" + readVals[5]);
-                 }
+                     {
+                         MODBUS_SUCCESS = true;                                                              // Признак выполнения контроля связи MODBUS
+                         toolStripStatusLabel1.Text = "    MODBUS ON    ";
+                         //toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5 УСТАНОВЛЕНА !");       // 
+                         toolStripStatusLabel2.Text = (readVals[0] + "." + readVals[1] + "." + readVals[2] + "   " + readVals[3] + ":" + readVals[4] + ":" + readVals[5]);
+                     }
                  else
-                 {
-                     MODBUS_SUCCESS = false;
-                     //  Com2_SUCCESS               = false;
-                     toolStripStatusLabel1.Text = "    MODBUS ERROR(byte_set1) ";
-                     // toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-                     e.Cancel = true;
-                 }
+                     {
+                         MODBUS_SUCCESS = false;
+                         //  Com2_SUCCESS               = false;
+                         toolStripStatusLabel1.Text = "    MODBUS ERROR(byte_set1) ";
+                         // toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                         e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
+                     }
 
-                 
                  if (ggs_mute_on)
                  {
                      if ((myProtocol != null))
@@ -7710,6 +7718,7 @@ namespace KamertonTest
                          toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                          toolStripStatusLabel4.ForeColor = Color.Red;
                          Thread.Sleep(100);
+                         e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                      }
                      ggs_mute_on = false;                                                                 // Признак включения ggs_mute
                  }
@@ -7729,7 +7738,7 @@ namespace KamertonTest
                          Com2_SUCCESS = false;
                          toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                          toolStripStatusLabel4.ForeColor = Color.Red;
-                         Thread.Sleep(100);
+                         e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                      }
                      ggs_mute_off = false;                                                                // Признак выключения ggs_mute
                  }
@@ -7748,7 +7757,7 @@ namespace KamertonTest
                          Com2_SUCCESS = false;
                          toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                          toolStripStatusLabel4.ForeColor = Color.Red;
-                         Thread.Sleep(100);
+                         e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                      }
                      radio_on = false;                                                                    // Признак выключения радиопередачи
                  }
@@ -7768,7 +7777,7 @@ namespace KamertonTest
                          Com2_SUCCESS = false;
                          toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                          toolStripStatusLabel4.ForeColor = Color.Red;
-                         Thread.Sleep(100);
+                         e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                      }
                      radio_off = false;
                  }
@@ -7788,7 +7797,7 @@ namespace KamertonTest
                             Com2_SUCCESS = false;
                             toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                             toolStripStatusLabel4.ForeColor = Color.Red;
-                            Thread.Sleep(100);
+                            e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                         }
                          set_sound_level = false;
                      }
@@ -7829,14 +7838,17 @@ namespace KamertonTest
                          Com2_SUCCESS = false;
                          toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                          toolStripStatusLabel4.ForeColor = Color.Red;
-                         Thread.Sleep(100);
+                         e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                      }
 
                      set_display = false;
                  }
 
-                 ushort[] writeVals = new ushort[20];
-                 ushort[] readVolt = new ushort[10];
+                 
+
+                 //ushort[] writeVals = new ushort[20];
+                 //ushort[] readVolt = new ushort[10];
+                 /*
                  numRdRegs = 4;
 
                  startWrReg = 120;
@@ -7852,10 +7864,12 @@ namespace KamertonTest
                      // Com2_SUCCESS               = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set2)  ";
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-                     e.Cancel = true;
+                     e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                  }
                  test_end1();
+                 */
 
+                 /*
                  // *********************** Проверить питание ********************************
                  writeVals[0] = 150;                                                  //  Адрес блока регистров для передачи в ПК уровней порогов.
                  writeVals[1] = 1684;                                                 //  Адрес блока памяти  для передачи в ПК уровней порогов.
@@ -7888,13 +7902,15 @@ namespace KamertonTest
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set3)  ";
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");          // Обработка ошибки.
-                     e.Cancel = true;
+                     e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                  }
 
+                 */
+                 
 
                  //-----------------------------------------------------------------------------------------
                  //****************************** Получить состояние регистров Аудио-1 ***************************
-
+                 /*
                  byte_set_ready = false;
                  startRdReg = 1;
                  numRdRegs = 7;
@@ -8082,9 +8098,13 @@ namespace KamertonTest
                  }
 
                  //   Thread.Sleep(50);
-                 Status_Rele_ready = true;
-                 //----------------------------------------------------------------------------------------------------
 
+
+                 Status_Rele_ready = true;
+
+                 */
+                 //----------------------------------------------------------------------------------------------------
+                 
 
                  if (bw_set_byte.CancellationPending)
                  {
@@ -8094,10 +8114,11 @@ namespace KamertonTest
                  bw_set_byte.ReportProgress(i);
                  i++;
                  if (i > 100) i = 0;
-                 data += 50;
-                 if (data > 1000) data = 50;
+                 data = 50;
+                 //if (data > 1000) data = 50;
+
                  // Thread.Sleep(50);
-             } while (!e.Cancel);
+             } while (e.Cancel== false);
 			 Thread.Sleep(50);
 			 e.Result = data;
 			 byte_set_run = false;
@@ -8105,19 +8126,20 @@ namespace KamertonTest
 		 private void Bw_set_byteCompleted(object sender, RunWorkerCompletedEventArgs e)
 		 {
 			 if (e.Cancelled)
-			 {
-				 // byte_set_run = false;
-				 progressBar1.Value = progressBar1.Minimum;
-				 timer_byte_set.Stop();
-				 if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
-				 if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
-			 }
-			 else if (e.Result != null)
-			 {
-				 if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
-				 if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
-				 timer_byte_set.Stop();
-			 }
+			     {
+				     // byte_set_run = false;
+				     progressBar1.Value = progressBar1.Minimum;
+				   //  timer_byte_set.Stop();
+				     if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
+				     if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
+			     }
+             else if (e.Result != null)
+             {
+                 progressBar1.Value = progressBar1.Minimum;
+                 if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
+                 if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
+                // timer_byte_set.Stop();
+             }
 
 		 }
 		 private void Bw_set_byteProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -8129,10 +8151,10 @@ namespace KamertonTest
 		 {
 			 if (serial_connect_ok)                                                                    // Признак успешного подключения serial_connect
 			 {
-				 button25.Enabled = true;
-				 button24.Enabled = true;
+				 button25.Enabled           = true;
+				 button24.Enabled           = true;
 				 toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1");
-				 timer_byte_set.Start();
+				// timer_byte_set.Start();
 				 if (!_bw_set_byte.IsBusy)
 				 {
 					 _bw_set_byte.RunWorkerAsync(100);
@@ -8144,7 +8166,7 @@ namespace KamertonTest
 			 if (_bw_set_byte.IsBusy)
 			 {
 				 _bw_set_byte.CancelAsync();
-				 timer_byte_set.Stop();
+				// timer_byte_set.Stop();
 				 // byte_set_run = false;
 			 }
 		 }
