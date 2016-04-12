@@ -5217,21 +5217,6 @@ namespace KamertonTest
             }
 
             set_sound_level = true;
-           
-/*
-			stop_bw_set_byte();
-            while (byte_set_run) {};
-			short[] writeVals = new short[12];
-			textBox4.BackColor = Color.White;
-			writeVals[1] = short.Parse(textBox4.Text, CultureInfo.CurrentCulture);    // Установка уровня входного сигнала
-			int tempK = writeVals[1] * 5;                                             // Установка уровня входного сигнала
-          	startWrReg = 60;                                                          // 40060 Адрес хранения величины сигнала
-			res = myProtocol.writeSingleRegister(slave, startWrReg, (short)tempK_lev);
-			startWrReg = 120;                                                         // 
-			res = myProtocol.writeSingleRegister(slave, startWrReg, 40);              // Установить резистором №1,№2  уровень сигнала
-			timer_param_set2.Start();
-
-            */
 		}
 		private void button25_Click(object sender, EventArgs e)                       // Проверка яркости экрана
 			{
@@ -7788,64 +7773,9 @@ namespace KamertonTest
                          toolStripStatusLabel4.ForeColor = Color.Red;
                          Thread.Sleep(100);
                      }
-                     /*
-                     if ((myProtocol != null))
-                     {
-
-                         short[] readVals = new short[4];
-                         startWrReg = 61;   // 40061 Адрес хранения величины сигнала
-                         res = myProtocol.writeSingleRegister(slave, startWrReg, tempK);
-                         startWrReg = 120;                                                                      // 
-                         res = myProtocol.writeSingleRegister(slave, startWrReg, 18);                        // 
-                         test_end1();
-                         startRdReg = 62;
-                         numRdRegs = 2;
-                         res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);     // 40062
-                         if ((res == BusProtocolErrors.FTALK_SUCCESS))
-                         {
-                             toolStripStatusLabel1.Text = "    MODBUS ON    ";
-                             toolStripStatusLabel1.BackColor = Color.Lime;
-                             s1_disp = readVals[0].ToString();                                             // Преобразование числа в строку
-                             label43.Text = (s1_disp);
-
-                             if (readVals[1] != 0)
-                             {
-                                 s2_disp = readVals[1].ToString();                                        // Преобразование числа в строку
-                                 label41.Text = (s2_disp);
-                                 label42.Text = "мкс";
-                             }
-                             else
-                             {
-                                 label41.Text = "3,3";
-                                 label42.Text = "вольта";
-                             }
-
-                         }
-                         Thread.Sleep(100);
-
-                     }
-                     else
-                     {
-                         Com2_SUCCESS = false;
-                         toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
-                         toolStripStatusLabel4.ForeColor = Color.Red;
-                         Thread.Sleep(100);
-                     }
-
-                     */
-
-
-
-
-
 
                      set_display = false;
                  }
-
-
-
-
-
 
                  ushort[] writeVals = new ushort[20];
                  ushort[] readVolt = new ushort[10];
