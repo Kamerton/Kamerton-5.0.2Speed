@@ -391,6 +391,7 @@ namespace KamertonTest
             this.checkBoxSenGGRadio1 = new System.Windows.Forms.CheckBox();
             this.checkBoxSenAll = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button104 = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.label200 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -914,7 +915,7 @@ namespace KamertonTest
             this.groupBox25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBox25.Controls.Add(this.label150);
             this.groupBox25.Controls.Add(this.label166);
-            this.groupBox25.Location = new System.Drawing.Point(773, 3);
+            this.groupBox25.Location = new System.Drawing.Point(685, 3);
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.Size = new System.Drawing.Size(200, 63);
             this.groupBox25.TabIndex = 43;
@@ -4809,6 +4810,7 @@ namespace KamertonTest
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage3.Controls.Add(this.button104);
             this.tabPage3.Controls.Add(this.groupBox25);
             this.tabPage3.Controls.Add(this.label54);
             this.tabPage3.Controls.Add(this.label200);
@@ -4833,6 +4835,20 @@ namespace KamertonTest
             this.tabPage3.TabIndex = 5;
             this.tabPage3.Text = "Полный тест";
             // 
+            // button104
+            // 
+            this.button104.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button104.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button104.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.button104.Image = ((System.Drawing.Image)(resources.GetObject("button104.Image")));
+            this.button104.Location = new System.Drawing.Point(891, 9);
+            this.button104.Name = "button104";
+            this.button104.Size = new System.Drawing.Size(82, 57);
+            this.button104.TabIndex = 44;
+            this.button104.Text = "Блокнот";
+            this.button104.UseVisualStyleBackColor = true;
+            this.button104.Click += new System.EventHandler(this.button104_Click);
+            // 
             // label54
             // 
             this.label54.AutoSize = true;
@@ -4847,11 +4863,11 @@ namespace KamertonTest
             // label200
             // 
             this.label200.AutoSize = true;
-            this.label200.Location = new System.Drawing.Point(476, 48);
+            this.label200.Location = new System.Drawing.Point(416, 48);
             this.label200.Name = "label200";
-            this.label200.Size = new System.Drawing.Size(173, 13);
+            this.label200.Size = new System.Drawing.Size(161, 13);
             this.label200.TabIndex = 41;
-            this.label200.Text = "\"0\" -  без ограничений              №";
+            this.label200.Text = "\"0\" -  без ограничений          №";
             // 
             // comboBox4
             // 
@@ -4870,7 +4886,7 @@ namespace KamertonTest
             "10000",
             "20000",
             "32767"});
-            this.comboBox4.Location = new System.Drawing.Point(390, 43);
+            this.comboBox4.Location = new System.Drawing.Point(330, 43);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(82, 21);
             this.comboBox4.TabIndex = 40;
@@ -4879,7 +4895,7 @@ namespace KamertonTest
             // label165
             // 
             this.label165.AutoSize = true;
-            this.label165.Location = new System.Drawing.Point(651, 25);
+            this.label165.Location = new System.Drawing.Point(576, 24);
             this.label165.Name = "label165";
             this.label165.Size = new System.Drawing.Size(95, 13);
             this.label165.TabIndex = 24;
@@ -4888,7 +4904,7 @@ namespace KamertonTest
             // textBox46
             // 
             this.textBox46.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox46.Location = new System.Drawing.Point(654, 43);
+            this.textBox46.Location = new System.Drawing.Point(579, 45);
             this.textBox46.MaxLength = 9;
             this.textBox46.Name = "textBox46";
             this.textBox46.Size = new System.Drawing.Size(100, 21);
@@ -4958,7 +4974,7 @@ namespace KamertonTest
             // label99
             // 
             this.label99.AutoSize = true;
-            this.label99.Location = new System.Drawing.Point(859, 25);
+            this.label99.Location = new System.Drawing.Point(784, 24);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(0, 13);
             this.label99.TabIndex = 15;
@@ -6380,6 +6396,7 @@ namespace KamertonTest
         private System.Windows.Forms.Button button102;
         private System.Windows.Forms.Button button103;
         private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Button button104;
     }
 }
 

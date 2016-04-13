@@ -309,9 +309,9 @@ namespace KamertonTest
 						Tab_index = 0;
 						timer_byte_set.Stop();
 						stop_bw_set_byte();
-						//stop_DoWorkAll_Test1();
-						Thread.Sleep(300);
-						while (byte_set_run) { };
+						stop_DoWorkAll_Test1();
+						Thread.Sleep(1300);
+						while (byte_set_run) {};
 						Thread.Sleep(100);
 						startCoil = 8;                                                       // Управление питанием платы "Камертон"
 						res = myProtocol.writeCoil(slave, startCoil, false);                 // Выключить питание платы "Камертон"
@@ -379,10 +379,12 @@ namespace KamertonTest
 					if (Tab_index == 2)                                                    // Если включен режим set_byte - отключить
 					{
 						Tab_index = 1;
-						timer_byte_set.Stop();
-						stop_bw_set_byte();
-						Thread.Sleep(300);
+                        timer_byte_set.Stop();
+                        stop_bw_set_byte();
+                        stop_DoWorkAll_Test1();
+                        Thread.Sleep(1300);
 						while (byte_set_run) {};
+                        Thread.Sleep(300);
 						if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
 						{
 							//Thread.Sleep(1500);
@@ -467,10 +469,6 @@ namespace KamertonTest
 					{
 						timer1.Stop();
 						stop_test_modbus1();                                                             // Отключить сканирование MODBUS 
-					//	Thread.Sleep(100);
-                        //coil_Button[8] = true;                                                           // Включить питание +12в.
-                        //startCoil      = 8;                                                              // Управление питанием платы Аудио-1
-                        //res            = myProtocol.writeCoil(slave, startCoil, true);                   // Включить питание платы Аудио-1
                         Thread.Sleep(500);
 						start_bw_set_byte();
 					}
@@ -483,10 +481,11 @@ namespace KamertonTest
 					if (Tab_index == 2)
 					{
 						Tab_index = 3;
-						//timer_byte_set.Stop();
-						stop_bw_set_byte();
-						Thread.Sleep(300);
-						while (byte_set_run) {};
+                        timer_byte_set.Stop();
+                        stop_bw_set_byte();
+                        stop_DoWorkAll_Test1();
+                        Thread.Sleep(1300);
+                        while (byte_set_run) { };
 						if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
 						{
 							//Thread.Sleep(1500);
@@ -566,10 +565,11 @@ namespace KamertonTest
 					if (Tab_index == 2)
 					{
 						Tab_index = 4;
-						//timer_byte_set.Stop();
-						stop_bw_set_byte();
-						Thread.Sleep(300);
-						while (byte_set_run) {};
+                        timer_byte_set.Stop();
+                        stop_bw_set_byte();
+                        stop_DoWorkAll_Test1();
+                        Thread.Sleep(1300);
+                        while (byte_set_run) { };
 						timer1.Stop();
 						Thread.Sleep(1500);
 						if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
@@ -630,10 +630,11 @@ namespace KamertonTest
 					if(Tab_index == 2)
 						{
 							Tab_index = 5;
-							//timer_byte_set.Stop();
-							stop_bw_set_byte();
-							Thread.Sleep(300);
-							while(byte_set_run) {};
+                            timer_byte_set.Stop();
+                            stop_bw_set_byte();
+                            stop_DoWorkAll_Test1();
+                            Thread.Sleep(1300);
+                            while (byte_set_run) {};
 							Thread.Sleep(100);
 							if (coilArr_Status_Rele[7] != false)                            // Проверить, может уже отключено питание. Нет - отключить                
 							{
@@ -1667,7 +1668,6 @@ namespace KamertonTest
 		#region timer all
 		private void timer_byte_set_Tick(object sender, EventArgs e)
 		{
-            /*
 
 			int i;
 
@@ -2447,8 +2447,6 @@ namespace KamertonTest
 				toolStripStatusLabel4.ForeColor = Color.Red;
 				//  Thread.Sleep(100);
 			}
-
-            */
 		}
 		private void timer1_Tick(object sender, EventArgs e)
 			{
@@ -3321,8 +3319,8 @@ namespace KamertonTest
 		{
 			ushort[] waitVals = new ushort[4];
 			bool[] coilArr = new bool[2];
-			startRdReg = 120;                                    //regBank.add(40120);    // adr_control_command Адрес передачи комманд на выполнение
-			//  0 в регистре означает завершение выполнения фрагмента проверки
+			startRdReg = 120;                                    // regBank.add(40120);    // adr_control_command Адрес передачи комманд на выполнение
+			                                                     // 0 в регистре означает завершение выполнения фрагмента проверки
 			numRdRegs = 2;
 			do
 			{
@@ -3330,7 +3328,7 @@ namespace KamertonTest
 
 				if ((res == BusProtocolErrors.FTALK_SUCCESS))
 				{
-					toolStripStatusLabel1.Text = "    MODBUS ON    ";
+					//toolStripStatusLabel1.Text = "    MODBUS ON    ";
 					MODBUS_SUCCESS = true;
 				}
 
@@ -7844,11 +7842,7 @@ namespace KamertonTest
                      set_display = false;
                  }
 
-                 
-
-                 //ushort[] writeVals = new ushort[20];
-                 //ushort[] readVolt = new ushort[10];
-                 /*
+             
                  numRdRegs = 4;
 
                  startWrReg = 120;
@@ -7867,9 +7861,9 @@ namespace KamertonTest
                      e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                  }
                  test_end1();
-                 */
+                 
 
-                 /*
+                 
                  // *********************** Проверить питание ********************************
                  writeVals[0] = 150;                                                  //  Адрес блока регистров для передачи в ПК уровней порогов.
                  writeVals[1] = 1684;                                                 //  Адрес блока памяти  для передачи в ПК уровней порогов.
@@ -7905,12 +7899,12 @@ namespace KamertonTest
                      e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                  }
 
-                 */
+                 
                  
 
                  //-----------------------------------------------------------------------------------------
                  //****************************** Получить состояние регистров Аудио-1 ***************************
-                 /*
+                 
                  byte_set_ready = false;
                  startRdReg = 1;
                  numRdRegs = 7;
@@ -8054,8 +8048,7 @@ namespace KamertonTest
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                      e.Cancel = true;
                  }
-                 //  Thread.Sleep(50);
-
+ 
                  startCoil = 25;  //  regBank.add(00009-16);   Отображение соостояния реле 25-32
                  numCoils = 8;
                  res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);
@@ -8078,8 +8071,6 @@ namespace KamertonTest
                      e.Cancel = true;
                  }
 
-                 //   Thread.Sleep(50);
-
                  startCoil = 81;  // Флаг 
                  numCoils = 3;
                  res = myProtocol.readInputDiscretes(slave, startCoil, coilArrFlag, numCoils);
@@ -8097,12 +8088,9 @@ namespace KamertonTest
                      e.Cancel = true;
                  }
 
-                 //   Thread.Sleep(50);
-
-
                  Status_Rele_ready = true;
 
-                 */
+                
                  //----------------------------------------------------------------------------------------------------
                  
 
@@ -8121,24 +8109,26 @@ namespace KamertonTest
              } while (e.Cancel== false);
 			 Thread.Sleep(50);
 			 e.Result = data;
-			 byte_set_run = false;
+			// byte_set_run = false;
 		 }
 		 private void Bw_set_byteCompleted(object sender, RunWorkerCompletedEventArgs e)
 		 {
 			 if (e.Cancelled)
 			     {
-				     // byte_set_run = false;
+				     byte_set_run = false;
 				     progressBar1.Value = progressBar1.Minimum;
-				   //  timer_byte_set.Stop();
+				     timer_byte_set.Stop();
 				     if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
 				     if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
+                     byte_set_run = false;
 			     }
              else if (e.Result != null)
              {
                  progressBar1.Value = progressBar1.Minimum;
                  if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
                  if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
-                // timer_byte_set.Stop();
+                 byte_set_run = false;
+                 timer_byte_set.Stop();
              }
 
 		 }
@@ -8157,18 +8147,20 @@ namespace KamertonTest
 				// timer_byte_set.Start();
 				 if (!_bw_set_byte.IsBusy)
 				 {
+                     timer_byte_set.Start();
 					 _bw_set_byte.RunWorkerAsync(100);
 				 }
 			 }
 		 }
 		 private void stop_bw_set_byte()
 		 {
+             timer_byte_set.Stop();
+            // byte_set_run = false;
 			 if (_bw_set_byte.IsBusy)
 			 {
+                 byte_set_run = false;
 				 _bw_set_byte.CancelAsync();
-				// timer_byte_set.Stop();
-				 // byte_set_run = false;
-			 }
+  			 }
 		 }
   
 		 private void stop_test()
@@ -10731,6 +10723,36 @@ namespace KamertonTest
                  radio2_table();                                                   // Отобразить таблицу порогов Radio2
              }
           }
+
+         private void button104_Click(object sender, EventArgs e)               // Дополнительная кнопка вызова Notepad
+         {
+             if (fileName == "")
+             {
+                 System.Diagnostics.Process.Start(folderNotepadName);
+             }
+             else
+             {
+
+                 if ((File.Exists(folderNotepadName)))
+                 {
+                     System.Diagnostics.Process.Start((@"C:\Program Files\Notepad++\notepad++.exe"), pathStringSD);
+                 }
+                 else
+                 {
+                     folderFormatName = @"C:\Program Files (x86)\Notepad++\notepad++.exe";
+                     if ((File.Exists(folderFormatName)))
+                     {
+                         System.Diagnostics.Process.Start((@"C:\Program Files (x86)\Notepad++\notepad++.exe"), pathStringSD);
+                     }
+                     else
+                     {
+                         MessageBox.Show("                         Внимание!\r\n\r\n Программа редактирования не установлена", "Вызов программы редактирования", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     }
+
+                 }
+
+             }
+         }
 
    
       
