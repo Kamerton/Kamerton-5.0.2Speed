@@ -265,6 +265,7 @@ namespace KamertonTest
 			ComPort2.WriteTimeout        = 500;
 			ComPort2.RtsEnable           = true;
 			ComPort2.DtrEnable           = true;
+            ComPort2.Encoding            = Encoding.UTF8;
 			comboBox4.SelectedIndex      = 0;
 			comboBox2.SelectedIndex      = 0;
 			radioButton1.Checked         = true;                                        // Одноразовая проверка

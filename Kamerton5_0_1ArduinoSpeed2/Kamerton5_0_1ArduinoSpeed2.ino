@@ -4482,23 +4482,23 @@ void test_MTT()
 	strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));
 	if (test_repeat == false)  myFile.println(buffer);                              // "Command  HangUp MTT OFF send!"
 	// ++++++++++++++++++++++++++++++++++ Проверить исправность канала динамиков на отсутствие наводок ++++++++++++++++++++++++
-	measure_vol_min(analog_FrontL,    adr_reg40250, adr_reg40450, 250,por_int_buffer[3]);                                // Измерить уровень сигнала на выходе FrontL    "Test MTT ** Signal FrontL                                   OFF - ";
-	measure_vol_min(analog_FrontR,    adr_reg40251, adr_reg40451, 251,por_int_buffer[5]);                                // Измерить уровень сигнала на выходе FrontR    "Test MTT ** Signal FrontR                                   OFF - ";
-	measure_vol_min(analog_LineL,     adr_reg40252, adr_reg40452, 252,por_int_buffer[7]);                                // Измерить уровень сигнала на выходе LineL     "Test MTT ** Signal LineL                                    OFF - ";
-	measure_vol_min(analog_LineR,     adr_reg40253, adr_reg40453, 253,por_int_buffer[9]);                                // Измерить уровень сигнала на выходе LineR     "Test MTT ** Signal LineR                                    OFF - ";
-	measure_vol_min(analog_mag_radio, adr_reg40254, adr_reg40454, 254,por_int_buffer[11]);                                // Измерить уровень сигнала на выходе mag radio "Test MTT ** Signal mag radio                                OFF - ";
-	measure_vol_min(analog_mag_phone, adr_reg40255, adr_reg40455, 255,por_int_buffer[13]);                                // Измерить уровень сигнала на выходе mag phone "Test MTT ** Signal mag phone                                OFF - ";
-	measure_vol_min(analog_ggs,       adr_reg40256, adr_reg40456, 256,por_int_buffer[15]);                                // Измерить уровень сигнала на выходе GGS       "Test MTT ** Signal GGS                                      OFF - ";
-	measure_vol_min(analog_gg_radio1, adr_reg40257, adr_reg40457, 257,por_int_buffer[17]);                                // Измерить уровень сигнала на выходе GG Radio1 "Test MTT ** Signal GG Radio1                                OFF - ";
-	measure_vol_min(analog_gg_radio2, adr_reg40258, adr_reg40458, 258,por_int_buffer[19]);                                // Измерить уровень сигнала на выходе GG Radio2 "Test MTT ** Signal GG Radio2                                OFF - ";
+	measure_vol_min(analog_FrontL,    adr_reg40250, adr_reg40450, 250,por_int_buffer[3]);                // Измерить уровень сигнала на выходе FrontL    "Test MTT ** Signal FrontL                                   OFF - ";
+	measure_vol_min(analog_FrontR,    adr_reg40251, adr_reg40451, 251,por_int_buffer[5]);                // Измерить уровень сигнала на выходе FrontR    "Test MTT ** Signal FrontR                                   OFF - ";
+	measure_vol_min(analog_LineL,     adr_reg40252, adr_reg40452, 252,por_int_buffer[7]);                // Измерить уровень сигнала на выходе LineL     "Test MTT ** Signal LineL                                    OFF - ";
+	measure_vol_min(analog_LineR,     adr_reg40253, adr_reg40453, 253,por_int_buffer[9]);                // Измерить уровень сигнала на выходе LineR     "Test MTT ** Signal LineR                                    OFF - ";
+	measure_vol_min(analog_mag_radio, adr_reg40254, adr_reg40454, 254,por_int_buffer[11]);               // Измерить уровень сигнала на выходе mag radio "Test MTT ** Signal mag radio                                OFF - ";
+	measure_vol_min(analog_mag_phone, adr_reg40255, adr_reg40455, 255,por_int_buffer[13]);               // Измерить уровень сигнала на выходе mag phone "Test MTT ** Signal mag phone                                OFF - ";
+	measure_vol_min(analog_ggs,       adr_reg40256, adr_reg40456, 256,por_int_buffer[15]);               // Измерить уровень сигнала на выходе GGS       "Test MTT ** Signal GGS                                      OFF - ";
+	measure_vol_min(analog_gg_radio1, adr_reg40257, adr_reg40457, 257,por_int_buffer[17]);               // Измерить уровень сигнала на выходе GG Radio1 "Test MTT ** Signal GG Radio1                                OFF - ";
+	measure_vol_min(analog_gg_radio2, adr_reg40258, adr_reg40458, 258,por_int_buffer[19]);               // Измерить уровень сигнала на выходе GG Radio2 "Test MTT ** Signal GG Radio2                                OFF - ";
 
 	// ++++++++++++++++++++++++++++++++++ Подать сигнал на вход микрофона MTT +++++++++++++++++++++++++++++++++++++++++++++++++
-	resistor(1,por_int_buffer[1]);                                                               // Установить уровень сигнала 60 мв
-	resistor(2,por_int_buffer[2]);                                                               // Установить уровень сигнала 60 мв
-	regBank.set(3,1);                                                               // Включить сигнал на вход микрофона трубки Mic3p
-	UpdateRegs();                                                                   // Выполнить команду
+	resistor(1,por_int_buffer[1]);                                                                       // Установить уровень сигнала 60 мв
+	resistor(2,por_int_buffer[2]);                                                                       // Установить уровень сигнала 60 мв
+	regBank.set(3,1);                                                                                    // Включить сигнал на вход микрофона трубки Mic3p
+	UpdateRegs();                                                                                        // Выполнить команду
 	delay(100);
-	strcpy_P(buffer, (char*)pgm_read_word(&(table_message[33])));                   // "Signal MTT microphone 30mv                    ON"            ;
+	strcpy_P(buffer, (char*)pgm_read_word(&(table_message[33])));                                        // "Signal MTT microphone 30mv                    ON"            ;
 	if (test_repeat == false) myFile.println(buffer);                               // "Signal MTT microphone 30mv                    ON"            ;
 	//++++++++++++++++++++++++++++++++++ Проверить отсутствие сигнала на линиях  +++++++++++++++++++++++++++++++++
 	measure_vol_min(analog_FrontL,    adr_reg40250, adr_reg40450, 250,por_int_buffer[4]);                 // Измерить уровень сигнала на выходе FrontL    "Test MTT ** Signal FrontL                                   OFF - ";
@@ -4522,7 +4522,7 @@ void test_MTT()
 	regBank.set(18,1);                                                                                     // XP1 - 20  HangUp  DCD ON
 	UpdateRegs();                                                                                          // Выполнить команду
 	delay(100);
-	strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                                          // "Command HangUp ON  MTT                           send!"      ;
+	strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));                                          // "Command HangUp ON  MTT                           send!"      ;
 	if (test_repeat == false) myFile.println(buffer);                                                      // "Command HangUp ON  MTT                           send!"      ;
 	measure_vol_max(analog_ggs,  adr_reg40289, adr_reg40489, 289,  por_int_buffer[33],por_int_buffer[34]);                       //  Измерить уровень сигнала на выходе GGS       "Test MTT ** Signal GGS             On      
 	regBank.set(18,0);                                                                                     // XP1 - 20  HangUp  DCD ON  Положить трубку
@@ -4531,7 +4531,7 @@ void test_MTT()
 	regBank.set(6,0);                                                                                      // Реле RL5. Отключить звук Front L, Front R
 	UpdateRegs();                                                                                          // Выполнить команду
 	set_sound(0);
-	regBank.set(adr_control_command,0);                                             // Завершить программу    
+	regBank.set(adr_control_command,0);                                                                    // Завершить программу    
 	mcp_Analog.digitalWrite(Front_led_Blue, HIGH); 
 }
 void test_tangR()
