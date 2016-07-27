@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Верия под новую плату Аудио2
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
