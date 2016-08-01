@@ -769,6 +769,13 @@ const unsigned int adr_reg40338      PROGMEM       =    1862;  // Aдрес счетчика
 const unsigned int adr_reg40538      PROGMEM       =    1864;  // Aдрес данных измерения   
 const unsigned int adr_reg40339      PROGMEM       =    1866;  // Aдрес счетчика ошибки        
 const unsigned int adr_reg40539      PROGMEM       =    1868;  // 
+const unsigned int adr_reg40340      PROGMEM       =    1870;  // Aдрес счетчика ошибки   сенсор маг     
+const unsigned int adr_reg40540      PROGMEM       =    1872;  // 
+
+
+
+
+
 
 //------------------------- Уровни пороговых значений сигналов при тестировании устройств--------------------------------------
 //++++++++++++++++++++++++++++ Заводские установки уровней порогов +++++++++++++++++++++++++++++++++++++
@@ -1431,7 +1438,8 @@ const char  txt_error133[]  PROGMEM              = "Test headset instructor ** S
 const char  txt_error134[]  PROGMEM              = "Test headset dispatcher ** Signal mag radio ON~ - ";
 const char  txt_error135[]  PROGMEM              = "Test MTT ** Signal mag radio                ON~ - ";
 const char  txt_error136[]  PROGMEM              = "Test Microphone ** Signal mag radio         ON~ - ";
-
+const char  txt_error137[]  PROGMEM               = "Sensor Mag                                 OFF - ";
+const char  txt_error138[]  PROGMEM               = "Sensor Mag                                 ON~ - ";
 
 
 char buffer[140];  
@@ -1668,7 +1676,9 @@ txt_error132,                                 // "Test GGS    ** Signal mag radi
 txt_error133,                                 // "Test headset instructor ** Signal mag radio                 ON  - ";
 txt_error134,                                 // "Test headset dispatcher ** Signal mag radio                 ON  - ";
 txt_error135,                                 // "Test MTT ** Signal mag radio                                ON  - ";
-txt_error136                                  // "Test Microphone ** Signal mag radio                         ON  - ";
+txt_error136,                                 // "Test Microphone ** Signal mag radio                         ON  - ";
+txt_error137,                                 //"Sensor Mag            OFF - ";
+txt_error138                                  //"Sensor Mag            ON - ";
 };
 
 // ========================= Блок программ ============================================
@@ -2207,7 +2217,7 @@ void UpdateRegs()                                        // Обновить регистры
 }
 
 void UpdateRegs_istr()
-{ 
+{ // Работа с кнопками меню инструктора. Остальные кнопки не реализованы.
 	 boolean set_rele ;
 		//-----Установить бит 1
 	  set_rele = regBank.get(2);
@@ -2887,6 +2897,7 @@ void sensor_all_off()
 	regBank.set(18,0);                                                              // XP1 - 20  HangUp  DCD
 	regBank.set(19,0);                                                              // J8-11     XP7 2 sensor тангента ручная
 	regBank.set(20,0);                                                              // J8-23     XP7 1 PTT1 тангента ручная CTS
+	regBank.set(21,0);                                                              // XP2-2     sensor "Маг." 
 	regBank.set(25,1);                                                              // XP1- 19 HaSs      sensor подключения трубки                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	regBank.set(26,0);                                                              // XP1- 17 HaSPTT    CTS DSR вкл.
 	regBank.set(27,0);                                                              // XP1- 16 HeS2Rs    sensor подключения гарнитуры инструктора с 2 наушниками
@@ -2933,9 +2944,9 @@ void sensor_all_off()
 	
 		if(bitRead(i50,3) != 0)                                                     // J8-11  тангента ручная                           "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
 		  {
-			regcount = read_reg_eeprom(adr_reg40201);                                          // адрес счетчика ошибки sensor тангента ручная     "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
+			regcount = read_reg_eeprom(adr_reg40201);                               // адрес счетчика ошибки sensor тангента ручная     "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
 			regcount++;                                                             // увеличить счетчик ошибок sensor тангента ручная  "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
-			save_reg_eeprom(adr_reg40201,regcount);                                            // адрес счетчика ошибки sensor тангента ручная     "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
+			save_reg_eeprom(adr_reg40201,regcount);                                 // адрес счетчика ошибки sensor тангента ручная     "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
 			regBank.set(201,1);                                                     // установить флаг ошибки sensor тангента ручная    "Sensor tangenta ruchnaja            XP7 - 2                 OFF - ";
 			regBank.set(120,1);                                                     // установить общий флаг ошибки
 			regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -2960,9 +2971,9 @@ void sensor_all_off()
 
 		if(bitRead(i50,4) != 0)                                                     // XP8 - 2   sensor Тангента ножная                  "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
 		  {
-			regcount = read_reg_eeprom(adr_reg40202);                                          // адрес счетчика ошибки sensor Тангента ножная      "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
+			regcount = read_reg_eeprom(adr_reg40202);                               // адрес счетчика ошибки sensor Тангента ножная      "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
 			regcount++;                                                             // увеличить счетчик ошибок  sensor Тангента ножная  "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
-			save_reg_eeprom(adr_reg40202,regcount);                                            // адрес счетчика ошибки  sensor Тангента ножная     "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
+			save_reg_eeprom(adr_reg40202,regcount);                                 // адрес счетчика ошибки  sensor Тангента ножная     "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
 			regBank.set(202,1);                                                     // установить флаг ошибки sensor Тангента ножная     "Sensor tangenta nognaja             XP8 - 2                 OFF - "; 
 			regBank.set(120,1);                                                     // установить общий флаг ошибки
 			regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -2985,11 +2996,40 @@ void sensor_all_off()
 			  }
 		  }
 
+		//if(bitRead(i52,0) != 0)                                                     //     sensor подключения  
+		//  {
+		//	regcount = read_reg_eeprom(adr_reg40340);                               // адрес счетчика ошибки  
+		//	regcount++;                                                             // увеличить счетчик ошибок sensor  
+		//	save_reg_eeprom(adr_reg40340,regcount);                                 // адрес счетчика ошибки  
+		//	regBank.set(340,1);                                                     // установить флаг ошибки sensor подключения  
+		//	regBank.set(120,1);                                                     // установить общий флаг ошибки
+		//	regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
+		//	regcount_err++;                                                         // увеличить счетчик всех ошибок 
+		//	regBank.set(adr_reg_count_err,regcount_err);                            // Сохранить данные счетчика всех ошибок
+		//	strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[137])));       //  
+		//	myFile.print(buffer);                                                   //  
+		//	strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));            // "    Error! - "; 
+		//	myFile.print(buffer);                                                   // "    Error! - "; 
+		//	myFile.println(regcount);                                               // Показания счетчика ошибок
+		//  }
+		//else
+		//  {
+		//	  if (test_repeat == false)
+		//	   {
+		//		strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[137])));   // "Sensor headset instructor 2         XP1- 16 HeS2Rs          OFF - ";
+		//		myFile.print(buffer);                                               // 
+		//		strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
+		//		if (test_repeat == false) myFile.println(buffer);                   // "Sensor headset instructor 2 отключен  - Pass
+		//	  }
+		//  }
+
+
+
 		if(bitRead(i52,1) != 0)                                                     // XP1- 16 HeS2Rs    sensor подключения гарнитуры инструктора с 2 наушниками
 		  {
-			regcount = read_reg_eeprom(adr_reg40203);                                          // адрес счетчика ошибки sensor подключения гарнитуры инструктора с 2 наушниками
+			regcount = read_reg_eeprom(adr_reg40203);                               // адрес счетчика ошибки sensor подключения гарнитуры инструктора с 2 наушниками
 			regcount++;                                                             // увеличить счетчик ошибок sensor подключения гарнитуры инструктора с 2 наушниками
-			save_reg_eeprom(adr_reg40203,regcount);                                            // адрес счетчика ошибки sensor подключения гарнитуры инструктора с 2 наушниками
+			save_reg_eeprom(adr_reg40203,regcount);                                 // адрес счетчика ошибки sensor подключения гарнитуры инструктора с 2 наушниками
 			regBank.set(203,1);                                                     // установить флаг ошибки sensor подключения гарнитуры инструктора с 2 наушниками 
 			regBank.set(120,1);                                                     // установить общий флаг ошибки
 			regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -3014,9 +3054,9 @@ void sensor_all_off()
 
 		if(bitRead(i52,2) != 0)                                                     // XP1- 13 HeS2Ls    sensor подключения гарнитуры инструктора 
 		  {
-			regcount = read_reg_eeprom(adr_reg40204);                                          // адрес счетчика ошибки sensor подключения гарнитуры инструктора
+			regcount = read_reg_eeprom(adr_reg40204);                               // адрес счетчика ошибки sensor подключения гарнитуры инструктора
 			regcount++;                                                             // увеличить счетчик ошибок sensor подключения гарнитуры инструктора
-			save_reg_eeprom(adr_reg40204,regcount);                                            // адрес счетчика ошибки sensor подключения гарнитуры инструктора 
+			save_reg_eeprom(adr_reg40204,regcount);                                 // адрес счетчика ошибки sensor подключения гарнитуры инструктора 
 			regBank.set(204,1);                                                     // установить флаг ошибки sensor подключения гарнитуры инструктора 
 			regBank.set(120,1);                                                     // установить общий флаг ошибки
 			regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -3041,9 +3081,9 @@ void sensor_all_off()
 
 		if(bitRead(i52,3) != 0)                                                     // XP1- 5  HeS1Rs    sensor подкючения гарнитуры диспетчера с 2 наушниками
 		  {
-			regcount = read_reg_eeprom(adr_reg40205);                                          // адрес счетчика ошибки sensor подкючения гарнитуры диспетчера с 2 наушниками
+			regcount = read_reg_eeprom(adr_reg40205);                               // адрес счетчика ошибки sensor подкючения гарнитуры диспетчера с 2 наушниками
 			regcount++;                                                             // увеличить счетчик ошибок sensor подкючения гарнитуры диспетчера с 2 наушниками
-			save_reg_eeprom(adr_reg40205,regcount);                                            // адрес счетчика ошибки sensor подкючения гарнитуры диспетчера с 2 наушниками
+			save_reg_eeprom(adr_reg40205,regcount);                                 // адрес счетчика ошибки sensor подкючения гарнитуры диспетчера с 2 наушниками
 			regBank.set(205,1);                                                     // установить флаг ошибки sensor подкючения гарнитуры диспетчера с 2 наушниками
 			regBank.set(120,1);                                                     // установить общий флаг ошибки
 			regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -3198,6 +3238,7 @@ void sensor_all_on()
 	regBank.set(13,1);                                                              // XP8 - 2   sensor Тангента ножная
 	regBank.set(16,1);                                                              // XS1 - 6   sensor подключения микрофона
 	regBank.set(19,1);                                                              // J8-11     XP7 2 sensor тангента ручная
+	regBank.set(21,1);                                                              // XP2-2     sensor "Маг." 
 	regBank.set(25,0);                                                              // XP1- 19 HaSs      sensor подключения трубки                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	//regBank.set(27,1);                                                              // XP1- 16 HeS2Rs    sensor подключения гарнитуры инструктора с 2 наушниками
 	//regBank.set(29,1);                                                              // XP1- 13 HeS2Ls    sensor подключения гарнитуры инструктора 
@@ -4225,8 +4266,8 @@ void test_headset_instructor()
 	test_instr_on();                                                                // Включить необходимые сенсоры, проверить состояние
 	//myFile.println("");
 	// ++++++++++++++++++++++++++++++++++ Подать сигнал на вход микрофона ++++++++++++++++++++++++++++++++++++++++++++++++++++
-	resistor(1, por_int_buffer[1]);                                                                // Установить уровень сигнала 30 мв
-	resistor(2, por_int_buffer[2]);                                                                // Установить уровень сигнала 30 мв
+	resistor(1, por_int_buffer[1]);                                                 // Установить уровень сигнала 30 мв
+	resistor(2, por_int_buffer[2]);                                                 // Установить уровень сигнала 30 мв
 	regBank.set(2,1);                                                               // Подать сигнал на вход микрофона инструктора  Mic2p
 	UpdateRegs();                                                                   // Выполнить команду
 	delay(300);
@@ -8132,8 +8173,10 @@ modbus registers follow the following format
 	regBank.add(335);                         // "Test MTT ** Signal mag radio                                            ON  - ";
 	regBank.add(336);                         // "Test Microphone ** Signal mag radio                                     ON  - ";
 	regBank.add(337);                         // Свободен 
+	regBank.add(340);                         // Флаг ошибки сенсор Маг
 
-	regBank.add(10081);                       // Адрес флагa индикации состояния сигнала CTS
+		
+		regBank.add(10081);                       // Адрес флагa индикации состояния сигнала CTS
 	regBank.add(10082);                       // Адрес флагa индикации состояния сигнала DSR
 	regBank.add(10083);                       // Адрес флагa индикации состояния сигнала DCD
 

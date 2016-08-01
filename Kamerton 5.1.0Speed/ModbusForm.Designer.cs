@@ -5854,7 +5854,7 @@ namespace KamertonTest
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Программа тестирования платы  \" Аудио - 1\" версия 5.0.2";
+            this.Text = "Программа тестирования плат  \" Аудио - 1\"  и  \" Аудио - 2\"       версия 5.1.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.LocationChanged += new System.EventHandler(this.Form1_LocationChanged);
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).EndInit();

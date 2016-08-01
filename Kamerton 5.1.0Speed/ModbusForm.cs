@@ -4676,7 +4676,7 @@ namespace KamertonTest
 		#endregion 
 		//*******************************************
 	
-		private void button11_Click_1(object sender, EventArgs e)                     // Старт полного теста
+		private void button11_Click_1(object sender, EventArgs e)                                  // Старт полного теста
 		{
 			if ((myProtocol != null))
 			{
@@ -4698,291 +4698,345 @@ namespace KamertonTest
 					button11.BackColor = Color.White;                                               // Кнопка "Старт" 
 					button11.Enabled = false;                                                       // Кнопка "Старт" отключена
 					button11.Refresh();                                                             // Кнопка "Старт"
-					textBox7.Text = ("Выполняется полный  контроль звукового модуля Аудио-1" + "\r\n");
-					textBox7.Text += ("\r\n");
-					textBox8.Text = ("");
-					textBox9.Text = ("");
-					textBox48.Text = ("");
-					textBox7.Refresh();
-					textBox8.Refresh();
-					textBox9.Refresh();
-					s_txt7 = "";
-					s_txt8 = "";
-					s_txt9 = "";
-					s_txt48 = "";
-					label54.Visible = false;                                                        // Текст "Ожидайте завершения выолнения команды!!" спрятан 
-					startWrReg = 120;                                                               // 
-					res = myProtocol.writeSingleRegister(slave, startWrReg, 24);                    // Команда на проверку наличия SD памяти
-					if ((res == BusProtocolErrors.FTALK_SUCCESS))
-					{
-						test_end1();                                                                // Проверка наличия SD памяти окончена
-						num_module_audio();                                                         // Преобразование номера модуля Аудио 1
-						numCoils = 2;                                                               //    
-						startCoil = 125;
-						res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);            // Проверить Адрес 125  индикации возникновения ошибки SD память
-						if ((res == BusProtocolErrors.FTALK_SUCCESS))
-						{
-							if (coilArr[0] != false)                                                //нет ошибки
-							{
-								textBox9.Text += ("SD память установлена " + "\r\n");
-								textBox9.Refresh();
-								//  0 в регистре означает завершение выполнения фрагмента проверки
-								numRdRegs = 2;
-								startCoil = 124;                                                    // regBank.add(124);  Флаг индикации связи с модулем "АУДИО"
-								numCoils = 2;
-								res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);    // 
-								if ((res == BusProtocolErrors.FTALK_SUCCESS))
-								{
-									if (coilArr[0] == true)                                         //нет ошибки
-									{
-										textBox7.Text += ("Связь со звуковой платой АУДИО-1 установлена." + "\r\n");
-										textBox7.Refresh();
-										// Многократная проверка, записать номера выбранных тестов
-										startCoil = 118;                                            // Признак многократной проверки установлен. Передать в контроллер
-										res = myProtocol.writeCoil(slave, startCoil, true);         // Отправить  признак многократной проверки в Камертон 5.0   
-										if ((res == BusProtocolErrors.FTALK_SUCCESS))
-										{
-											if (radioButton2.Checked)                               // Признак многократной роверки необходим для блокирования вывода результатов проверки
-											{
-												// Многократная проверка, записать номера выбранных тестов
-												startCoil = 118;                                    // Признак многократной роверки установлен. Передать в контроллер
-												res = myProtocol.writeCoil(slave, startCoil, true);
 
-												TestStep = 0;                                       // Счетчик количества тестов
+                    startWrReg = 120;                                                               // типа модуля Аудио1/2
+                    res = myProtocol.writeSingleRegister(slave, startWrReg, 54);                    // Команда на проверку типа модуля Аудио1/2
+                    if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                    {
+                        test_end1();                                                                // Проверка типа модуля Аудио1/2 окончена
+                        short[] readVals = new short[4];
+                        startRdReg = 14; // 40014 
+                        numRdRegs = 1;
+                        res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);
+                        int module_audio = readVals[0];
+                        if (module_audio == 1)
+                        {
+                            textBox7.Text = ("Выполняется полный  контроль звукового модуля Аудио-1" + "\r\n");
+                        }
+                        else if (module_audio == 2)
+                        {
+                            textBox7.Text = ("Выполняется полный  контроль звукового модуля Аудио-2" + "\r\n");
+                        }
+                        else
+                        {
+                            textBox7.Text = ("Звуковой модуль Аудио НЕ ОПРЕДЕЛЕН" + "\r\n");
+                        }
+                        
+                        textBox7.Text += ("\r\n");
+                        textBox8.Text = ("");
+                        textBox9.Text = ("");
+                        textBox48.Text = ("");
+                        textBox7.Refresh();
+                        textBox8.Refresh();
+                        textBox9.Refresh();
+                        s_txt7 = "";
+                        s_txt8 = "";
+                        s_txt9 = "";
+                        s_txt48 = "";
+                        label54.Visible = false;                                                        // Текст "Ожидайте завершения выолнения команды!!" спрятан 
+                        startWrReg = 120;                                                               // 
+                        res = myProtocol.writeSingleRegister(slave, startWrReg, 24);                    // Команда на проверку наличия SD памяти
+                        if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                        {
+                            test_end1();                                                                // Проверка наличия SD памяти окончена
+                            num_module_audio();                                                         // Преобразование номера модуля Аудио 1
+                            numCoils = 2;                                                               //    
+                            startCoil = 125;
+                            res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);            // Проверить Адрес 125  индикации возникновения ошибки SD память
+                            if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                            {
+                                if (coilArr[0] != false)                                                //нет ошибки
+                                {
+                                    textBox9.Text += ("SD память установлена " + "\r\n");
+                                    textBox9.Refresh();
+                                    //  0 в регистре означает завершение выполнения фрагмента проверки
+                                    numRdRegs = 2;
+                                    startCoil = 124;                                                    // regBank.add(124);  Флаг индикации связи с модулем "АУДИО"
+                                    numCoils = 2;
+                                    res = myProtocol.readCoils(slave, startCoil, coilArr, numCoils);    // 
+                                    if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                                    {
+                                        if (coilArr[0] == true)                                         //нет ошибки
+                                        {
 
-												if (checkBoxPower.Checked)                          //
-												{
-													test_step[TestStep] = 0;
-													TestStep++;
-												}
+                                            if (module_audio == 1)
+                                            {
+                                                textBox7.Text += ("Связь со звуковой платой АУДИО-1 установлена." + "\r\n");
+                                            }
+                                            else if (module_audio == 2)
+                                            {
+                                                textBox7.Text += ("Связь со звуковой платой АУДИО-2 установлена." + "\r\n");
+                                            }
+                                            else
+                                            {
+                                                textBox7.Text = ("Звуковой модуль Аудио НЕ ОПРЕДЕЛЕН" + "\r\n");
+                                            }
 
-												if (checkBoxSensors1.Checked)
-												{
-													test_step[TestStep] = 1;
-													TestStep++;
-												}
+                                            textBox7.Refresh();
+                                            // Многократная проверка, записать номера выбранных тестов
+                                            startCoil = 118;                                            // Признак многократной проверки установлен. Передать в контроллер
+                                            res = myProtocol.writeCoil(slave, startCoil, true);         // Отправить  признак многократной проверки в Камертон 5.0   
+                                            if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                                            {
+                                                if (radioButton2.Checked)                               // Признак многократной роверки необходим для блокирования вывода результатов проверки
+                                                {
+                                                    // Многократная проверка, записать номера выбранных тестов
+                                                    startCoil = 118;                                    // Признак многократной роверки установлен. Передать в контроллер
+                                                    res = myProtocol.writeCoil(slave, startCoil, true);
 
-												if (checkBoxSensors2.Checked)
-												{
-													test_step[TestStep] = 2;
-													TestStep++;
-												}
+                                                    TestStep = 0;                                       // Счетчик количества тестов
 
-												if (checkBoxSenGar1instr.Checked)
-												{
-													test_step[TestStep] = 3;
-													TestStep++;
-												}
+                                                    if (checkBoxPower.Checked)                          //
+                                                    {
+                                                        test_step[TestStep] = 0;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenGar1disp.Checked)
-												{
-													test_step[TestStep] = 4;
-													TestStep++;
-												}
+                                                    if (checkBoxSensors1.Checked)
+                                                    {
+                                                        test_step[TestStep] = 1;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenTrubka.Checked)
-												{
-													test_step[TestStep] = 5;
-													TestStep++;
-												}
+                                                    if (checkBoxSensors2.Checked)
+                                                    {
+                                                        test_step[TestStep] = 2;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenTangRuch.Checked)
-												{
-													test_step[TestStep] = 6;
-													TestStep++;
-												}
+                                                    if (checkBoxSenGar1instr.Checked)
+                                                    {
+                                                        test_step[TestStep] = 3;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenTangN.Checked)
-												{
-													test_step[TestStep] = 7;
-													TestStep++;
-												}
+                                                    if (checkBoxSenGar1disp.Checked)
+                                                    {
+                                                        test_step[TestStep] = 4;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenGGS.Checked)
-												{
-													test_step[TestStep] = 8;
-													TestStep++;
-												}
+                                                    if (checkBoxSenTrubka.Checked)
+                                                    {
+                                                        test_step[TestStep] = 5;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenGGRadio1.Checked)
-												{
-													test_step[TestStep] = 9;
-													TestStep++;
-												}
+                                                    if (checkBoxSenTangRuch.Checked)
+                                                    {
+                                                        test_step[TestStep] = 6;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenGGRadio2.Checked)
-												{
-													test_step[TestStep] = 10;
-													TestStep++;
-												}
+                                                    if (checkBoxSenTangN.Checked)
+                                                    {
+                                                        test_step[TestStep] = 7;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxSenMicrophon.Checked)
-												{
-													test_step[TestStep] = 11;
-													TestStep++;
-												}
+                                                    if (checkBoxSenGGS.Checked)
+                                                    {
+                                                        test_step[TestStep] = 8;
+                                                        TestStep++;
+                                                    }
 
-												if (checkBoxDisp.Checked)
-												{
-													test_step[TestStep] = 12;
-													TestStep++;
-												}
+                                                    if (checkBoxSenGGRadio1.Checked)
+                                                    {
+                                                        test_step[TestStep] = 9;
+                                                        TestStep++;
+                                                    }
 
-											}
-											else
-											{
-												// При однократной проверки, записать все номера тестов
-												startCoil = 118;                                                              // Признак многократной роверки снят.      Передать в контроллер
-												res = myProtocol.writeCoil(slave, startCoil, false);
-												for (int i = 0; i < 13; i++)                                                  // Заполнить список тестов (Выполнить все тесты)
-												{
-													test_step[i] = i;
-												}
-												TestStep = 13;                                                                // Количество тестов
-											}
+                                                    if (checkBoxSenGGRadio2.Checked)
+                                                    {
+                                                        test_step[TestStep] = 10;
+                                                        TestStep++;
+                                                    }
 
-											TestN = 0;                                                                        // Обнулить счетчик номера выполняемых тестов
-											TestRepeatCount = 1;                                                              // Установить начальный номер  счетчика проходов теста
-											startWrReg = 120;                                                                 // Команда на 
-											res = myProtocol.writeSingleRegister(slave, startWrReg, 16);                      // Команда на сброс счетчиков отправлена
-											test_end1();
-											startWrReg = 120;                                                                 // Команда на открытие файла отправлена
-											res = myProtocol.writeSingleRegister(slave, startWrReg, 12);                      // Команда на открытие файла отправлена
-											test_end1();
-											textBox9.Text += ("Команда на открытие файла отправлена" + "\r\n");
-											textBox9.Refresh();
-											Thread.Sleep(600);
-											file_fakt_namber();                                                               // Отобразить имя текущего файла
-											num_string();
-											Create_File();
-											textBox8.Text += ("Отчет тестирования модуля Аудио-1 N " + textBox46.Text + "\r\n");
-											textBox8.Text += ("Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n\r\n");
-											textBox48.Text += ("Отчет тестирования модуля Аудио-1 N " + textBox46.Text + "\r\n");
-											textBox48.Text += ("Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n\r\n");
-											textBox8.Refresh();
-											textBox48.Refresh();
-											test_end1();
-											//  Запуск теста
-											button9.BackColor = Color.Red;
-											button9.Enabled = true;
-											button9.Refresh();
-											Thread.Sleep(300);
-											start_DoWorkAll_Test();
+                                                    if (checkBoxSenMicrophon.Checked)
+                                                    {
+                                                        test_step[TestStep] = 11;
+                                                        TestStep++;
+                                                    }
 
-										}
-										else
-										{
-											textBox7.Text += ("Ошибка! Номера тестов не получены" + "\r\n");
-											button9.BackColor = Color.LightSalmon;
-											button11.BackColor = Color.Lime;
-											label92.Text = ("");
-											textBox7.Text += ("Тест остановлен" + "\r\n");
-											progressBar2.Value = 0;
-											Thread.Sleep(200);
-											Button_All_Test_Stop = false;                                          // Признак окончания теста
-											button9.Enabled = false;                                               // Отключить кнопку   "Стоп"
-											Thread.Sleep(200);
-											label54.Visible = false;
-											groupBox19.Text = ("Ход выполнения теста ");                           // Очистить индикацию счетчика тестов
-											button11.Enabled = true;
-											All_Test_run = false;
-											start_test_modbus1();                                                  // Запустить сканирование modbus
-										}
-									}
-									else
-									{
-										textBox7.Text += ("Связь со звуковой платой АУДИО-1 НЕ УСТАНОВЛЕНА !(1)" + "\r\n" + "\r\n");
-										button9.BackColor = Color.LightSalmon;
-										button11.BackColor = Color.Lime;
-										label92.Text = ("");
-										textBox7.Text += ("Тест остановлен" + "\r\n");
-										progressBar2.Value = 0;
-										Thread.Sleep(200);
-										Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
-										button9.Enabled = false;                                               // Отключить кнопку  
-										Thread.Sleep(200);
-										label54.Visible = false;
-										groupBox19.Text = ("Ход выполнения теста ");
-										button11.Enabled = true;
-										All_Test_run = false;
-										start_test_modbus1();
-									}
+                                                    if (checkBoxDisp.Checked)
+                                                    {
+                                                        test_step[TestStep] = 12;
+                                                        TestStep++;
+                                                    }
 
-								}
-								else
-								{
-									toolStripStatusLabel1.Text = "    MODBUS ERROR (9) ";
-									toolStripStatusLabel1.BackColor = Color.Red;
-									toolStripStatusLabel4.Text = ("Ошибка!запрос на подключение модуля Аудио-1");  // Обработка ошибки.
-									toolStripStatusLabel4.ForeColor = Color.Red;
-									toolStripStatusLabel4.BackColor = Color.White;
-									Thread.Sleep(200);
-									Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
-									button9.Enabled = false;                                               // Отключить кнопку  
-									Thread.Sleep(200);
-									label54.Visible = false;
-									groupBox19.Text = ("Ход выполнения теста ");
-									button11.Enabled = true;
-									All_Test_run = false;
-									start_test_modbus1();
-								}
+                                                }
+                                                else
+                                                {
+                                                    // При однократной проверки, записать все номера тестов
+                                                    startCoil = 118;                                                              // Признак многократной роверки снят.      Передать в контроллер
+                                                    res = myProtocol.writeCoil(slave, startCoil, false);
+                                                    for (int i = 0; i < 13; i++)                                                  // Заполнить список тестов (Выполнить все тесты)
+                                                    {
+                                                        test_step[i] = i;
+                                                    }
+                                                    TestStep = 13;                                                                // Количество тестов
+                                                }
 
-							}
-							else
-							{
-								textBox9.Text += ("Ошибка! SD память не установлена " + "\r\n");
-								textBox9.Text += ("Проверка остановлена. Установите  SD память " + "\r\n");
-								textBox9.Refresh();
-								Thread.Sleep(200);
-								Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
-								button9.Enabled = false;                                               // Отключить кнопку  
-								Thread.Sleep(200);
-								label54.Visible = false;
-								groupBox19.Text = ("Ход выполнения теста ");
-								button11.Enabled = true;
-								All_Test_run = false;
-								start_test_modbus1();
-							}
+                                                TestN = 0;                                                                        // Обнулить счетчик номера выполняемых тестов
+                                                TestRepeatCount = 1;                                                              // Установить начальный номер  счетчика проходов теста
+                                                startWrReg = 120;                                                                 // Команда на 
+                                                res = myProtocol.writeSingleRegister(slave, startWrReg, 16);                      // Команда на сброс счетчиков отправлена
+                                                test_end1();
+                                                startWrReg = 120;                                                                 // Команда на открытие файла отправлена
+                                                res = myProtocol.writeSingleRegister(slave, startWrReg, 12);                      // Команда на открытие файла отправлена
+                                                test_end1();
+                                                textBox9.Text += ("Команда на открытие файла отправлена" + "\r\n");
+                                                textBox9.Refresh();
+                                                Thread.Sleep(600);
+                                                file_fakt_namber();                                                               // Отобразить имя текущего файла
+                                                num_string();
+                                                Create_File();
+                                                textBox8.Text += ("Отчет тестирования модуля Аудио-1 N " + textBox46.Text + "\r\n");
+                                                textBox8.Text += ("Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n\r\n");
+                                                textBox48.Text += ("Отчет тестирования модуля Аудио-1 N " + textBox46.Text + "\r\n");
+                                                textBox48.Text += ("Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n\r\n");
+                                                textBox8.Refresh();
+                                                textBox48.Refresh();
+                                                test_end1();
+                                                //  Запуск теста
+                                                button9.BackColor = Color.Red;
+                                                button9.Enabled = true;
+                                                button9.Refresh();
+                                                Thread.Sleep(300);
+                                                start_DoWorkAll_Test();
 
-						}
+                                            }
+                                            else
+                                            {
+                                                textBox7.Text += ("Ошибка! Номера тестов не получены" + "\r\n");
+                                                button9.BackColor = Color.LightSalmon;
+                                                button11.BackColor = Color.Lime;
+                                                label92.Text = ("");
+                                                textBox7.Text += ("Тест остановлен" + "\r\n");
+                                                progressBar2.Value = 0;
+                                                Thread.Sleep(200);
+                                                Button_All_Test_Stop = false;                                          // Признак окончания теста
+                                                button9.Enabled = false;                                               // Отключить кнопку   "Стоп"
+                                                Thread.Sleep(200);
+                                                label54.Visible = false;
+                                                groupBox19.Text = ("Ход выполнения теста ");                           // Очистить индикацию счетчика тестов
+                                                button11.Enabled = true;
+                                                All_Test_run = false;
+                                                start_test_modbus1();                                                  // Запустить сканирование modbus
+                                            }
+                                        }
+                                        else
+                                        {
+                                            textBox7.Text += ("Связь со звуковой платой АУДИО-1 НЕ УСТАНОВЛЕНА !(1)" + "\r\n" + "\r\n");
+                                            button9.BackColor = Color.LightSalmon;
+                                            button11.BackColor = Color.Lime;
+                                            label92.Text = ("");
+                                            textBox7.Text += ("Тест остановлен" + "\r\n");
+                                            progressBar2.Value = 0;
+                                            Thread.Sleep(200);
+                                            Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
+                                            button9.Enabled = false;                                               // Отключить кнопку  
+                                            Thread.Sleep(200);
+                                            label54.Visible = false;
+                                            groupBox19.Text = ("Ход выполнения теста ");
+                                            button11.Enabled = true;
+                                            All_Test_run = false;
+                                            start_test_modbus1();
+                                        }
 
-						else
-						{
-							toolStripStatusLabel1.Text = "    MODBUS ERROR (8) ";
-							toolStripStatusLabel1.BackColor = Color.Red;
-							toolStripStatusLabel4.Text = ("Ошибка ответа SD !");  // Обработка ошибки.
-							toolStripStatusLabel4.ForeColor = Color.Red;
-							toolStripStatusLabel4.BackColor = Color.White;
-							Thread.Sleep(200);
-							Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
-							button9.Enabled = false;                                               // Отключить кнопку  
-							Thread.Sleep(200);
-							label54.Visible = false;
-							groupBox19.Text = ("Ход выполнения теста ");
-							button11.Enabled = true;
-							All_Test_run = false;
-							start_test_modbus1();
+                                    }
+                                    else
+                                    {
+                                        toolStripStatusLabel1.Text = "    MODBUS ERROR (9) ";
+                                        toolStripStatusLabel1.BackColor = Color.Red;
+                                        toolStripStatusLabel4.Text = ("Ошибка!запрос на подключение модуля Аудио-1");  // Обработка ошибки.
+                                        toolStripStatusLabel4.ForeColor = Color.Red;
+                                        toolStripStatusLabel4.BackColor = Color.White;
+                                        Thread.Sleep(200);
+                                        Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
+                                        button9.Enabled = false;                                               // Отключить кнопку  
+                                        Thread.Sleep(200);
+                                        label54.Visible = false;
+                                        groupBox19.Text = ("Ход выполнения теста ");
+                                        button11.Enabled = true;
+                                        All_Test_run = false;
+                                        start_test_modbus1();
+                                    }
 
-						}
+                                }
+                                else
+                                {
+                                    textBox9.Text += ("Ошибка! SD память не установлена " + "\r\n");
+                                    textBox9.Text += ("Проверка остановлена. Установите  SD память " + "\r\n");
+                                    textBox9.Refresh();
+                                    Thread.Sleep(200);
+                                    Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
+                                    button9.Enabled = false;                                               // Отключить кнопку  
+                                    Thread.Sleep(200);
+                                    label54.Visible = false;
+                                    groupBox19.Text = ("Ход выполнения теста ");
+                                    button11.Enabled = true;
+                                    All_Test_run = false;
+                                    start_test_modbus1();
+                                }
 
-					}
-					else
-					{
-						toolStripStatusLabel1.Text = "    MODBUS ERROR (7) ";
-						toolStripStatusLabel1.BackColor = Color.Red;
-						toolStripStatusLabel4.Text = ("Ошибка запроса наличия SD !");  // Обработка ошибки.
-						toolStripStatusLabel4.ForeColor = Color.Red;
-						toolStripStatusLabel4.BackColor = Color.White;
-						Thread.Sleep(200);
-						Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
-						button9.Enabled = false;                                               // Отключить кнопку  
-						Thread.Sleep(200);
-						label54.Visible = false;
-						groupBox19.Text = ("Ход выполнения теста ");
-						button11.Enabled = true;
-						All_Test_run = false;
-						start_test_modbus1();
-					}
+                            }
+
+                            else
+                            {
+                                toolStripStatusLabel1.Text = "    MODBUS ERROR (8) ";
+                                toolStripStatusLabel1.BackColor = Color.Red;
+                                toolStripStatusLabel4.Text = ("Ошибка ответа SD !");  // Обработка ошибки.
+                                toolStripStatusLabel4.ForeColor = Color.Red;
+                                toolStripStatusLabel4.BackColor = Color.White;
+                                Thread.Sleep(200);
+                                Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
+                                button9.Enabled = false;                                               // Отключить кнопку  
+                                Thread.Sleep(200);
+                                label54.Visible = false;
+                                groupBox19.Text = ("Ход выполнения теста ");
+                                button11.Enabled = true;
+                                All_Test_run = false;
+                                start_test_modbus1();
+
+                            }
+
+                        }
+                        else
+                        {
+                            toolStripStatusLabel1.Text = "    MODBUS ERROR (7) ";
+                            toolStripStatusLabel1.BackColor = Color.Red;
+                            toolStripStatusLabel4.Text = ("Ошибка запроса наличия SD !");  // Обработка ошибки.
+                            toolStripStatusLabel4.ForeColor = Color.Red;
+                            toolStripStatusLabel4.BackColor = Color.White;
+                            Thread.Sleep(200);
+                            Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
+                            button9.Enabled = false;                                               // Отключить кнопку  
+                            Thread.Sleep(200);
+                            label54.Visible = false;
+                            groupBox19.Text = ("Ход выполнения теста ");
+                            button11.Enabled = true;
+                            All_Test_run = false;
+                            start_test_modbus1();
+                        }
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = "    MODBUS ERROR (60) ";
+                        toolStripStatusLabel1.BackColor = Color.Red;
+                        toolStripStatusLabel4.Text = ("Ошибка при определении типа модуля Аудио1/2");  // Обработка ошибки.
+                        toolStripStatusLabel4.ForeColor = Color.Red;
+                        toolStripStatusLabel4.BackColor = Color.White;
+                        Thread.Sleep(200);
+                        Button_All_Test_Stop = false;                                               // Признак для управления кнопкой "Стоп"
+                        button9.Enabled = false;                                               // Отключить кнопку  
+                        Thread.Sleep(200);
+                        label54.Visible = false;
+                        groupBox19.Text = ("Ход выполнения теста ");
+                        button11.Enabled = true;
+                        All_Test_run = false;
+                        start_test_modbus1();
+                    }
 				}
 				else
 				{
@@ -5525,8 +5579,8 @@ namespace KamertonTest
 
 		 private void button60_Click_2(object sender, EventArgs e)        // Гарнитура инструктора
 			 {
-				 startCoil = 8;                                            // Управление питанием платы "Камертон"
-				 res = myProtocol.writeCoil(slave, startCoil, true);       // Выключить питание платы "Камертон"
+				 startCoil = 8;                                           // Управление питанием платы "Камертон"
+				 res = myProtocol.writeCoil(slave, startCoil, true);      // Выключить питание платы "Камертон"
 				 CloseSerialPort2();
 				 Form2 frm2 = new Form2();                                //Создаем дочернюю форму
 				 //Подключение обработчика события в дочерней форме

@@ -14,47 +14,41 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="_core">
-      <UniqueIdentifier>{bcc23263-9c20-4272-a579-3821981db6d4}</UniqueIdentifier>
+      <UniqueIdentifier>{669f4d3f-cc7d-4a99-801e-5ab065ad2a78}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries">
-      <UniqueIdentifier>{a17b3b88-2ced-4f09-82d3-1a39b465102e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_libraries\AH_AD9850">
-      <UniqueIdentifier>{61f6c9ad-075b-4cb5-b475-e1a2fb85d270}</UniqueIdentifier>
+      <UniqueIdentifier>{2dbe60ad-ce9d-4b86-8cdd-759122e2c883}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\MCP23017">
-      <UniqueIdentifier>{4251d638-e64e-4898-b392-8f866105b045}</UniqueIdentifier>
+      <UniqueIdentifier>{5e6f7fc4-fa26-452c-ac21-c434cc67ba76}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\MODBUS">
-      <UniqueIdentifier>{216bb0cb-90ad-4b99-ade9-d803044213d7}</UniqueIdentifier>
+      <UniqueIdentifier>{58f6b492-8da5-46dc-aea9-a7d199968cb0}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\MsTimer2">
-      <UniqueIdentifier>{7f5e9529-a007-4b25-ae52-f389ebec3adf}</UniqueIdentifier>
+      <UniqueIdentifier>{9afeee93-2881-4fc6-9feb-1ec7b9fdd55e}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\RTClib">
-      <UniqueIdentifier>{a6078842-c707-4c78-bb69-fe18a9498e3a}</UniqueIdentifier>
+      <UniqueIdentifier>{92f327dd-0d72-49f8-9bcb-3f9018decaea}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\SdFat">
-      <UniqueIdentifier>{ad29da90-e397-4d4d-887d-98fab7e3be5e}</UniqueIdentifier>
+      <UniqueIdentifier>{843b9542-2500-48c8-bf17-c86fa4533b86}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\SdFat\utility">
-      <UniqueIdentifier>{39d5df6c-11c9-4a9b-ac6a-6ff5d96308cb}</UniqueIdentifier>
+      <UniqueIdentifier>{ce22f4e3-49bc-4df4-90e0-0ea542dd2aae}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\SPI">
-      <UniqueIdentifier>{a418638e-d652-4070-a3e2-ac961162c17f}</UniqueIdentifier>
+      <UniqueIdentifier>{65656769-d522-4e2c-86c2-3c0150323a9f}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\Wire">
-      <UniqueIdentifier>{6626b189-2b15-4fe8-b936-b6d01a1efc47}</UniqueIdentifier>
+      <UniqueIdentifier>{3cf12751-222b-40f5-aa6d-0c9bfa2d0408}</UniqueIdentifier>
     </Filter>
     <Filter Include="_libraries\Wire\utility">
-      <UniqueIdentifier>{ec99615a-a02f-43ad-8a90-124221c72fba}</UniqueIdentifier>
+      <UniqueIdentifier>{3a340ab7-feb5-41aa-834a-0eb253fda83a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Kamerton5_0_1ArduinoSpeed2.ino" />
-    <None Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_pulse.S">
-      <Filter>_core</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.Kamerton5_0_1ArduinoSpeed2.vsarduino.h">
@@ -63,65 +57,62 @@
     <ClInclude Include="AnalogBinLogger.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Arduino.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Arduino.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\binary.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\binary.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Client.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Client.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\HardwareSerial.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial_private.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\IPAddress.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\IPAddress.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\new.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\new.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Platform.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Print.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Print.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Printable.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Printable.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Server.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Server.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Stream.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Stream.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Udp.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Udp.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBAPI.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\USBAPI.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBCore.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\USBCore.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBDesc.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\USBDesc.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WCharacter.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\WCharacter.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_private.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\wiring_private.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WString.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\WString.h">
       <Filter>_core</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\variants\mega\pins_arduino.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\variants\mega\pins_arduino.h">
       <Filter>_core</Filter>
-    </ClInclude>
-    <ClInclude Include="libraries\AH_AD9850\AH_AD9850.h">
-      <Filter>_libraries\AH_AD9850</Filter>
     </ClInclude>
     <ClInclude Include="libraries\MCP23017\MCP23017.h">
       <Filter>_libraries\MCP23017</Filter>
@@ -228,91 +219,73 @@
     <ClInclude Include="libraries\SdFat\utility\StdioStream.h">
       <Filter>_libraries\SdFat\utility</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\SPI\SPI.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\libraries\SPI\SPI.h">
       <Filter>_libraries\SPI</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\Wire.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\libraries\Wire\Wire.h">
       <Filter>_libraries\Wire</Filter>
     </ClInclude>
-    <ClInclude Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\utility\twi.h">
+    <ClInclude Include="C:\arduino-1.5.1r2\hardware\arduino\avr\libraries\Wire\utility\twi.h">
       <Filter>_libraries\Wire\utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\abi.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\CDC.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\CDC.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\HardwareSerial.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\HID.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial0.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\hooks.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial1.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\IPAddress.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial2.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\main.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HardwareSerial3.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\new.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\HID.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Print.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\hooks.c">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Stream.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\IPAddress.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\Tone.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\main.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\USBCore.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\new.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\WInterrupts.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Print.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\wiring.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Stream.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\wiring_analog.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\Tone.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\wiring_digital.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\USBCore.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\wiring_pulse.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WInterrupts.c">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\wiring_shift.c">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring.c">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\WMath.cpp">
       <Filter>_core</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_analog.c">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\cores\arduino\WString.cpp">
       <Filter>_core</Filter>
-    </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_digital.c">
-      <Filter>_core</Filter>
-    </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_pulse.c">
-      <Filter>_core</Filter>
-    </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\wiring_shift.c">
-      <Filter>_core</Filter>
-    </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WMath.cpp">
-      <Filter>_core</Filter>
-    </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino\WString.cpp">
-      <Filter>_core</Filter>
-    </ClCompile>
-    <ClCompile Include="libraries\AH_AD9850\AH_AD8950.cpp">
-      <Filter>_libraries\AH_AD9850</Filter>
     </ClCompile>
     <ClCompile Include="libraries\MCP23017\MCP23017.cpp">
       <Filter>_libraries\MCP23017</Filter>
@@ -383,13 +356,13 @@
     <ClCompile Include="libraries\SdFat\utility\StdioStream.cpp">
       <Filter>_libraries\SdFat\utility</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\SPI\SPI.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\libraries\SPI\SPI.cpp">
       <Filter>_libraries\SPI</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\Wire.cpp">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\libraries\Wire\Wire.cpp">
       <Filter>_libraries\Wire</Filter>
     </ClCompile>
-    <ClCompile Include="c:\arduino-1.6.5-r2\hardware\arduino\avr\libraries\Wire\utility\twi.c">
+    <ClCompile Include="C:\arduino-1.5.1r2\hardware\arduino\avr\libraries\Wire\utility\twi.c">
       <Filter>_libraries\Wire\utility</Filter>
     </ClCompile>
   </ItemGroup>
