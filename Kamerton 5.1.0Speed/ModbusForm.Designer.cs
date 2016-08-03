@@ -955,24 +955,24 @@ namespace KamertonTest
             this.groupBox18.Size = new System.Drawing.Size(176, 166);
             this.groupBox18.TabIndex = 55;
             this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Настройки порогов в файлах";
+            this.groupBox18.Text = " ";
             this.ToolTip1.SetToolTip(this.groupBox18, "Применение настроек порогов из файлов.");
             // 
             // button103
             // 
             this.button103.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button103.Location = new System.Drawing.Point(5, 100);
+            this.button103.Location = new System.Drawing.Point(5, 77);
             this.button103.Name = "button103";
             this.button103.Size = new System.Drawing.Size(165, 23);
             this.button103.TabIndex = 55;
-            this.button103.Text = "Сохранить в Камертон 5.0";
+            this.button103.Text = "Записать в Камертон 5.1";
             this.button103.UseVisualStyleBackColor = true;
             this.button103.Click += new System.EventHandler(this.button103_Click);
             // 
             // button82
             // 
             this.button82.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button82.Location = new System.Drawing.Point(5, 30);
+            this.button82.Location = new System.Drawing.Point(5, 19);
             this.button82.Name = "button82";
             this.button82.Size = new System.Drawing.Size(165, 23);
             this.button82.TabIndex = 54;
@@ -983,7 +983,7 @@ namespace KamertonTest
             // button68
             // 
             this.button68.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button68.Location = new System.Drawing.Point(5, 65);
+            this.button68.Location = new System.Drawing.Point(5, 48);
             this.button68.Name = "button68";
             this.button68.Size = new System.Drawing.Size(165, 23);
             this.button68.TabIndex = 53;
