@@ -407,6 +407,7 @@ namespace KamertonTest
 						button99.BackColor  = Color.LightGreen;
 						button100.BackColor = Color.LightGreen;
 						button101.BackColor = Color.LightGreen;
+                        read_version_ini();
 						Thread.Sleep(100);
 					}
 					else
@@ -414,7 +415,7 @@ namespace KamertonTest
 						if (!Button_All_Test_Stop)
 						{
 							button11.BackColor = Color.Lime;
-							if (coilArr_Status_Rele[7] == false)
+                         	if (coilArr_Status_Rele[7] == false)
 							{
 								timer1.Stop();
 								stop_test_modbus1();                                                             // Отключить сканирование MODBUS 
@@ -437,6 +438,7 @@ namespace KamertonTest
 								button99.BackColor  = Color.LightGreen;
 								button100.BackColor = Color.LightGreen;
 								button101.BackColor = Color.LightGreen;
+                                read_version_ini();
  							}
 
 							if(!Test_MODBUS)
@@ -453,8 +455,7 @@ namespace KamertonTest
 										res = myProtocol.writeCoil(slave, startCoil, false);        // Выключить питание платы "Камертон"
 										Thread.Sleep(400);
 									}
-
-									button1.BackColor = Color.LightGreen;
+                                   	button1.BackColor = Color.LightGreen;
 									button95.BackColor = Color.LightGreen;
 									button96.BackColor = Color.LightGreen;
 									button97.BackColor = Color.LightGreen;
@@ -462,7 +463,8 @@ namespace KamertonTest
 									button99.BackColor = Color.LightGreen;
 									button100.BackColor = Color.LightGreen;
 									button101.BackColor = Color.LightGreen;
-								}
+                                    read_version_ini();
+ 								}
 						}
 					}
 					break;
@@ -4698,7 +4700,6 @@ namespace KamertonTest
 					button11.BackColor = Color.White;                                               // Кнопка "Старт" 
 					button11.Enabled = false;                                                       // Кнопка "Старт" отключена
 					button11.Refresh();                                                             // Кнопка "Старт"
-
                     startWrReg = 120;                                                               // типа модуля Аудио1/2
                     res = myProtocol.writeSingleRegister(slave, startWrReg, 54);                    // Команда на проверку типа модуля Аудио1/2
                     if ((res == BusProtocolErrors.FTALK_SUCCESS))
@@ -5274,7 +5275,59 @@ namespace KamertonTest
 			richTextBox2.SelectionStart = richTextBox2.Text.Length;
 			richTextBox2.ScrollToCaret();
 		}
- 
+        private void read_version_ini()
+        {
+                    startWrReg = 120;                                                               //  
+                    res = myProtocol.writeSingleRegister(slave, startWrReg, 55);                    // Команда на  
+                    if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                    {
+                        test_end1();                                                                // Проверка   окончена
+                        short[] readVals = new short[4];
+                        startRdReg = 15; // 40014 
+                        numRdRegs = 1;
+                        res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);
+                        if ((res == BusProtocolErrors.FTALK_SUCCESS))
+                        {
+                            int default_ini = readVals[0];
+                            if (default_ini == 1)
+                            {
+                                textBox10.Text = ("По умолчанию Аудио-1");
+                            }
+                            else if (default_ini == 2)
+                            {
+                                textBox10.Text = ("По умолчанию Аудио-2");
+                            }
+                            else if (default_ini == 3)
+                            {
+                                textBox10.Text = ("Файл");
+                            }
+                            else
+                            {
+                                textBox10.Text = ("НЕ ОПРЕДЕЛЕН");
+                            }
+                        }
+                        else
+                        {
+                            toolStripStatusLabel1.Text = "    MODBUS ERROR (15) ";
+                            toolStripStatusLabel1.BackColor = Color.Red;
+                            toolStripStatusLabel4.Text = ("Ошибка!Версия настроек не получена");  // Обработка ошибки.
+                            toolStripStatusLabel4.ForeColor = Color.Red;
+                            toolStripStatusLabel4.BackColor = Color.White;
+                            Thread.Sleep(100);
+                        }
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = "    MODBUS ERROR (16) ";
+                        toolStripStatusLabel1.BackColor = Color.Red;
+                        toolStripStatusLabel4.Text = ("Ошибка!Версия настроек не получена");  // Обработка ошибки.
+                        toolStripStatusLabel4.ForeColor = Color.Red;
+                        toolStripStatusLabel4.BackColor = Color.White;
+                        Thread.Sleep(100);
+                    }
+
+        }
+
 		private void button24_Click(object sender, EventArgs e)                       // Установка уровня входного сигнала резисторами
 		{
 			button24.Enabled = false;
@@ -5794,7 +5847,7 @@ namespace KamertonTest
             // radio1_table();                                                   // Отобразить таблицу порогов Radio1
             // radio2_table();                                                   // Отобразить таблицу порогов Radio2
             //// All_Table_Read = true;                                            // Таблица уровней загружена
-
+             read_version_ini();
 		 }
          private void read_porog_all()
          {
@@ -8371,10 +8424,10 @@ namespace KamertonTest
 				 ushort adr_mem = Convert.ToUInt16(textBox1.Text);
 				 ushort.Parse(textBox2.Text);
 				 ushort blok_mem = Convert.ToUInt16(textBox2.Text);
-				 error_list1(adr_mem, blok_mem);                                   // 1- Блок памяти, 2 - Количесво блоков по 16 адресов памяти
+				 error_list1(adr_mem, blok_mem);                                  // 1- Блок памяти, 2 - Количесво блоков по 16 адресов памяти
 			 }
 
-		 private void button94_Click(object sender, EventArgs e)               // Кнопка "По умолчанию"  таблицу По умолчанию  
+		 private void button94_Click(object sender, EventArgs e)                  // Кнопка "По умолчанию"  таблицу По умолчанию  
 			 {
 				 button94.Enabled = false;
 				 button94.BackColor = Color.LightSalmon;
@@ -8397,8 +8450,9 @@ namespace KamertonTest
 				 button94.BackColor = Color.LightGreen;
 				 button94.Text = "По умолчанию";
 				 button94.Refresh();
+                 read_version_ini();
 			 }
-		 private void button95_Click(object sender, EventArgs e)               // Кнопка "Сохранить"  таблицу инструктора
+		 private void button95_Click(object sender, EventArgs e)                   // Кнопка "Сохранить"  таблицу инструктора
 			 {
 
 			 if(Insrt_Table_Read)
@@ -8467,7 +8521,7 @@ namespace KamertonTest
 
 					 // Отправить параметры блока получения данных из памяти 
 					 startWrReg = 130;                                                 //  Отправить параметры блока получения данных из памяти 
-					 numWrRegs = 18;                                                  //
+					 numWrRegs = 18;                                                   //
 					 res = myProtocol.writeMultipleRegisters(slave, startWrReg, writeVals, numWrRegs);
 					 test_end1();
 					 startWrReg = 120;                                                 // 
@@ -9016,6 +9070,7 @@ namespace KamertonTest
                 save_tab_ggs();
                 save_tab_radio1();
                 save_tab_radio2();
+                read_version_ini();
             }
             else
             {
@@ -10811,9 +10866,6 @@ namespace KamertonTest
 
              }
          }
-
-   
-      
 	 }
 
 	public static class CallBackMy
