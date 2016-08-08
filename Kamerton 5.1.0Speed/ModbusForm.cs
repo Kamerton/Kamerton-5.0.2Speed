@@ -131,7 +131,7 @@ namespace KamertonTest
             bool ggs_mute_off             = false;                                   // Признак выключения ggs_mute
             bool set_display              = false;                                   // Признак уровня яркости
             bool set_sound_level          = false;                                   // Признак установки уровня сигнала
-            bool  Message_show            = true;                                    // Разрешить показ сообщения 
+            bool Message_show             = true;                                    // Разрешить показ сообщения 
             bool disp_mks                 = true;                                    // Признак вывода мкс или вольт
             short tempK                   = 0;
             int tempK_lev                 = 0;
@@ -1747,7 +1747,7 @@ namespace KamertonTest
                    button25.Enabled = true;
                }
 
-				// ***** Обновить информацию из  модуля Аудио-1 *****************
+				// ***** Обновить информацию из  модуля Аудио *****************
 				if (byte_set_ready)
 				{
 					for (int bite_x = 0; bite_x < 7; bite_x++)
@@ -1789,7 +1789,7 @@ namespace KamertonTest
 					}
 				}
 				//---------------------------------------------------------------------------
-				//******************** Отобразить состояние регистров модуля Аудио-1 ****************
+				//******************** Отобразить состояние регистров модуля Аудио ****************
 				for (i = 7; i >= 0; i--)
 				{
 					if (Dec_bin[i] == true)
@@ -1855,7 +1855,7 @@ namespace KamertonTest
 					}
 				}
 				//-----------------------------------------------------------------------------------
-				//***************** Отобразить состояние регистров Аудио-1 рядом с кнопками управления *****************
+				//***************** Отобразить состояние регистров Аудио рядом с кнопками управления *****************
 
 				if (Status_Rele_ready)
 				{
@@ -4487,6 +4487,39 @@ namespace KamertonTest
                 s_txt48  += ("Тест микрофона сигнал на выходе mag radio            \tON  -       \t = " + temp_disp + " \r\n");
                 res       = myProtocol.writeCoil(slave, 336, false);
             }
+            if (coilArr_all[137] != false)
+            {
+                error_list_reg(1858, 1, 137, 137);
+                temp_disp = readVolt_all[137];
+                s_txt8 += ("                                                      \t< = " + readVals_all[137] + ">  " + temp_disp + " \r\n");
+                s_txt48 += ("                                                     \tON  -       \t = " + temp_disp + " \r\n");
+                res = myProtocol.writeCoil(slave, 337, false);
+            }
+            if (coilArr_all[138] != false)
+            {
+                error_list_reg(1862, 1, 138, 138);
+                temp_disp = readVolt_all[138];
+                s_txt8 += ("                                                      \tON  -       \t< = " + readVals_all[138] + ">  " + temp_disp + " \r\n");
+                s_txt48 += ("                                                     \tON  -       \t = " + temp_disp + " \r\n");
+                res = myProtocol.writeCoil(slave, 338, false);
+            }
+            if (coilArr_all[139] != false)
+            {
+                error_list_reg(1866, 1, 139, 139);
+                temp_disp = readVolt_all[139];
+                s_txt8 += ("                                                      \tON  -       \t< = " + readVals_all[139] + ">  " + temp_disp + " \r\n");
+                s_txt48 += ("                                                     \tON  -       \t = " + temp_disp + " \r\n");
+                res = myProtocol.writeCoil(slave, 339, false);
+            }
+            if (coilArr_all[140] != false)
+            {
+                error_list_reg(1870, 1, 140, 140);
+                temp_disp = readVolt_all[140];
+                s_txt8 += ("Тест сенсор выходе mag                               \tON  -       \t< = " + readVals_all[140] + ">  " + temp_disp + " \r\n");
+                s_txt48 += ("Тест сенсор выходе mag                                            \t = " + temp_disp + " \r\n");
+                res = myProtocol.writeCoil(slave, 340, false);
+            }
+
 			res = myProtocol.writeCoil(slave, 120, false);                      // Снять флаг общей ошибки теста
 
 		}
@@ -4499,7 +4532,7 @@ namespace KamertonTest
 			ushort step_reg    = 10;
 			int numWrRegs      = 3;
 			ushort _adr_mem    = adr_mem;                                              // Старт 1309
-			ushort _i_reg_max  = i_reg_max;                                          // Количество блоков памяти
+			ushort _i_reg_max  = i_reg_max;                                            // Количество блоков памяти
 			startWrReg         = 120;
 			startRdReg         = 130;
 			writeVals[0]       = 130;                                                      //  Адрес блока регистров для передачи в ПК уровней порогов.
@@ -4522,7 +4555,7 @@ namespace KamertonTest
 				test_end1();
 
 				richTextBox2.Text += (writeVals[1].ToString() + "\r\n");
-				for (int i = 0; i < step_reg; i++)                // Чтение блока регистров 
+				for (int i = 0; i < step_reg; i++)                                   // Чтение блока регистров 
 				{
 					richTextBox2.Text += (i + " - " + readTemp[i].ToString() + "\r\n");
 				}
@@ -4530,38 +4563,6 @@ namespace KamertonTest
 				_adr_mem += step_reg;
 				_adr_mem += step_reg;
 			}
-
-			/*
-			for (int i_reg = 0; i_reg < 13; i_reg++)
-			{
-				res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);     // 40200 Считать счетчики ошибок  
-				if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				{
-					toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					MODBUS_SUCCESS = true;
-
-					for (int i_temp = 0; i_temp < 5; i_temp++)
-					{
-						readVals_all[startRdReg + i_temp - 200] = readVals[i_temp];
-					}
-					startRdReg += 5;
-				}
-
-				res = myProtocol.readMultipleRegisters(slave, startRdReg, readVals, numRdRegs);     // 40200 Считать счетчики ошибок  
-				if ((res == BusProtocolErrors.FTALK_SUCCESS))
-				{
-					toolStripStatusLabel1.Text = "    MODBUS ON    ";
-					MODBUS_SUCCESS = true;
-
-					for (int i_temp = 0; i_temp < 5; i_temp++)
-					{
-						readVals_all[startRdReg + i_temp - 200] = readVals[i_temp];
-					}
-					startRdReg += 5;
-				}
-			}
-
-			*/
 		}
 	
 		private void error_list_reg(ushort adr_mem, ushort i_reg_max, ushort adr_readVals_all, ushort adr_readVolt_all)                                          //  40200 Получить данные со  счетчиков ошибок  
@@ -4579,55 +4580,22 @@ namespace KamertonTest
 			
 			startWrReg = 120;
 			startRdReg = 130;
-			//writeVals[1] = 1310;                                                     //  Адрес блока памяти  для передачи в ПК уровней порогов.
-			//writeVals[2] = 2;                                                        //  Длина блока регистров для передачи в ПК уровней порогов.
-   
-			writeVals[0] = 130;                                                      //  Адрес блока регистров для передачи в ПК уровней порогов.
-			writeVals[1] = _adr_mem;                                             //  Адрес блока памяти  для передачи в ПК уровней порогов.
-			writeVals[2] = 2;                                             //  Длина блока регистров для передачи в ПК уровней порогов.
-			startWrReg   = 124;                                                    //  Отправить параметры блока получения данных из памяти 
+
+			writeVals[0] = 130;                                                     //  Адрес блока регистров для передачи в ПК уровней порогов.
+			writeVals[1] = _adr_mem;                                                //  Адрес блока памяти  для передачи в ПК уровней порогов.
+			writeVals[2] = 2;                                                       //  Длина блока регистров для передачи в ПК уровней порогов.
+			startWrReg   = 124;                                                     //  Отправить параметры блока получения данных из памяти 
 			numWrRegs    = 3;                                                       //
 			res          = myProtocol.writeMultipleRegisters(slave, startWrReg, writeVals, numWrRegs);
 			test_end1();
-			startWrReg = 120;                                                    // адрес блока команд
-			res = myProtocol.writeSingleRegister(slave, startWrReg, 15);         // Команда - Передать информацию в регистры
+			startWrReg = 120;                                                       // адрес блока команд
+			res = myProtocol.writeSingleRegister(slave, startWrReg, 15);            // Команда - Передать информацию в регистры
 			test_end1();
 			res = myProtocol.readMultipleRegisters(slave, writeVals[0], readTemp, step_reg);
 			test_end1();
 
 			readVals_all[_adr_readVals_all] = readTemp[0];                 
 			readVolt_all[_adr_readVolt_all] = readTemp[1];
-			
-			
-			/*
-			for (int i_reg = 0; i_reg < i_reg_max; i_reg++)
-			{
-				writeVals[1] = _adr_mem;                                             //  Адрес блока памяти  для передачи в ПК уровней порогов.
-				writeVals[2] = step_reg;                                             //  Длина блока регистров для передачи в ПК уровней порогов.
-				startWrReg = 124;                                                    //  Отправить параметры блока получения данных из памяти 
-				numWrRegs = 3;                                                       //
-				res = myProtocol.writeMultipleRegisters(slave, startWrReg, writeVals, numWrRegs);
-				test_end1();
-				startWrReg = 120;                                                    // адрес блока команд
-				res = myProtocol.writeSingleRegister(slave, startWrReg, 15);         // Команда - Передать информацию в регистры
-				test_end1();
-				res = myProtocol.readMultipleRegisters(slave, writeVals[0], readTemp, step_reg);
-				test_end1();
-
-				for (int i_temp = 0; i_temp < step_reg; i_temp++)
-				{
-					readVals_all[_adr_readVals_all + i_temp] = readTemp[i_temp];
-					readVolt_all[_adr_readVolt_all + i_temp] = readTemp[i_temp + 1];
-					i_temp++;
-				}
-				_adr_readVals_all += step_reg;                    // Смещение в начало следующего блока регистров 
-				_adr_readVolt_all += step_reg;                    // Смещение в начало следующего блока регистров 
-
-				_adr_mem += step_reg;                             // Смещение в начало следующего блока памяти
-				_adr_mem += step_reg;                             // Смещение в начало следующего блока памяти
-				Thread.Sleep(400);
-			}
-			*/
 		}
 		private void error_list3()                                          //  200   Получить данные состояния флага индикации возникновения  ошибки
 		{
@@ -4696,7 +4664,7 @@ namespace KamertonTest
 				{
 					toolStripStatusLabel1.Text = "    MODBUS ON    ";                               // Успешное подключение по протоколу MODBUS
 					toolStripStatusLabel1.BackColor = Color.Lime;                                   // Успешное подключение по протоколу MODBUS
-					Thread.Sleep(1700);                                                             // Ожидание включения модуля Аудио-1
+					Thread.Sleep(1700);                                                             // Ожидание включения модуля Аудио
 					button11.BackColor = Color.White;                                               // Кнопка "Старт" 
 					button11.Enabled = false;                                                       // Кнопка "Старт" отключена
 					button11.Refresh();                                                             // Кнопка "Старт"
@@ -4713,10 +4681,14 @@ namespace KamertonTest
                         if (module_audio == 1)
                         {
                             textBox7.Text = ("Выполняется полный  контроль звукового модуля Аудио-1" + "\r\n");
+                            radioButton11.Checked = true;
+                            radioButton12.Checked = false;
                         }
                         else if (module_audio == 2)
                         {
                             textBox7.Text = ("Выполняется полный  контроль звукового модуля Аудио-2" + "\r\n");
+                            radioButton12.Checked = true;
+                            radioButton11.Checked = false;
                         }
                         else
                         {
@@ -4892,9 +4864,9 @@ namespace KamertonTest
                                                 file_fakt_namber();                                                               // Отобразить имя текущего файла
                                                 num_string();
                                                 Create_File();
-                                                textBox8.Text += ("Отчет тестирования модуля Аудио-1 N " + textBox46.Text + "\r\n");
+                                                textBox8.Text += ("Отчет тестирования модуля Аудио N " + textBox46.Text + "\r\n");
                                                 textBox8.Text += ("Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n\r\n");
-                                                textBox48.Text += ("Отчет тестирования модуля Аудио-1 N " + textBox46.Text + "\r\n");
+                                                textBox48.Text += ("Отчет тестирования модуля Аудио N " + textBox46.Text + "\r\n");
                                                 textBox48.Text += ("Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n\r\n");
                                                 textBox8.Refresh();
                                                 textBox48.Refresh();
@@ -4928,7 +4900,7 @@ namespace KamertonTest
                                         }
                                         else
                                         {
-                                            textBox7.Text += ("Связь со звуковой платой АУДИО-1 НЕ УСТАНОВЛЕНА !(1)" + "\r\n" + "\r\n");
+                                            textBox7.Text += ("Связь со звуковой платой АУДИО НЕ УСТАНОВЛЕНА !(1)" + "\r\n" + "\r\n");
                                             button9.BackColor = Color.LightSalmon;
                                             button11.BackColor = Color.Lime;
                                             label92.Text = ("");
@@ -4950,7 +4922,7 @@ namespace KamertonTest
                                     {
                                         toolStripStatusLabel1.Text = "    MODBUS ERROR (9) ";
                                         toolStripStatusLabel1.BackColor = Color.Red;
-                                        toolStripStatusLabel4.Text = ("Ошибка!запрос на подключение модуля Аудио-1");  // Обработка ошибки.
+                                        toolStripStatusLabel4.Text = ("Ошибка!запрос на подключение модуля Аудио");  // Обработка ошибки.
                                         toolStripStatusLabel4.ForeColor = Color.Red;
                                         toolStripStatusLabel4.BackColor = Color.White;
                                         Thread.Sleep(200);
@@ -5043,7 +5015,7 @@ namespace KamertonTest
 				{
 					toolStripStatusLabel1.Text = "    MODBUS ERROR (6) ";
 					toolStripStatusLabel1.BackColor = Color.Red;
-					toolStripStatusLabel4.Text = ("Ошибка включения питания Камертон 5.0.1!");  // Обработка ошибки.
+					toolStripStatusLabel4.Text = ("Ошибка включения питания Камертон 5.1.0!");  // Обработка ошибки.
 					toolStripStatusLabel4.ForeColor = Color.Red;
 					toolStripStatusLabel4.BackColor = Color.White;
 					Thread.Sleep(200);
@@ -5062,7 +5034,7 @@ namespace KamertonTest
 			{
 				toolStripStatusLabel1.Text = "    MODBUS ERROR (5) ";
 				toolStripStatusLabel1.BackColor = Color.Red;
-				toolStripStatusLabel4.Text = ("Ошибка!Протокол не запущен Камертон5.0.1 !");  // Обработка ошибки.
+				toolStripStatusLabel4.Text = ("Ошибка!Протокол не запущен Камертон5.1.0 !");  // Обработка ошибки.
 				toolStripStatusLabel4.ForeColor = Color.Red;
 				toolStripStatusLabel4.BackColor = Color.White;
 				Thread.Sleep(2000);
@@ -5086,7 +5058,7 @@ namespace KamertonTest
 				}
 			}
 
-		private void num_string()                                                     // Получение из Камертон 5.0 и ввод номера имени файла 
+		private void num_string()                                                     // Получение из Камертон 5.1 и ввод номера имени файла 
 		{
 			short[] readVals = new short[125];
 			int startRdReg;
@@ -5139,7 +5111,7 @@ namespace KamertonTest
            label150.Text = fileName;
 		   openFileDialog1.FileName = fileName;
 		}
-		private void num_module_audio()                                               // Ввод номера платы Аудио 1 и передача его в Камертон 5
+		private void num_module_audio()                                               // Ввод номера платы Аудио и передача его в Камертон 5
 		{
 		
 			ushort[] writeVals = new ushort[20];
@@ -7786,9 +7758,9 @@ namespace KamertonTest
              ushort[] writeVals           = new ushort[20];
              ushort[] readVolt            = new ushort[10];
 			 toolStripStatusLabel2.Text   = "";
-             coil_Button[8] = true;                                              // Управление питанием платы Аудио-1
-             startCoil = 8;                                                      // Управление питанием платы Аудио-1
-             res = myProtocol.writeCoil(slave, startCoil, true);                 // Включить питание платы Аудио-1
+             coil_Button[8] = true;                                              // Управление питанием платы Аудио
+             startCoil = 8;                                                      // Управление питанием платы Аудио
+             res = myProtocol.writeCoil(slave, startCoil, true);                 // Включить питание платы Аудио
              byte_set_run                 = true;
 			 do
              {
@@ -8229,15 +8201,15 @@ namespace KamertonTest
 				     byte_set_run = false;
 				     progressBar1.Value = progressBar1.Minimum;
 				     timer_byte_set.Stop();
-				     if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
-				     if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
+				     if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио окончена");
+				     if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.1");
                      byte_set_run = false;
 			     }
              else if (e.Result != null)
              {
                  progressBar1.Value = progressBar1.Minimum;
-                 if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1 окончена");
-                 if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.0");
+                 if (!byte_set_run) toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио окончена");
+                 if (Tab_index == 3) toolStripStatusLabel8.Text = ("Установка параметров подключения Камертон 5.1");
                  byte_set_run = false;
                  timer_byte_set.Stop();
              }
@@ -8254,7 +8226,7 @@ namespace KamertonTest
 			 {
 				 button25.Enabled           = true;
 				 button24.Enabled           = true;
-				 toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио-1");
+				 toolStripStatusLabel8.Text = ("Проверка состояния сенсоров Аудио");
 				// timer_byte_set.Start();
 				 if (!_bw_set_byte.IsBusy)
 				 {
@@ -8292,8 +8264,8 @@ namespace KamertonTest
 				textBox7.Refresh();
 				textBox9.Refresh();
 				textBox7.Text += "Тест окончен!";
-				textBox8.Text += ("\r\n" + "Тест модуля Аудио-1 окончен!   Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
-                textBox48.Text += ("\r\n" + "Тест модуля Аудио-1 окончен!   Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
+				textBox8.Text += ("\r\n" + "Тест модуля Аудио окончен!   Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
+                textBox48.Text += ("\r\n" + "Тест модуля Аудио окончен!   Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
                 textBox7.SelectionStart = textBox7.Text.Length;
 				textBox7.ScrollToCaret();
 				textBox8.SelectionStart = textBox8.Text.Length;
@@ -8333,53 +8305,7 @@ namespace KamertonTest
 				textBox9.Text += ("Ошибка!  Тестируемый модуль не подключен" + "\r\n");
 			}
 		}
-         //private void stop_test_potok()
-         //{
-         //    if ((myProtocol != null))
-         //    {
-         //        ushort[] writeVals = new ushort[20];
-         //        bool[] coilArr     = new bool[34];
-         //        startWrReg         = 120;
-         //        res                = myProtocol.writeSingleRegister(slave, startWrReg, 13);          // Команда на закрытие файла отправлена
-         //        s_txt9            += ("Команда на закрытие файла отправлена" + "\r\n");
-         //        s_txt7            += "Тест окончен!";
-         //        s_txt8            += ("\r\n" + "Тест модуля Аудио-1 окончен!   Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
-         //        s_txt48           += ("\r\n" + "Тест модуля Аудио-1 окончен!   Дата " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.CurrentCulture) + "\r\n");
-
-         //        if (radioButton1.Checked)                                // Условие однократной проверки
-         //        {
-         //            pathString = System.IO.Path.Combine(folderName, (("RusError " + DateTime.Now.ToString("yyyy.MM.dd", CultureInfo.CurrentCulture))));
-         //            pathString = System.IO.Path.Combine(pathString, fileName);
-         //            File.WriteAllText(pathString, textBox48.Text, Encoding.GetEncoding("UTF-8"));
-         //            if (File.Exists(pathString))
-         //            {
-         //                textBox48.Text = File.ReadAllText(pathString);
-         //            }
-         //            else
-         //            {
-         //                MessageBox.Show("Файл НЕ существует!  " + pathString, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
-         //            }
-         //            // Сформировать файл отчета
-         //        }
-         //        else
-         //        {
-         //            pathString = System.IO.Path.Combine(folderName, (("RusError " + DateTime.Now.ToString("yyyy.MM.dd", CultureInfo.CurrentCulture))));
-         //            System.IO.Directory.CreateDirectory(pathString);
-         //            pathString = System.IO.Path.Combine(pathString, fileName);
-         //            File.WriteAllText(pathString, textBox8.Text, Encoding.GetEncoding("UTF-8"));
-         //            Read_File();                                                      // Вывести информацию из файла в окно
-         //        }
-         //        startCoil = 8;                                                        // Управление питанием платы "Камертон"
-         //        res = myProtocol.writeCoil(slave, startCoil, false);                  // Отключить питание платы "Камертон"
-         //    }
-         //    else
-         //    {
-         //        s_txt9 += ("Ошибка!  Тестируемый модуль не подключен" + "\r\n");
-         //    }
-
-
-         //}
-
+ 
 		 private void button15_Click(object sender, EventArgs e)               // Test EEPROM
 		 {
 			 stop_test_modbus1();                                                       // Отключить сканирование MODBUS 
@@ -8424,10 +8350,10 @@ namespace KamertonTest
 				 ushort adr_mem = Convert.ToUInt16(textBox1.Text);
 				 ushort.Parse(textBox2.Text);
 				 ushort blok_mem = Convert.ToUInt16(textBox2.Text);
-				 error_list1(adr_mem, blok_mem);                                  // 1- Блок памяти, 2 - Количесво блоков по 16 адресов памяти
+				 error_list1(adr_mem, blok_mem);                                       // 1- Блок памяти, 2 - Количесво блоков по 16 адресов памяти
 			 }
 
-		 private void button94_Click(object sender, EventArgs e)                  // Кнопка "По умолчанию"  таблицу По умолчанию  
+		 private void button94_Click(object sender, EventArgs e)               // Кнопка "По умолчанию"  таблицу По умолчанию  
 			 {
 				 button94.Enabled = false;
 				 button94.BackColor = Color.LightSalmon;
@@ -8452,7 +8378,7 @@ namespace KamertonTest
 				 button94.Refresh();
                  read_version_ini();
 			 }
-		 private void button95_Click(object sender, EventArgs e)                   // Кнопка "Сохранить"  таблицу инструктора
+		 private void button95_Click(object sender, EventArgs e)               // Кнопка "Сохранить"  таблицу инструктора
 			 {
 
 			 if(Insrt_Table_Read)
@@ -9057,6 +8983,19 @@ namespace KamertonTest
 
          private void button103_Click(object sender, EventArgs e)              // Кнопка "Сохранить"  таблицу в Камертон 5.0
          {
+             if (radioButton11.Checked)                                        // Признак порогов для Аудио 1
+             {
+                 startWrReg = 120;                                                          // 
+                 res = myProtocol.writeSingleRegister(slave, startWrReg, 56);  //  Записать признак версии порогов  модуля Аудио1
+                 test_end1();
+             }
+             if (radioButton12.Checked)                                        // Признак порогов для Аудио 2
+             {
+                 startWrReg = 120;                                             // 
+                 res = myProtocol.writeSingleRegister(slave, startWrReg, 57);  // Записать признак версии порогов  модуля Аудио2
+                 test_end1();
+             }
+ 
             button103.Enabled = false;
             button103.BackColor = Color.LightSalmon;
             button103.Text = "Загрузка";
@@ -9078,7 +9017,7 @@ namespace KamertonTest
             }
             button103.Enabled = true;
             button103.BackColor = Color.LightGreen;
-            button103.Text = "Сохранить в Камертон 5.0";
+            button103.Text = "Сохранить в Камертон 5.1";
             button103.Refresh();
          }
 
@@ -10771,9 +10710,8 @@ namespace KamertonTest
 
    
 
-         private void button68_Click(object sender, EventArgs e)                 // Сохранить в файл
+         private void button68_Click(object sender, EventArgs e)              // Сохранить в файл
          {
-
              SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
              SaveFileDialog1.CreatePrompt = true;
              SaveFileDialog1.OverwritePrompt = true;
@@ -10866,6 +10804,7 @@ namespace KamertonTest
 
              }
          }
+
 	 }
 
 	public static class CallBackMy

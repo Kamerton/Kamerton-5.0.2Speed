@@ -492,6 +492,9 @@ namespace KamertonTest
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.timerPowerOff = new System.Windows.Forms.Timer(this.components);
             this.timerCloseForm = new System.Windows.Forms.Timer(this.components);
+            this.label127 = new System.Windows.Forms.Label();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel1)).BeginInit();
             this.groupBox25.SuspendLayout();
@@ -940,15 +943,18 @@ namespace KamertonTest
             // groupBox18
             // 
             this.groupBox18.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.groupBox18.Controls.Add(this.radioButton12);
+            this.groupBox18.Controls.Add(this.radioButton11);
+            this.groupBox18.Controls.Add(this.label127);
             this.groupBox18.Controls.Add(this.textBox10);
             this.groupBox18.Controls.Add(this.label95);
             this.groupBox18.Controls.Add(this.button103);
             this.groupBox18.Controls.Add(this.button82);
             this.groupBox18.Controls.Add(this.button68);
             this.groupBox18.Controls.Add(this.checkBox1);
-            this.groupBox18.Location = new System.Drawing.Point(7, 411);
+            this.groupBox18.Location = new System.Drawing.Point(7, 398);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(176, 180);
+            this.groupBox18.Size = new System.Drawing.Size(176, 193);
             this.groupBox18.TabIndex = 55;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = " ";
@@ -956,7 +962,7 @@ namespace KamertonTest
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(5, 130);
+            this.textBox10.Location = new System.Drawing.Point(5, 148);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(165, 20);
             this.textBox10.TabIndex = 57;
@@ -965,7 +971,7 @@ namespace KamertonTest
             // label95
             // 
             this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(10, 111);
+            this.label95.Location = new System.Drawing.Point(8, 132);
             this.label95.Name = "label95";
             this.label95.Size = new System.Drawing.Size(155, 13);
             this.label95.TabIndex = 56;
@@ -1008,7 +1014,7 @@ namespace KamertonTest
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox1.Location = new System.Drawing.Point(5, 157);
+            this.checkBox1.Location = new System.Drawing.Point(6, 174);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(157, 17);
             this.checkBox1.TabIndex = 32;
@@ -4563,7 +4569,7 @@ namespace KamertonTest
             this.groupBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox16.Location = new System.Drawing.Point(6, 6);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(178, 400);
+            this.groupBox16.Size = new System.Drawing.Size(178, 386);
             this.groupBox16.TabIndex = 0;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Настройка проверки";
@@ -4580,7 +4586,7 @@ namespace KamertonTest
             // 
             this.checkBoxPower.AutoSize = true;
             this.checkBoxPower.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxPower.Location = new System.Drawing.Point(6, 140);
+            this.checkBoxPower.Location = new System.Drawing.Point(6, 124);
             this.checkBoxPower.Name = "checkBoxPower";
             this.checkBoxPower.Size = new System.Drawing.Size(127, 19);
             this.checkBoxPower.TabIndex = 29;
@@ -4591,7 +4597,7 @@ namespace KamertonTest
             // 
             this.checkBoxDisp.AutoSize = true;
             this.checkBoxDisp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxDisp.Location = new System.Drawing.Point(6, 380);
+            this.checkBoxDisp.Location = new System.Drawing.Point(6, 364);
             this.checkBoxDisp.Name = "checkBoxDisp";
             this.checkBoxDisp.Size = new System.Drawing.Size(126, 19);
             this.checkBoxDisp.TabIndex = 28;
@@ -4602,7 +4608,7 @@ namespace KamertonTest
             // 
             this.checkBoxSensors2.AutoSize = true;
             this.checkBoxSensors2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSensors2.Location = new System.Drawing.Point(6, 180);
+            this.checkBoxSensors2.Location = new System.Drawing.Point(6, 164);
             this.checkBoxSensors2.Name = "checkBoxSensors2";
             this.checkBoxSensors2.Size = new System.Drawing.Size(136, 19);
             this.checkBoxSensors2.TabIndex = 27;
@@ -4613,7 +4619,7 @@ namespace KamertonTest
             // 
             this.checkBoxSensors1.AutoSize = true;
             this.checkBoxSensors1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSensors1.Location = new System.Drawing.Point(6, 160);
+            this.checkBoxSensors1.Location = new System.Drawing.Point(6, 144);
             this.checkBoxSensors1.Name = "checkBoxSensors1";
             this.checkBoxSensors1.Size = new System.Drawing.Size(146, 19);
             this.checkBoxSensors1.TabIndex = 26;
@@ -4624,7 +4630,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenGGS.AutoSize = true;
             this.checkBoxSenGGS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenGGS.Location = new System.Drawing.Point(6, 320);
+            this.checkBoxSenGGS.Location = new System.Drawing.Point(6, 304);
             this.checkBoxSenGGS.Name = "checkBoxSenGGS";
             this.checkBoxSenGGS.Size = new System.Drawing.Size(48, 19);
             this.checkBoxSenGGS.TabIndex = 25;
@@ -4635,7 +4641,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenMicrophon.AutoSize = true;
             this.checkBoxSenMicrophon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenMicrophon.Location = new System.Drawing.Point(6, 300);
+            this.checkBoxSenMicrophon.Location = new System.Drawing.Point(6, 284);
             this.checkBoxSenMicrophon.Name = "checkBoxSenMicrophon";
             this.checkBoxSenMicrophon.Size = new System.Drawing.Size(89, 19);
             this.checkBoxSenMicrophon.TabIndex = 24;
@@ -4646,7 +4652,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenGar1disp.AutoSize = true;
             this.checkBoxSenGar1disp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenGar1disp.Location = new System.Drawing.Point(6, 220);
+            this.checkBoxSenGar1disp.Location = new System.Drawing.Point(6, 204);
             this.checkBoxSenGar1disp.Name = "checkBoxSenGar1disp";
             this.checkBoxSenGar1disp.Size = new System.Drawing.Size(158, 19);
             this.checkBoxSenGar1disp.TabIndex = 23;
@@ -4657,7 +4663,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenGar1instr.AutoSize = true;
             this.checkBoxSenGar1instr.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenGar1instr.Location = new System.Drawing.Point(6, 200);
+            this.checkBoxSenGar1instr.Location = new System.Drawing.Point(6, 184);
             this.checkBoxSenGar1instr.Name = "checkBoxSenGar1instr";
             this.checkBoxSenGar1instr.Size = new System.Drawing.Size(163, 19);
             this.checkBoxSenGar1instr.TabIndex = 21;
@@ -4668,7 +4674,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenTangRuch.AutoSize = true;
             this.checkBoxSenTangRuch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenTangRuch.Location = new System.Drawing.Point(6, 280);
+            this.checkBoxSenTangRuch.Location = new System.Drawing.Point(6, 264);
             this.checkBoxSenTangRuch.Name = "checkBoxSenTangRuch";
             this.checkBoxSenTangRuch.Size = new System.Drawing.Size(122, 19);
             this.checkBoxSenTangRuch.TabIndex = 18;
@@ -4679,7 +4685,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenTangN.AutoSize = true;
             this.checkBoxSenTangN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenTangN.Location = new System.Drawing.Point(6, 260);
+            this.checkBoxSenTangN.Location = new System.Drawing.Point(6, 244);
             this.checkBoxSenTangN.Name = "checkBoxSenTangN";
             this.checkBoxSenTangN.Size = new System.Drawing.Size(127, 19);
             this.checkBoxSenTangN.TabIndex = 17;
@@ -4690,7 +4696,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenTrubka.AutoSize = true;
             this.checkBoxSenTrubka.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenTrubka.Location = new System.Drawing.Point(6, 240);
+            this.checkBoxSenTrubka.Location = new System.Drawing.Point(6, 224);
             this.checkBoxSenTrubka.Name = "checkBoxSenTrubka";
             this.checkBoxSenTrubka.Size = new System.Drawing.Size(65, 19);
             this.checkBoxSenTrubka.TabIndex = 16;
@@ -4701,7 +4707,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenGGRadio2.AutoSize = true;
             this.checkBoxSenGGRadio2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenGGRadio2.Location = new System.Drawing.Point(6, 360);
+            this.checkBoxSenGGRadio2.Location = new System.Drawing.Point(6, 344);
             this.checkBoxSenGGRadio2.Name = "checkBoxSenGGRadio2";
             this.checkBoxSenGGRadio2.Size = new System.Drawing.Size(86, 19);
             this.checkBoxSenGGRadio2.TabIndex = 15;
@@ -4712,7 +4718,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenGGRadio1.AutoSize = true;
             this.checkBoxSenGGRadio1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenGGRadio1.Location = new System.Drawing.Point(6, 340);
+            this.checkBoxSenGGRadio1.Location = new System.Drawing.Point(6, 324);
             this.checkBoxSenGGRadio1.Name = "checkBoxSenGGRadio1";
             this.checkBoxSenGGRadio1.Size = new System.Drawing.Size(86, 19);
             this.checkBoxSenGGRadio1.TabIndex = 14;
@@ -4723,7 +4729,7 @@ namespace KamertonTest
             // 
             this.checkBoxSenAll.AutoSize = true;
             this.checkBoxSenAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSenAll.Location = new System.Drawing.Point(6, 105);
+            this.checkBoxSenAll.Location = new System.Drawing.Point(6, 90);
             this.checkBoxSenAll.Name = "checkBoxSenAll";
             this.checkBoxSenAll.Size = new System.Drawing.Size(114, 19);
             this.checkBoxSenAll.TabIndex = 13;
@@ -5768,6 +5774,37 @@ namespace KamertonTest
             this.timerCloseForm.Interval = 200;
             this.timerCloseForm.Tick += new System.EventHandler(this.timerCloseForm_Tick);
             // 
+            // label127
+            // 
+            this.label127.AutoSize = true;
+            this.label127.Location = new System.Drawing.Point(6, 105);
+            this.label127.Name = "label127";
+            this.label127.Size = new System.Drawing.Size(101, 13);
+            this.label127.TabIndex = 58;
+            this.label127.Text = "Пороги для Аудио-";
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(110, 103);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(31, 17);
+            this.radioButton11.TabIndex = 61;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "1";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(137, 103);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(31, 17);
+            this.radioButton12.TabIndex = 62;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "2";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -6316,6 +6353,9 @@ namespace KamertonTest
         private System.Windows.Forms.Button button104;
         private System.Windows.Forms.Label label95;
         private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label127;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton radioButton11;
     }
 }
 
