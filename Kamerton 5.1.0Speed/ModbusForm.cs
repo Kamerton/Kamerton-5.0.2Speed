@@ -4123,32 +4123,32 @@ namespace KamertonTest
 			{
 				error_list_reg(1682, 2, 93, 93);
 				temp_disp = readVolt_all[93];
-				s_txt8   += ("Напряжение питания модуля не в норме                     \t< = " + readVals_all[93] + ">  " + temp_disp * 2.51 / 100 + " V\r\n");
-				s_txt48  += ("Напряжение питания модуля не в норме                     \t = " + temp_disp * 2.51 / 100 + " V\r\n");
+				s_txt8   += ("Напряжение питания модуля не в норме                     \t< = " + readVals_all[93] + ">  " + temp_disp * 2.963 / 100 + " V\r\n");
+				s_txt48  += ("Напряжение питания модуля не в норме                     \t = " + temp_disp * 2.963 / 100 + " V\r\n");
 				res       = myProtocol.writeCoil(slave, 293, false);
 			}
 			if (coilArr_all[94] != false)
 			{
 				error_list_reg(1686, 2, 94, 94);
 				temp_disp = readVolt_all[94];
-				s_txt8   += ("Напряжение питания Радио1 не в норме                     \t< = " + readVals_all[94] + ">  " + temp_disp * 2.51 / 100 + " V\r\n");
-				s_txt48  += ("Напряжение питания Радио1 не в норме                     \t = " + temp_disp * 2.51 / 100 + " V\r\n");
+				s_txt8   += ("Напряжение питания Радио1 не в норме                     \t< = " + readVals_all[94] + ">  " + temp_disp * 2.963 / 100 + " V\r\n");
+				s_txt48  += ("Напряжение питания Радио1 не в норме                     \t = " + temp_disp * 2.963 / 100 + " V\r\n");
                 res       = myProtocol.writeCoil(slave, 294, false);
 			}
 			if (coilArr_all[95] != false)
 			{
 				error_list_reg(1690, 2, 95, 95);
 				temp_disp = readVolt_all[95];
-				s_txt8   += ("Напряжение питания Радио2 не в норме                     \t< = " + readVals_all[95] + ">  " + temp_disp * 2.51 / 100 + " V\r\n");
-				s_txt48  += ("Напряжение питания Радио2 не в норме                     \t = " + temp_disp * 2.51 / 100 + " V\r\n");
+				s_txt8   += ("Напряжение питания Радио2 не в норме                     \t< = " + readVals_all[95] + ">  " + temp_disp * 2.963 / 100 + " V\r\n");
+				s_txt48  += ("Напряжение питания Радио2 не в норме                     \t = " + temp_disp * 2.963 / 100 + " V\r\n");
                 res       = myProtocol.writeCoil(slave, 295, false);
 			}
 			if (coilArr_all[96] != false)
 			{
 				error_list_reg(1694, 2, 96, 96);
 				temp_disp = readVolt_all[96];
-				s_txt8   += ("Напряжение питания ГГС  не в норме                       \t< = " + readVals_all[96] + ">  " + temp_disp * 2.51 / 100 + " V\r\n");
-				s_txt48  += ("Напряжение питания ГГС  не в норме                       \t = " + temp_disp * 2.51 / 100 + " V\r\n");
+				s_txt8   += ("Напряжение питания ГГС  не в норме                       \t< = " + readVals_all[96] + ">  " + temp_disp * 2.963 / 100 + " V\r\n");
+				s_txt48  += ("Напряжение питания ГГС  не в норме                       \t = " + temp_disp * 2.963 / 100 + " V\r\n");
 				res       = myProtocol.writeCoil(slave, 296, false);
 			}
 			if (coilArr_all[97] != false)
