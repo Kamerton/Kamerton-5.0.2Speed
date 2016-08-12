@@ -5494,9 +5494,12 @@ namespace KamertonTest
 		 }
 		private void button6_Click(object sender, EventArgs e)                         // Вызов программы форматирования SD карты
 		 {
-		   //  bool file_del = false;
+             startWrReg = 120;                                                                      // 
+             res = myProtocol.writeSingleRegister(slave, startWrReg, 58);
+             test_end1();
 
 
+            /*
 			 if ((File.Exists(folderFormatName)))
 			 {
 				 MessageBox.Show("                         Внимание!\r\n\r\n Установите  SD карту в устройство чтения на ПК", "Вызов программы форматирования SD карты", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -5516,7 +5519,7 @@ namespace KamertonTest
 				 }
 
 			 }
-
+            */
 		 }
 
 		private void file_del_SD_Click(object sender, EventArgs e)

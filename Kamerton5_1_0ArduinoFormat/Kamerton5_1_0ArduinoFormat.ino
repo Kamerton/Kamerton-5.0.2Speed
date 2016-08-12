@@ -1988,7 +1988,7 @@ const char* const string_table_err[] PROGMEM =
 
 #define DEBUG_PRINT 1
 // Serial output stream
-ArduinoOutStream cout(Serial);
+ArduinoOutStream cout(Serial2);
 
 // MBR information
 uint8_t partType;
@@ -2362,7 +2362,28 @@ void formatCard()
   cout << F("Format done\n");
 }
 
+void formatSD()
+{
+  if (!card.begin(chipSelect, spiSpeed)) 
+  {
+    cout << F(
+           "\nSD initialization failure!\n"
+           "Is the SD card inserted correctly?\n"
+           "Is chip select correct at the top of this program?\n");
+    sdError("card.begin failed");
+  }
+  cardSizeBlocks = card.cardSize();
+  if (cardSizeBlocks == 0) 
+  {
+    sdError("cardSize");
+  }
+  cardCapacityMB = (cardSizeBlocks + 2047) / 2048;
 
+  cout << F("Card Size: ") << cardCapacityMB;
+  cout << F(" MB, (MB = 1,048,576 bytes)") << endl;
+  formatCard();
+  regBank.set(adr_control_command, 0);
+}
 
 // ========================= Блок программ ============================================
 
@@ -3446,6 +3467,9 @@ void control_command()
       case 57:
 		i2c_eeprom_write_byte(deviceaddress, adr_vesion_Audio1_2, 2);  // Записать признак версии порогов  модуля Аудио2
 		regBank.set(adr_control_command, 0); 
+		break;
+      case 58:
+		formatSD();                               // Форматировать SD карту
 		break;
       default:
         regBank.set(adr_control_command, 0);      // 
@@ -9885,7 +9909,7 @@ void setup()
   Serial.begin(9600);                                            // Подключение к USB ПК
   Serial1.begin(115200);                                         // Подключение к звуковому модулю Камертон
   slave.setSerial(3, 57600);                                     // Подключение к протоколу MODBUS компьютера Serial3
-  Serial2.begin(115200);                                         //
+  Serial2.begin(115200);                                         // Передача сообщений в программу Камертон 5.1 
   Serial.println(" ");
   Serial.println(" ***** Start system  *****");
   Serial.println("Kamerton5_0_1ArduinoSpeed2 ");
@@ -9936,15 +9960,7 @@ void setup()
     Serial.println("initialization SD successfully.");
     regBank.set(125, true);
   }
-  cardSizeBlocks = card.cardSize();
-  if (cardSizeBlocks == 0) 
-  {
-    sdError("cardSize");
-  }
-  cardCapacityMB = (cardSizeBlocks + 2047) / 2048;
-
-  cout << F("Card Size: ") << cardCapacityMB;
-  cout << F(" MB, (MB = 1,048,576 bytes)") << endl;
+ 
   SdFile::dateTimeCallback(dateTime);                          // Настройка времени записи файла
   regBank.set(40120, 0);                                       // Сбросить все команды на выполнение
   regBank.set(adr_reg_count_err, 0);                           // Обнулить данные счетчика всех ошибок
