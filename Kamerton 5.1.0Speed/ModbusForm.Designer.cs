@@ -64,6 +64,9 @@ namespace KamertonTest
             this.label150 = new System.Windows.Forms.Label();
             this.label166 = new System.Windows.Forms.Label();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.label127 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label95 = new System.Windows.Forms.Label();
             this.button103 = new System.Windows.Forms.Button();
@@ -409,8 +412,6 @@ namespace KamertonTest
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button67 = new System.Windows.Forms.Button();
-            this.file_del_yes = new System.Windows.Forms.Button();
-            this.file_del_no = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.file_del_SD = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -492,9 +493,6 @@ namespace KamertonTest
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.timerPowerOff = new System.Windows.Forms.Timer(this.components);
             this.timerCloseForm = new System.Windows.Forms.Timer(this.components);
-            this.label127 = new System.Windows.Forms.Label();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cTrigLevel1)).BeginInit();
             this.groupBox25.SuspendLayout();
@@ -959,6 +957,37 @@ namespace KamertonTest
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = " ";
             this.ToolTip1.SetToolTip(this.groupBox18, "Применение настроек порогов из файлов.");
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(137, 103);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(31, 17);
+            this.radioButton12.TabIndex = 62;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "2";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(110, 103);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(31, 17);
+            this.radioButton11.TabIndex = 61;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "1";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // label127
+            // 
+            this.label127.AutoSize = true;
+            this.label127.Location = new System.Drawing.Point(6, 105);
+            this.label127.Name = "label127";
+            this.label127.Size = new System.Drawing.Size(101, 13);
+            this.label127.TabIndex = 58;
+            this.label127.Text = "Пороги для Аудио-";
             // 
             // textBox10
             // 
@@ -5030,8 +5059,6 @@ namespace KamertonTest
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage4.Controls.Add(this.button67);
-            this.tabPage4.Controls.Add(this.file_del_yes);
-            this.tabPage4.Controls.Add(this.file_del_no);
             this.tabPage4.Controls.Add(this.button6);
             this.tabPage4.Controls.Add(this.file_del_SD);
             this.tabPage4.Controls.Add(this.label11);
@@ -5062,34 +5089,12 @@ namespace KamertonTest
             this.button67.UseVisualStyleBackColor = true;
             this.button67.Click += new System.EventHandler(this.button67_Click);
             // 
-            // file_del_yes
-            // 
-            this.file_del_yes.Location = new System.Drawing.Point(722, 46);
-            this.file_del_yes.Name = "file_del_yes";
-            this.file_del_yes.Size = new System.Drawing.Size(75, 25);
-            this.file_del_yes.TabIndex = 33;
-            this.file_del_yes.Text = "Удалить";
-            this.file_del_yes.UseVisualStyleBackColor = true;
-            this.file_del_yes.Visible = false;
-            this.file_del_yes.Click += new System.EventHandler(this.file_del_yes_Click);
-            // 
-            // file_del_no
-            // 
-            this.file_del_no.Location = new System.Drawing.Point(722, 7);
-            this.file_del_no.Name = "file_del_no";
-            this.file_del_no.Size = new System.Drawing.Size(75, 25);
-            this.file_del_no.TabIndex = 32;
-            this.file_del_no.Text = "Отменить";
-            this.file_del_no.UseVisualStyleBackColor = true;
-            this.file_del_no.Visible = false;
-            this.file_del_no.Click += new System.EventHandler(this.file_del_no_Click);
-            // 
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.Red;
             this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(891, 7);
+            this.button6.Location = new System.Drawing.Point(882, 7);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(70, 64);
             this.button6.TabIndex = 31;
@@ -5103,7 +5108,7 @@ namespace KamertonTest
             this.file_del_SD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.file_del_SD.ForeColor = System.Drawing.SystemColors.ControlText;
             this.file_del_SD.Image = ((System.Drawing.Image)(resources.GetObject("file_del_SD.Image")));
-            this.file_del_SD.Location = new System.Drawing.Point(803, 7);
+            this.file_del_SD.Location = new System.Drawing.Point(787, 7);
             this.file_del_SD.Name = "file_del_SD";
             this.file_del_SD.Size = new System.Drawing.Size(71, 64);
             this.file_del_SD.TabIndex = 28;
@@ -5132,7 +5137,7 @@ namespace KamertonTest
             this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button21.ForeColor = System.Drawing.SystemColors.Desktop;
             this.button21.Image = ((System.Drawing.Image)(resources.GetObject("button21.Image")));
-            this.button21.Location = new System.Drawing.Point(601, 7);
+            this.button21.Location = new System.Drawing.Point(611, 7);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(79, 64);
             this.button21.TabIndex = 22;
@@ -5145,7 +5150,7 @@ namespace KamertonTest
             this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button12.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button12.Image = ((System.Drawing.Image)(resources.GetObject("button12.Image")));
-            this.button12.Location = new System.Drawing.Point(493, 7);
+            this.button12.Location = new System.Drawing.Point(497, 7);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(89, 64);
             this.button12.TabIndex = 7;
@@ -5774,37 +5779,6 @@ namespace KamertonTest
             this.timerCloseForm.Interval = 200;
             this.timerCloseForm.Tick += new System.EventHandler(this.timerCloseForm_Tick);
             // 
-            // label127
-            // 
-            this.label127.AutoSize = true;
-            this.label127.Location = new System.Drawing.Point(6, 105);
-            this.label127.Name = "label127";
-            this.label127.Size = new System.Drawing.Size(101, 13);
-            this.label127.TabIndex = 58;
-            this.label127.Text = "Пороги для Аудио-";
-            // 
-            // radioButton11
-            // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(110, 103);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(31, 17);
-            this.radioButton11.TabIndex = 61;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "1";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            // 
-            // radioButton12
-            // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(137, 103);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(31, 17);
-            this.radioButton12.TabIndex = 62;
-            this.radioButton12.TabStop = true;
-            this.radioButton12.Text = "2";
-            this.radioButton12.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -6084,8 +6058,6 @@ namespace KamertonTest
         private System.Windows.Forms.Label label167;
         private System.Windows.Forms.Button file_del_SD;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button file_del_yes;
-        private System.Windows.Forms.Button file_del_no;
         private System.Windows.Forms.Button button76;
         private System.Windows.Forms.Button button91;
         private System.Windows.Forms.Button button88;

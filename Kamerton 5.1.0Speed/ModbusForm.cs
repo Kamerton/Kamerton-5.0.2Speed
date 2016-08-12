@@ -5494,112 +5494,73 @@ namespace KamertonTest
 		 }
 		private void button6_Click(object sender, EventArgs e)                         // Вызов программы форматирования SD карты
 		 {
-             startWrReg = 120;                                                                      // 
-             res = myProtocol.writeSingleRegister(slave, startWrReg, 58);
-             test_end1();
-
-
-            /*
-			 if ((File.Exists(folderFormatName)))
-			 {
-				 MessageBox.Show("                         Внимание!\r\n\r\n Установите  SD карту в устройство чтения на ПК", "Вызов программы форматирования SD карты", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				 System.Diagnostics.Process.Start(folderFormatName);
-			 }
-			 else
-			 {
-				 folderFormatName = @"C:\Program Files (x86)\SDA\SD Formatter\SDFormatter.exe";
-				 if ((File.Exists(folderFormatName)))
-				 {
-					 MessageBox.Show("                         Внимание!\r\n\r\n Установите  SD карту в устройство чтения на ПК", "Вызов программы форматирования SD карты", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					 System.Diagnostics.Process.Start(folderFormatName);
-				 }
-				 else
-				 {
-					 MessageBox.Show("                         Внимание!\r\n\r\n Программа форматирования не установлена", "Вызов программы форматирования SD карты", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				 }
-
-			 }
-            */
-		 }
+                 button6.Enabled = false;
+                 var result = MessageBox.Show(("ВНИМАНИЕ! \r\n\r\n Вся информация с SD памяти будет удалена"), "Форматирование SD памяти", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                 if (result == DialogResult.No)
+                 {
+                      button6.Enabled = true;
+                 }
+                 else
+                 {
+                     textBox48.Text = "Выполняется форматирование SD памяти\r\n\r\n";
+                     textBox48.Refresh();
+                     startWrReg = 120;                                                                      // 
+                     res = myProtocol.writeSingleRegister(slave, startWrReg, 58);
+                     test_end1();
+                     button6.Enabled = true;
+                 }
+ 		 }
 
 		private void file_del_SD_Click(object sender, EventArgs e)
 		 {
 			 if (comboBox1.Text != "")
 			 {
-				 file_del_yes.Visible = true;
-				 file_del_no.Visible  = true;
-				 file_del_SD.Enabled  = false;
-				 file_del_no.Enabled  = true;
-				 file_del_yes.Enabled = true;
-				 fileName             = comboBox1.SelectedItem.ToString();
-				 MessageBox.Show(("  Файл для удаления с SD карты и ПК\r\n\r\n                    ") + fileName, "Программа удаления файла с SD карты и ПК", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			 }
+ 				 file_del_SD.Enabled  = false;
+  				 fileName             = comboBox1.SelectedItem.ToString();
+                 var result = MessageBox.Show(("  Файл для удаления с SD карты и ПК\r\n\r\n                    ") + fileName, "Программа удаления файла с SD карты и ПК", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                 if (result == DialogResult.No)
+                 {
+                     file_del_SD.Enabled = true;
+                 }
+                 else
+                 {
+                     fileName = comboBox1.SelectedItem.ToString();
+                     pathString = System.IO.Path.Combine(folderName, (("RusError " + DateTime.Now.ToString("yyyy.MM.dd", CultureInfo.CurrentCulture))));
+                     pathStringSD = System.IO.Path.Combine(folderName, "SD");
+                     pathString = System.IO.Path.Combine(pathString, fileName);
+                     pathStringSD = System.IO.Path.Combine(pathStringSD, fileName);
+                     if (!(File.Exists(pathString)))
+                     {
+                         textBox48.Text = ("Внимание!  " + pathString + "   Файл на компьютере не найден");
+                     }
+                     else
+                     {
+                         File.Delete(pathString);
+                     }
+                     if (!(File.Exists(pathStringSD)))
+                     {
+                         textBox48.Text = ("Внимание!  " + pathStringSD + "   Файл на компьютере не найден");
+                     }
+                     else
+                     {
+                         File.Delete(pathStringSD);
+                     }
+                     if (!(ComPort2.IsOpen)) ComPort2.Open();
+                     //Удаление файла на SD
+                     ComPort2.Write(comboBox1.SelectedItem.ToString());
+                     slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
+                     startWrReg = 120;                                                     // Удалить  файл из Камертон 50  
+                     res = myProtocol.writeSingleRegister(slave, startWrReg, 27);
+                     test_end1();
+                     button12.Enabled = true;
+                     file_del_SD.Enabled = true;
+                 }
+ 			 }
 			 else
 			 {
 				 MessageBox.Show("Файл для удаления с SD карты и ПК не указан", "Программа удаления файла с SD карты и ПК", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			 }
 
-		 }
-		private void file_del_no_Click(object sender, EventArgs e)
-		 {
-			 file_del_SD.Enabled  = true;
-			 file_del_no.Enabled  = false;
-			 file_del_yes.Enabled = false;
-			 Thread.Sleep(200);
-			 file_del_SD.Enabled  = true;
-			 file_del_yes.Visible = false;
-			 file_del_no.Visible  = false;
-		 }
-		private void file_del_yes_Click(object sender, EventArgs e)
-		 {
-			 file_del_SD.Enabled = false;                                              // Удалить  файл из SD и ПК
-			 file_del_yes.Enabled = false;
-			 file_del_no.Enabled = false;
-			 if (comboBox1.Text != "")
-			 {
-				 fileName = comboBox1.SelectedItem.ToString();
-				 pathString = System.IO.Path.Combine(folderName, (("RusError " + DateTime.Now.ToString("yyyy.MM.dd", CultureInfo.CurrentCulture))));
-				 pathStringSD = System.IO.Path.Combine(folderName, "SD");
-				 pathString = System.IO.Path.Combine(pathString, fileName);
-				 pathStringSD = System.IO.Path.Combine(pathStringSD, fileName);
-
-
-				 if (!(File.Exists(pathString)))
-				 {
-					 textBox48.Text = ("Внимание!  " + pathString + "   Файл на компьютере не найден");
-				 }
-
-				 else
-				 {
-					 File.Delete(pathString);
-				 }
-
-				 if (!(File.Exists(pathStringSD)))
-				 {
-					 textBox48.Text = ("Внимание!  " + pathStringSD + "   Файл на компьютере не найден");
-				 }
-				 else
-				 {
-					 File.Delete(pathStringSD);
-				 }
-				 if (!(ComPort2.IsOpen)) ComPort2.Open();
-				 //Удаление файла на SD
-				 ComPort2.Write(comboBox1.SelectedItem.ToString());
-				 slave = int.Parse(txtSlave.Text, CultureInfo.CurrentCulture);
-				 startWrReg = 120;                                                     // Удалить  файл из Камертон 50  
-				 res = myProtocol.writeSingleRegister(slave, startWrReg, 27);
-				 test_end1();
-				 button12.Enabled = true;
-				 //  ComPort2.Close();
-			 }
-			 else
-			 {
-				 MessageBox.Show("Файл для удаления с SD карты и ПК не указан", "Программа удаления файла с SD карты и ПК", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			 }
-
-			 file_del_SD.Enabled = true;
-			 file_del_yes.Visible = false;
-			 file_del_no.Visible = false;
 		 }
 
  // Вызов дополнительных форм
