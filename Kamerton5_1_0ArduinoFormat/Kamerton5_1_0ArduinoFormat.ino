@@ -1539,10 +1539,10 @@ const char  txt_message25[]   PROGMEM            = " ****** Test tangenta nognaj
 const char  txt_message26[]   PROGMEM            = " ****** Test tangenta ruchnaja start! ********"      ;
 const char  txt_message27[]   PROGMEM            = "Command sensor OFF MTT                      send!"   ;
 const char  txt_message28[]   PROGMEM            = "Command PTT    OFF MTT                      send!"   ;
-const char  txt_message29[]   PROGMEM            = "Command HangUp OFF MTT -> DOWN(POLOGENA)    send!"   ;
+const char  txt_message29[]   PROGMEM            = "Commanda (HangUp)           MTT -> POLOGENA send!"   ;
 const char  txt_message30[]   PROGMEM            = "Command sensor ON  MTT                      send!"   ;
 const char  txt_message31[]   PROGMEM            = "Command PTT    ON  MTT                      send!"   ;
-const char  txt_message32[]   PROGMEM            = "Command HangUp ON  MTT -> UP(PODNATA BBEPX) send!"   ;
+const char  txt_message32[]   PROGMEM            = "Commanda (HangUp)      MTT -> PODNATA BBEPX send!"   ;
 const char  txt_message33[]   PROGMEM            = "Signal MTT microphone 1.0V                  ON"      ;
 const char  txt_message34[]   PROGMEM            = "Microphone MTT signal                       ON"      ;
 const char  txt_message35[]   PROGMEM            = "Signal FrontL, FrontR                       ON "     ;
@@ -1665,8 +1665,8 @@ const char  txt_error63[]  PROGMEM               = "Test MTT PTT    (CTS)       
 const char  txt_error64[]  PROGMEM               = "Test microphone PTT  (CTS)                  OFF - ";
 const char  txt_error65[]  PROGMEM               = "Test MTT PTT    (CTS)                       ON~ - ";
 const char  txt_error66[]  PROGMEM               = "Test microphone PTT  (CTS)                  ON~ - ";
-const char  txt_error67[]  PROGMEM               = "Test MTT HangUp (DCD)                       OFF - ";
-const char  txt_error68[]  PROGMEM               = "Test MTT HangUp (DCD)                       ON~ - ";
+const char  txt_error67[]  PROGMEM               = "Proverка - (HangUp)    MTT -> PODNATA BBEPX     - ";
+const char  txt_error68[]  PROGMEM               = "Proverка - (HangUp)         MTT -> POLOGENA     - ";
 const char  txt_error69[]  PROGMEM               = "";
 
 const char  txt_error70[]  PROGMEM               = "Command PTT1 tangenta ruchnaja (CTS)        OFF - ";
@@ -2728,7 +2728,7 @@ void UpdateRegs()                                        // Обновить р�
   //-----Установить бит 1
   set_rele = regBank.get(18);
   mcp_Out2.digitalWrite(1, set_rele);                // XP1 - 20  HangUp  DCD
-
+ // Serial.println(set_rele);
   //-----Установить бит 2
   set_rele = regBank.get(19);
   mcp_Out2.digitalWrite(2, set_rele);                // J8-11     XP7 2 sensor  Танг. р.
@@ -5173,14 +5173,14 @@ void test_headset_dispatcher()
 void test_MTT()
 {
   mcp_Analog.digitalWrite(Front_led_Blue, LOW);
-  int vers_ini  = i2c_eeprom_read_byte(deviceaddress, adr_vesion_Audio1_2);   // Считать из памяти версию загруженного порога
+  int vers_ini  = i2c_eeprom_read_byte(deviceaddress, adr_vesion_Audio1_2);      // Считать из памяти версию загруженного порога
   read_porog_eeprom(353, 39);
   set_sound(1);
   if (test_repeat == false)
   {
     myFile.println("");
-    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[24])));                   // " ****** Test MTT start! ******"                              ;
-    myFile.println(buffer);                                                         // " ****** Test MTT start! ******"                              ;
+    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[24])));                 // " ****** Test MTT start! ******"                              ;
+    myFile.println(buffer);                                                       // " ****** Test MTT start! ******"                              ;
     file_print_date();
     myFile.println("");
   }
@@ -5189,10 +5189,10 @@ void test_MTT()
   regBank.set(25, 0);                                                             //  XP1- 19 HaSs  sensor подключения трубки    MTT включить должно быть в "0"
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[30])));
   if (test_repeat == false)  myFile.println(buffer);                              // "Command sensor ON MTT  send!
-  regBank.set(18, 0);                                                             // XP1 - 20  HangUp  DCD Трубку поднять DCD должно быть в "0"
+  regBank.set(18, 0);    // Трубка поднята                                        // XP1 - 20  HangUp  DCD Трубку поднять DCD должно быть в "0"
   UpdateRegs();                                                                   // Выполнить команду
   delay(100);
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Command HangUp ON  MTT -> UP(PODNATA BBEPX) send!" 
   if (test_repeat == false)  myFile.println(buffer);                              // "Command  HangUp MTT OFF send!"
   // ++++++++++++++++++++++++++++++++++ Проверить исправность канала динамиков на отсутствие наводок ++++++++++++++++++++++++
   measure_vol_min(analog_FrontL,    adr_reg40250, adr_reg40450, 250, por_int_buffer[3]);               // Измерить уровень сигнала на выходе FrontL    "Test MTT ** Signal FrontL                                   OFF - ";
@@ -5250,15 +5250,15 @@ void test_MTT()
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[35])));                                          //
   if (test_repeat == false) myFile.println(buffer);                                                      // "Signal FrontL, FrontR  ON                             - "
   measure_vol_min(analog_ggs,       adr_reg40256, adr_reg40456, 256, por_int_buffer[16]);                // Измерить уровень сигнала на выходе GGS       "Test MTT ** Signal GGS                                      OFF - ";
-  regBank.set(18, 1);                                                                                    // XP1 - 20  HangUp  DCD ON
+  regBank.set(18, 1);           // Трубка положена                                                       // XP1 - 20  HangUp  DCD ON
   UpdateRegs();                                                                                          // Выполнить команду
   delay(100);
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));                                          // "Command HangUp ON  MTT                           send!"      ;
-  if (test_repeat == false) myFile.println(buffer);                                                      // "Command HangUp ON  MTT                           send!"      ;
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));                                          // "Command HangUp OFF MTT -> DOWN(POLOGENA)    send!"   ;
+  if (test_repeat == false) myFile.println(buffer);                                                      // "Command HangUp OFF MTT -> DOWN(POLOGENA)    send!"   ;
   measure_vol_max(analog_ggs,  adr_reg40289, adr_reg40489, 289,  por_int_buffer[33], por_int_buffer[34]);                      //  Измерить уровень сигнала на выходе GGS       "Test MTT ** Signal GGS             On
-  regBank.set(18, 0);                                                                                    // XP1 - 20  HangUp  DCD ON  Положить трубку
+  regBank.set(18, 0);          // Трубка поднята                                                         // XP1 - 20  HangUp  DCD ON  Положить трубку
   regBank.set(26, 0);                                                                                    // XP1- 17 HaSPTT    CTS DSR вкл. Отключить PTT MTT
-  regBank.set(25, 1);                                                                                    //  XP1- 19 HaSs  sensor подключения трубки    MTT отключить должно быть в "1"
+  regBank.set(25, 1);                                                                                    // XP1- 19 HaSs  sensor подключения трубки    MTT отключить должно быть в "1"
   regBank.set(6, 0);                                                                                     // Реле RL5. Отключить звук Front L, Front R
   UpdateRegs();                                                                                          // Выполнить команду
   set_sound(0);
@@ -5959,19 +5959,19 @@ void testGGS()
   if (test_repeat == false)
   {
     myFile.println("");
-    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[48])));                   // " ****** Test GGS start! ******"      ;
-    myFile.println(buffer);                                                         // " ****** Test GGS start! ******"      ;
+    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[48])));                 // " ****** Test GGS start! ******"      ;
+    myFile.println(buffer);                                                       // " ****** Test GGS start! ******"      ;
     file_print_date();
     myFile.println("");
   }
   regBank.set(25, 1);                                                             // XP1- 19 HaSs      sensor подключения трубки
-  regBank.set(18, 0);
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[27])));                  // "Command sensor OFF  MTT                           send!"      ;
-  if (test_repeat == false) myFile.println(buffer);                                                         // "Command sensor ON  MTT                           send!"      ;
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));                  // "Command HangUp OFF MTT                              send! "      ;
+  regBank.set(18, 0);    //Трубка поднята  
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[27])));                   // "Command sensor OFF  MTT                           send!"      ;
+  if (test_repeat == false) myFile.println(buffer);                               // "Command sensor ON  MTT                           send!"      ;
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Command HangUp OFF MTT                              send! "      ;
   if (test_repeat == false) myFile.println(buffer);
-  resistor(1, por_int_buffer[1]);                                                           // Установить уровень сигнала 60 мв
-  resistor(2, por_int_buffer[2]);                                                             // Установить уровень сигнала 60 мв
+  resistor(1, por_int_buffer[1]);                                                 // Установить уровень сигнала 60 мв
+  resistor(2, por_int_buffer[2]);                                                 // Установить уровень сигнала 60 мв
   regBank.set(6, 0);                                                              // Реле RL5 Звук Front L, Front R
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[71])));                   // "Signal FrontL, FrontR                         OFF "      ;
   if (test_repeat == false) myFile.println(buffer);
@@ -5984,11 +5984,11 @@ void testGGS()
   byte i50 = regBank.get(40004);
 
 
-  if (bitRead(i50, 2) != 0)                                                   // XP1- 19 HaSs sensor контроля подключения трубки    "Sensor MTT                          XP1- 19 HaSs            OFF - ";
+  if (bitRead(i50, 2) != 0)                                                 // XP1- 19 HaSs sensor контроля подключения трубки    "Sensor MTT                          XP1- 19 HaSs            OFF - ";
   {
-    regcount = read_reg_eeprom(adr_reg40200);                                          // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            OFF - ";
+    regcount = read_reg_eeprom(adr_reg40200);                               // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            OFF - ";
     regcount++;                                                             // увеличить счетчик ошибок sensor отключения трубки  "Sensor MTT                          XP1- 19 HaSs            OFF - ";
-    save_reg_eeprom(adr_reg40200, regcount);                                           // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            OFF - ";
+    save_reg_eeprom(adr_reg40200, regcount);                                // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            OFF - ";
     regBank.set(200, 1);                                                    // установить флаг ошибки                             "Sensor MTT                          XP1- 19 HaSs            OFF - ";
     regBank.set(120, 1);                                                    // установить общий флаг ошибки
     regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -6004,17 +6004,17 @@ void testGGS()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[0])));     // "Sensor MTT                     XP1- 19 HaSs   OFF               - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      if (test_repeat == false) myFile.println(buffer);                   //  sensor  трубки отключен  - Pass
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[0])));       // "Sensor MTT                     XP1- 19 HaSs   OFF               - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      if (test_repeat == false) myFile.println(buffer);                     //  sensor  трубки отключен  - Pass
     }
   }
-  if (regBank.get(adr_reg_ind_DCD) != 0)                                       // Проверить включение HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
+  if (regBank.get(adr_reg_ind_DCD) != 0)                                    // Проверить включение HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
   {
-    regcount = read_reg_eeprom(adr_reg40267);                                          // адрес счетчика ошибки отключения HangUp  DCD  "Test MTT HangUp (DCD)                                       OFF - ";
+    regcount = read_reg_eeprom(adr_reg40267);                               // адрес счетчика ошибки отключения HangUp  DCD  "Test MTT HangUp (DCD)                                       OFF - ";
     regcount++;                                                             // увеличить счетчик ошибок
-    save_reg_eeprom(adr_reg40267, regcount);                                           // адрес счетчика ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
+    save_reg_eeprom(adr_reg40267, regcount);                                // адрес счетчика ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
     regBank.set(267, 1);                                                    // установить флаг ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
     regBank.set(120, 1);                                                    // установить общий флаг ошибки
     regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
@@ -6030,10 +6030,10 @@ void testGGS()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));    // "Test MTT HangUp (DCD)                                       OFF - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      myFile.println(buffer);                                             // "Test MTT HangUp (DCD)                                       OFF - ";
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));      // "Test MTT HangUp (DCD)                                       OFF - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      myFile.println(buffer);                                               // "Test MTT HangUp (DCD)                                       OFF - ";
     }
   }
 
@@ -6049,8 +6049,8 @@ void testGGS()
   measure_vol_min(analog_gg_radio2, adr_reg40288, adr_reg40488, 288, por_int_buffer[19]);                               // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio2                                OFF - ";
   //----------------------------------------------------------------------------------------------------------------------------------------
 
-  regBank.set(6, 1);                                                              // Реле RL5 Звук Front L, Front R
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[49])));                   // "Signal GGS  FrontL, FrontR   0,7V             ON"
+  regBank.set(6, 1);                                                        // Реле RL5 Звук Front L, Front R
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[49])));             // "Signal GGS  FrontL, FrontR   0,7V             ON"
   if (test_repeat == false) myFile.println(buffer);
   delay(100);
   UpdateRegs();
@@ -6070,21 +6070,21 @@ void testGGS()
   measure_vol_min(analog_gg_radio1, adr_reg40287, adr_reg40487, 287, por_int_buffer[18]);                                  // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio1                                OFF - ";
   measure_vol_min(analog_gg_radio2, adr_reg40288, adr_reg40488, 288, por_int_buffer[20]);                                  // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio2                                OFF - ";
 
-  regBank.set(25, 0);                                                             // XP1- 19 HaSs      sensor подключения трубки
-  UpdateRegs();                                                                   // Выполнить команду
+  regBank.set(25, 0);                                                       // XP1- 19 HaSs      sensor подключения трубки
+  UpdateRegs();                                                             // Выполнить команду
   delay(100);
   UpdateRegs();
   delay(100);
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[30])));                   // "Command sensor ON  MTT                           send!"      ;
-  if (test_repeat == false) myFile.println(buffer);                               // "Command sensor ON  MTT                           send!"      ;
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[30])));             // "Command sensor ON  MTT                           send!"      ;
+  if (test_repeat == false) myFile.println(buffer);                         // "Command sensor ON  MTT                           send!"      ;
 
   i50 = regBank.get(40004);
 
-  if (bitRead(i50, 2) == 0)                                                   // XP1- 19 HaSs sensor контроля подключения трубки    "Sensor MTT                          XP1- 19 HaSs            ON  - ";
+  if (bitRead(i50, 2) == 0)                                                 // XP1- 19 HaSs sensor контроля подключения трубки    "Sensor MTT                          XP1- 19 HaSs            ON  - ";
   {
-    regcount = read_reg_eeprom(adr_reg40210);                                          // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            ON  - ";
+    regcount = read_reg_eeprom(adr_reg40210);                               // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            ON  - ";
     regcount++;                                                             // увеличить счетчик ошибок sensor отключения трубки  "Sensor MTT                          XP1- 19 HaSs            ON  - ";
-    save_reg_eeprom(adr_reg40210, regcount);                                           // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            ON  - ";
+    save_reg_eeprom(adr_reg40210, regcount);                                // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            ON  - ";
     regBank.set(210, 1);                                                    // установить флаг ошибки                             "Sensor MTT                          XP1- 19 HaSs            ON  - ";
     regBank.set(120, 1);                                                    // установить общий флаг ошибки
     strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[10])));        // "Sensor MTT                      XP1- 19 HaSs   ON                - ";
@@ -6097,37 +6097,37 @@ void testGGS()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[10])));    // "Sensor MTT                     XP1- 19 HaSs   ON                 - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      if (test_repeat == false) myFile.println(buffer);                   //  sensor  трубки включен  - Pass
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[10])));      // "Sensor MTT                     XP1- 19 HaSs   ON                 - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      if (test_repeat == false) myFile.println(buffer);                     //  sensor  трубки включен  - Pass
     }
   }
 
-  if (regBank.get(adr_reg_ind_DCD) != 0)                                       // Проверить включение HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
+  if (regBank.get(adr_reg_ind_DCD) != 0)                                    // Проверить включение HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
   {
     regcount = read_reg_eeprom(adr_reg40267);                                           // адрес счетчика ошибки отключения HangUp  DCD  "Test MTT HangUp (DCD)                                       OFF - ";
-    regcount++;                                                              // увеличить счетчик ошибок
+    regcount++;                                                             // увеличить счетчик ошибок
     save_reg_eeprom(adr_reg40267, regcount);                                            // адрес счетчика ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
-    regBank.set(267, 1);                                                     // установить флаг ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
-    regBank.set(120, 1);                                                     // установить общий флаг ошибки
-    regcount_err = regBank.get(adr_reg_count_err);                           // Получить данные счетчика всех ошибок
-    regcount_err++;                                                          // увеличить счетчик всех ошибок
-    regBank.set(adr_reg_count_err, regcount_err);                            // Сохранить данные счетчика всех ошибок
-    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));         // "Test MTT HangUp (DCD)                                       OFF - ";
-    myFile.print(buffer);                                                    // "Test MTT HangUp (DCD)                                       OFF - ";
-    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));             // "    Error! - ";
-    myFile.print(buffer);                                                    // "    Error! - ";
-    myFile.println(regcount);                                                // Показания счетчика ошибок
+    regBank.set(267, 1);                                                    // установить флаг ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
+    regBank.set(120, 1);                                                    // установить общий флаг ошибки
+    regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
+    regcount_err++;                                                         // увеличить счетчик всех ошибок
+    regBank.set(adr_reg_count_err, regcount_err);                           // Сохранить данные счетчика всех ошибок
+    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));        // "Proverка - MTT HangUp (DCD)  PODNATA BBEPX      - ";
+    myFile.print(buffer);                                                   // "Test MTT HangUp (DCD)                                       OFF - ";
+    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));            // "    Error! - ";
+    myFile.print(buffer);                                                   // "    Error! - ";
+    myFile.println(regcount);                                               // Показания счетчика ошибок
   }
   else
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));     // "Test MTT HangUp (DCD)                                       OFF - ";
-      myFile.print(buffer);                                                //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));         // "Pass";
-      myFile.println(buffer);                                              // "Test MTT HangUp (DCD)                                       OFF - ";
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));      // "Proverка - MTT HangUp (DCD)  PODNATA BBEPX      - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      myFile.println(buffer);                                               // "Test MTT HangUp (DCD)                                       OFF - ";
     }
   }
   //+++++++++++++++++++++++++++++++++++   Проверка отсутствия сигнала на выходах +++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -6145,38 +6145,38 @@ void testGGS()
   measure_vol_min(analog_gg_radio2, adr_reg40288, adr_reg40488, 288, por_int_buffer[20]);                                // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio2                                OFF - ";
   //----------------------------------------------------------------------------------------------------------------------------------------
 
-  regBank.set(18, 1);                                                              // XP1 - 20  HangUp  DCD ON
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                    // "Command HangUp ON  MTT                           send!"      ;
-  if (test_repeat == false) myFile.println(buffer);                                // "Command HangUp ON  MTT                           send!"      ;
+  regBank.set(18, 1);                                                       // XP1 - 20  HangUp  DCD ON
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));             // "Commanda (HangUp) MTT -> POLOGENA                send!"      ;
+  if (test_repeat == false) myFile.println(buffer);                         // "Commanda (HangUp) MTT -> POLOGENA                send!"      ;
 
   UpdateRegs();
   delay(100);
   UpdateRegs();
 
-  if (regBank.get(adr_reg_ind_DCD) == 0)                                        // Проверить включение HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
+  if (regBank.get(adr_reg_ind_DCD) == 0)                                    // Проверить включение HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
   {
-    regcount = read_reg_eeprom(adr_reg40268);                                           // адрес счетчика ошибки отключения HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
-    regcount++;                                                              // увеличить счетчик ошибок
-    save_reg_eeprom(adr_reg40268, regcount);                                            // адрес счетчика ошибки отключения HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
-    regBank.set(268, 1);                                                     // установить флаг ошибки отключения HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
-    regBank.set(120, 1);                                                     // установить общий флаг ошибки
-    regcount_err = regBank.get(adr_reg_count_err);                           // Получить данные счетчика всех ошибок
-    regcount_err++;                                                          // увеличить счетчик всех ошибок
-    regBank.set(adr_reg_count_err, regcount_err);                            // Сохранить данные счетчика всех ошибок
-    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));         // "Test MTT HangUp (DCD)                                       ON  - ";
-    myFile.print(buffer);                                                    // "Test MTT HangUp (DCD)                                       ON  - ";
-    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));             // "    Error! - ";
-    myFile.print(buffer);                                                    // "    Error! - ";
-    myFile.println(regcount);                                                // Показания счетчика ошибок
+    regcount = read_reg_eeprom(adr_reg40268);                               // адрес счетчика ошибки отключения HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
+    regcount++;                                                             // увеличить счетчик ошибок
+    save_reg_eeprom(adr_reg40268, regcount);                                // адрес счетчика ошибки отключения HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
+    regBank.set(268, 1);                                                    // установить флаг ошибки отключения HangUp  DCD "Test MTT HangUp (DCD)                                       ON  - ";
+    regBank.set(120, 1);                                                    // установить общий флаг ошибки
+    regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
+    regcount_err++;                                                         // увеличить счетчик всех ошибок
+    regBank.set(adr_reg_count_err, regcount_err);                           // Сохранить данные счетчика всех ошибок
+    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));        // "Proverка - MTT HangUp (DCD)  POLOGENA                           - ";
+    myFile.print(buffer);                                                   // "Proverка - MTT HangUp (DCD)  POLOGENA                           - ";
+    strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));            // "    Error! - ";
+    myFile.print(buffer);                                                   // "    Error! - ";
+    myFile.println(regcount);                                               // Показания счетчика ошибок
   }
   else
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));     // "Test MTT HangUp (DCD)                                       ON  - ";
-      myFile.print(buffer);                                                //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));         // "Pass";
-      myFile.println(buffer);                                              //  "Test MTT HangUp (DCD)                                       ON  - ";трубки включен  - Pass
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));      // "Proverка - MTT HangUp (DCD)  POLOGENA                           - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      myFile.println(buffer);                                               // Proverка - MTT HangUp (DCD)  POLOGENA                            - ;
     }
   }
 
@@ -6193,11 +6193,11 @@ void testGGS()
   measure_vol_min(analog_gg_radio1, adr_reg40287, adr_reg40487, 287, por_int_buffer[18]);                // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio1                                OFF - ";
   measure_vol_min(analog_gg_radio2, adr_reg40288, adr_reg40488, 288, por_int_buffer[20]);                // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio2                                OFF - ";
 
-  regBank.set(6, 0);                                                               // Реле RL5 Звук Front L, Front R
+  regBank.set(6, 0);                                                        // Реле RL5 Звук Front L, Front R
   UpdateRegs();
   set_sound(0);
   mcp_Analog.digitalWrite(Front_led_Blue, HIGH);
-  regBank.set(adr_control_command, 0);                                             // Завершить программу
+  regBank.set(adr_control_command, 0);                                      // Завершить программу
 }
 void test_GG_Radio1()
 {
@@ -7226,8 +7226,8 @@ void test_MTT_off()
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[28])));                   // "Command PTT    OFF MTT                           send! "     ;
   if (test_repeat == false) myFile.println(buffer);                               // "Command PTT    OFF MTT                           send! "     ;
   regBank.set(18, 0);                                                             // XP1 - 20  HangUp  DCD
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));                   // "Command        OFF HangUp MTT                    send! "     ;
-  if (test_repeat == false) myFile.println(buffer);                               // "Command        OFF HangUp MTT                    send! "     ;
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Commanda (HangUp)      MTT -> PODNATA BBEPX send!"     ;
+  if (test_repeat == false) myFile.println(buffer);                               // "Commanda (HangUp)      MTT -> PODNATA BBEPX send!"     ;
   regBank.set(16, 0);                                                             // XS1 - 6   sensor Мик
   regBank.set(1, 0);                                                              // Реле RL0 Звук
   regBank.set(2, 0);                                                              // Реле RL1 Звук
@@ -7245,7 +7245,7 @@ void test_MTT_off()
   byte i50 = regBank.get(40004);
 
   //wdt_reset();
-  if (bitRead(i50, 2) != 0)                                                   // XP1- 19 HaSs sensor контроля подключения трубки    "Sensor MTT                          XP1- 19 HaSs            OFF - ";
+  if (bitRead(i50, 2) != 0)                                                 // XP1- 19 HaSs sensor контроля подключения трубки    "Sensor MTT                          XP1- 19 HaSs            OFF - ";
   {
     regcount = read_reg_eeprom(adr_reg40200);                                          // адрес счетчика ошибки                              "Sensor MTT                          XP1- 19 HaSs            OFF - ";
     regcount++;                                                             // увеличить счетчик ошибок sensor отключения трубки  "Sensor MTT                          XP1- 19 HaSs            OFF - ";
@@ -7265,19 +7265,19 @@ void test_MTT_off()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[0])));     // "Sensor MTT                     XP1- 19 HaSs   OFF               - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      myFile.println(buffer);                                             //  sensor  трубки отключен  - Pass
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[0])));       // "Sensor MTT                     XP1- 19 HaSs   OFF               - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      myFile.println(buffer);                                               //  sensor  трубки отключен  - Pass
     }
   }
   UpdateRegs();
   delay(100);
 
   // 2)  Проверка  на отключение PTT  MTT (CTS)
-  if (regBank.get(adr_reg_ind_CTS) != 0)                                      // Проверка  на отключение CTS MTT
+  if (regBank.get(adr_reg_ind_CTS) != 0)                                    // Проверка  на отключение CTS MTT
   {
-    regcount = read_reg_eeprom(adr_reg40263);                                          // адрес счетчика ошибки PTT  MTT (CTS) "Test MTT PTT    (CTS)                                       OFF - ";
+    regcount = read_reg_eeprom(adr_reg40263);                               // адрес счетчика ошибки PTT  MTT (CTS) "Test MTT PTT    (CTS)                                       OFF - ";
     regcount++;                                                             // увеличить счетчик ошибок
     save_reg_eeprom(adr_reg40263, regcount);                                           // адрес счетчика ошибки PTT  MTT (CTS) "Test MTT PTT    (CTS)                                       OFF - ";
     regBank.set(263, 1);                                                    // установить флаг ошибки
@@ -7295,24 +7295,24 @@ void test_MTT_off()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[63])));    // "Test MTT PTT    (CTS)                                       OFF - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      myFile.println(buffer);                                             // "Test MTT PTT    (CTS)                                       OFF - ";
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[63])));      // "Test MTT PTT    (CTS)                                       OFF - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      myFile.println(buffer);                                               // "Test MTT PTT    (CTS)                                       OFF - ";
     }
   }
   //wdt_reset();
-  if (regBank.get(adr_reg_ind_DCD) != 0)                                       // Проверить включение HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
+  if (regBank.get(adr_reg_ind_DCD) != 0)                                    // Проверить включение HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
   {
-    regcount = read_reg_eeprom(adr_reg40267);                                          // адрес счетчика ошибки отключения HangUp  DCD  "Test MTT HangUp (DCD)                                       OFF - ";
+    regcount = read_reg_eeprom(adr_reg40267);                               // адрес счетчика ошибки отключения HangUp  DCD  "Test MTT HangUp (DCD)                                       OFF - ";
     regcount++;                                                             // увеличить счетчик ошибок
-    save_reg_eeprom(adr_reg40267, regcount);                                           // адрес счетчика ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
+    save_reg_eeprom(adr_reg40267, regcount);                                // адрес счетчика ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
     regBank.set(267, 1);                                                    // установить флаг ошибки отключения HangUp  DCD   "Test MTT HangUp (DCD)                                       OFF - ";
     regBank.set(120, 1);                                                    // установить общий флаг ошибки
     regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
     regcount_err++;                                                         // увеличить счетчик всех ошибок
     regBank.set(adr_reg_count_err, regcount_err);                           // Сохранить данные счетчика всех ошибок
-    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));        // "Test MTT HangUp (DCD)                                       OFF - ";
+    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));        // "Proverка - MTT HangUp (DCD)  PODNATA BBEPX      - ";
     myFile.print(buffer);                                                   // "Test MTT HangUp (DCD)                                       OFF - ";
     strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));            // "    Error! - ";
     myFile.print(buffer);                                                   // "    Error! - ";
@@ -7322,10 +7322,10 @@ void test_MTT_off()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));    // "Test MTT HangUp (DCD)                                       OFF - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      myFile.println(buffer);                                             // "Test MTT HangUp (DCD)                                       OFF - ";
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));       // "Proverка - MTT HangUp (DCD)  PODNATA BBEPX      - ";
+      myFile.print(buffer);                                                  //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));           // "Pass";
+      myFile.println(buffer);                                                // "Test MTT HangUp (DCD)                                       OFF - ";
     }
   }
   mcp_Analog.digitalWrite(Front_led_Blue, HIGH);
@@ -7343,8 +7343,8 @@ void test_MTT_on()
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[31])));                   // "Command PTT    ON  MTT                           send!"      ;
   if (test_repeat == false) myFile.println(buffer);                               // "Command PTT    ON  MTT                           send!"      ;
   regBank.set(18, 1);                                                             // XP1 - 20  HangUp  DCD ON
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Command HangUp ON  MTT                           send!"      ;
-  if (test_repeat == false) myFile.println(buffer);                               // "Command HangUp ON  MTT                           send!"      ;
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[29])));                   // "Command HangUp OFF MTT -> DOWN(POLOGENA)    send!"   ;
+  if (test_repeat == false) myFile.println(buffer);                               // "Command HangUp OFF MTT -> DOWN(POLOGENA)    send!"   ;     ;
 
   UpdateRegs();
   delay(100);
@@ -7421,8 +7421,8 @@ void test_MTT_on()
     regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
     regcount_err++;                                                         // увеличить счетчик всех ошибок
     regBank.set(adr_reg_count_err, regcount_err);                           // Сохранить данные счетчика всех ошибок
-    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));        // "Test MTT HangUp (DCD)                                       ON  - ";
-    myFile.print(buffer);                                                   // "Test MTT HangUp (DCD)                                       ON  - ";
+    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));        // "Proverка - MTT HangUp (DCD)  POLOGENA                           - ";
+	myFile.print(buffer);                                                   // "Test MTT HangUp (DCD)                                       ON  - ";
     strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));            // "    Error! - ";
     myFile.print(buffer);                                                   // "    Error! - ";
     myFile.println(regcount);                                               // Показания счетчика ошибок
@@ -7431,10 +7431,10 @@ void test_MTT_on()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));    // "Test MTT HangUp (DCD)                                       ON  - ";
-      myFile.print(buffer);                                               //
-      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));        // "Pass";
-      myFile.println(buffer);                                             //  "Test MTT HangUp (DCD)                                       ON  - ";трубки включен  - Pass
+    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[68])));        // "Proverка - MTT HangUp (DCD)  POLOGENA                           - ";
+      myFile.print(buffer);                                                 //
+      strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
+      myFile.println(buffer);                                               // "Proverка - MTT HangUp (DCD)  POLOGENA                           - ";
     }
   }
   mcp_Analog.digitalWrite(Front_led_Blue, HIGH);

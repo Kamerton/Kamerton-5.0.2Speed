@@ -263,6 +263,7 @@ namespace KamertonTest
             this.button71 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label128 = new System.Windows.Forms.Label();
             this.label149 = new System.Windows.Forms.Label();
             this.label151 = new System.Windows.Forms.Label();
             this.label153 = new System.Windows.Forms.Label();
@@ -3201,6 +3202,7 @@ namespace KamertonTest
             // groupBox14
             // 
             this.groupBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupBox14.Controls.Add(this.label128);
             this.groupBox14.Controls.Add(this.label149);
             this.groupBox14.Controls.Add(this.label151);
             this.groupBox14.Controls.Add(this.label153);
@@ -3217,6 +3219,16 @@ namespace KamertonTest
             this.groupBox14.Size = new System.Drawing.Size(315, 130);
             this.groupBox14.TabIndex = 45;
             this.groupBox14.TabStop = false;
+            // 
+            // label128
+            // 
+            this.label128.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label128.Location = new System.Drawing.Point(217, 90);
+            this.label128.Name = "label128";
+            this.label128.Size = new System.Drawing.Size(96, 19);
+            this.label128.TabIndex = 62;
+            this.label128.Text = "МТТ";
+            this.label128.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label149
             // 
@@ -3451,10 +3463,10 @@ namespace KamertonTest
             this.label90.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label90.Location = new System.Drawing.Point(6, 112);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(80, 23);
+            this.label90.Size = new System.Drawing.Size(39, 23);
             this.label90.TabIndex = 27;
-            this.label90.Text = "HangUp";
-            this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label90.Text = "MTT";
+            this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label91
             // 
@@ -3533,11 +3545,12 @@ namespace KamertonTest
             // button19
             // 
             this.button19.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button19.Location = new System.Drawing.Point(92, 112);
+            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button19.Location = new System.Drawing.Point(51, 111);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(49, 23);
+            this.button19.Size = new System.Drawing.Size(70, 23);
             this.button19.TabIndex = 3;
-            this.button19.Text = "Вкл.";
+            this.button19.Text = "Положить";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -3607,11 +3620,12 @@ namespace KamertonTest
             // button26
             // 
             this.button26.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button26.Location = new System.Drawing.Point(147, 112);
+            this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button26.Location = new System.Drawing.Point(126, 112);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(49, 23);
+            this.button26.Size = new System.Drawing.Size(70, 23);
             this.button26.TabIndex = 15;
-            this.button26.Text = "Откл.";
+            this.button26.Text = "Поднять";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -6328,6 +6342,7 @@ namespace KamertonTest
         private System.Windows.Forms.Label label127;
         private System.Windows.Forms.RadioButton radioButton12;
         private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.Label label128;
     }
 }
 

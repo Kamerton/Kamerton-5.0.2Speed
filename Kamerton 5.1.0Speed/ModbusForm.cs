@@ -1666,6 +1666,7 @@ namespace KamertonTest
 				toolStripStatusLabel1.BackColor = Color.Red;
 				toolStripStatusLabel4.Text = ("Ошибка получения имени файла!");  // Обработка ошибки.
 				toolStripStatusLabel4.ForeColor = Color.Red;
+                toolStripStatusLabel1.BackColor = Color.Red;
 				Thread.Sleep(100);
 			}
 			test_end1();
@@ -2413,11 +2414,13 @@ namespace KamertonTest
 					{
 						label152.BackColor = Color.Red;
 						label152.Text = "1";
+                        label128.Text = "МТТ Поднята";
 					}
 					else
 					{
 						label152.BackColor = Color.Lime;
 						label152.Text = "0";
+                        label128.Text = "МТТ Положена";
 					}
 				}
 
@@ -2435,13 +2438,13 @@ namespace KamertonTest
 				}
 				if(Com2_SUCCESS)
 				{
-				   toolStripStatusLabel4.BackColor = Color.Lime;
+				 //  toolStripStatusLabel4.BackColor = Color.Lime;
 				   toolStripStatusLabel4.ForeColor = Color.Black;
 				}
 				else
 				{
-					toolStripStatusLabel4.ForeColor = Color.Red;
-					toolStripStatusLabel4.BackColor = Color.White;
+				//	toolStripStatusLabel4.ForeColor = Color.Red;
+				//	toolStripStatusLabel4.BackColor = Color.White;
 				}
 
 			}
@@ -2841,12 +2844,12 @@ namespace KamertonTest
 			coil_Button[13] = false;
 		}
 
-		private void button60_Click(object sender, EventArgs e)              // Отключено, Применяется для измерения напряжения 
+		private void button60_Click(object sender, EventArgs e)                      // Отключено, Применяется для измерения напряжения 
 		{
 			// coil_Button[21] = true; // Управление сенсорами
 		}
 
-		private void button76_Click(object sender, EventArgs e)              // Отключено, Применяется для измерения напряжения 
+		private void button76_Click(object sender, EventArgs e)                      // Отключено, Применяется для измерения напряжения 
 		{
 			// coil_Button[21] = false;
 		}
@@ -2936,13 +2939,13 @@ namespace KamertonTest
 			coil_Button[17] = false;
 		}
 
-		private void button19_Click(object sender, EventArgs e)                      // ВКЛ XP1 - 20  HangUp  DCD
+		private void button19_Click(object sender, EventArgs e)                      // ВКЛ XP1 - 20  HangUp  DCD  Трубку положить
 		{
 			coil_Button[18] = true;
 		}
-		private void button26_Click(object sender, EventArgs e)                      // ОТКЛ XP1 - 20  HangUp  DCD
+		private void button26_Click(object sender, EventArgs e)                      // ОТКЛ XP1 - 20  HangUp  DCD  Трубку поднять
 		{
-			coil_Button[18] = false;
+			coil_Button[18] = false;                                               
 		}
 
 		private void button8_Click(object sender, EventArgs e)                       // ВКЛ XP1- 6  HeS1PTT   CTS вкл
@@ -3341,7 +3344,9 @@ namespace KamertonTest
 				else
 				{
 					toolStripStatusLabel1.Text = "    MODBUS ERROR (end1) ";
+                    toolStripStatusLabel1.BackColor = Color.Red;
 					toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                    toolStripStatusLabel4.BackColor = Color.Red;
 					Com2_SUCCESS               = false;
 					MODBUS_SUCCESS             = false;
 					Thread.Sleep(100);
@@ -5431,6 +5436,7 @@ namespace KamertonTest
 		 {
 			 textBox48.Text = "";
 			 textBox48.Refresh();
+             button13.Enabled = false;
 			 progressBar3.Value = 1;
 			 list_files = false;
 			 read_file = true;
@@ -5450,9 +5456,8 @@ namespace KamertonTest
 				 res = myProtocol.writeSingleRegister(slave, startWrReg, 25);
 				 Thread.Sleep(3000);
 				 button12.Enabled = true;
-			   //  test_end1();
 			 }
-		 }
+ 		 }
 		private void button12_Click_1(object sender, EventArgs e)                      // Отправить текст в файл на ПК
 		 {
 				 button12.Enabled = false;
@@ -7121,7 +7126,9 @@ namespace KamertonTest
 				 {
 					 MODBUS_SUCCESS = false;
 					 toolStripStatusLabel1.Text = "    MODBUS ERROR (3) ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
 					 toolStripStatusLabel4.Text = ("Ошибка получения имени файла! ");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
 					 stop_test_modbus1();
 					 Thread.Sleep(2000);
 				 }
@@ -7132,6 +7139,8 @@ namespace KamertonTest
 				 MODBUS_SUCCESS = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR(2) ";
 				 toolStripStatusLabel4.Text = ("Команда получения имени файла не выполнена !");  // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 stop_test_modbus1();
 				 Thread.Sleep(2000);
 			 }
@@ -7156,7 +7165,10 @@ namespace KamertonTest
 					 MODBUS_SUCCESS             = false;
 					 Com2_SUCCESS               = false;
 					 toolStripStatusLabel1.Text = "    MODBUS ERROR(1m) ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
 					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
+                     toolStripStatusLabel1.BackColor = Color.Red;
 				 }
 
 
@@ -7220,13 +7232,13 @@ namespace KamertonTest
 			 }
 			 if (Com2_SUCCESS)
 			 {
-				 toolStripStatusLabel4.BackColor = Color.Lime;
-				 toolStripStatusLabel4.ForeColor = Color.Black;
+				// toolStripStatusLabel4.BackColor = Color.Lime;
+				// toolStripStatusLabel4.ForeColor = Color.Black;
 			 }
 			 else
 			 {
-				 toolStripStatusLabel4.ForeColor = Color.Red;
-				 toolStripStatusLabel4.BackColor = Color.White;
+				// toolStripStatusLabel4.ForeColor = Color.Red;
+				 //toolStripStatusLabel4.BackColor = Color.White;
 			 }
 		 }
 		 private void start_test_modbus1()
@@ -7505,7 +7517,9 @@ namespace KamertonTest
 							 MODBUS_SUCCESS             = false;
 							 Com2_SUCCESS               = false;
 							 toolStripStatusLabel1.Text = "    MODBUS ERROR(1) ";
+                             toolStripStatusLabel1.BackColor = Color.Red;
 							 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                             toolStripStatusLabel4.BackColor = Color.Red;
 							 Thread.Sleep(200);
 							 e.Cancel = true;
 							 return;
@@ -7535,7 +7549,9 @@ namespace KamertonTest
 				 {
 					 MODBUS_SUCCESS = false;
 					 toolStripStatusLabel1.Text = "    MODBUS ERROR (3) ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
 					 toolStripStatusLabel4.Text = ("Ошибка получения имени файла! ");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
 					 Thread.Sleep(2000);
 				 }
 			 }
@@ -7543,7 +7559,9 @@ namespace KamertonTest
 			 {
 				 MODBUS_SUCCESS = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR(2) ";
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 toolStripStatusLabel4.Text = ("Команда получения имени файла не выполнена !");  // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
 				 Thread.Sleep(2000);
 			 }
 		 }
@@ -7627,13 +7645,13 @@ namespace KamertonTest
 			 }
 			 if (Com2_SUCCESS)
 			 {
-				 toolStripStatusLabel4.BackColor = Color.Lime;
-				 toolStripStatusLabel4.ForeColor = Color.Black;
+				// toolStripStatusLabel4.BackColor = Color.Lime;
+				// toolStripStatusLabel4.ForeColor = Color.Black;
 			 }
 			 else
 			 {
-				 toolStripStatusLabel4.ForeColor = Color.Red;
-				 toolStripStatusLabel4.BackColor = Color.White;
+				// toolStripStatusLabel4.ForeColor = Color.Red;
+				// toolStripStatusLabel4.BackColor = Color.White;
 			 }
 
 		   }
@@ -7743,6 +7761,7 @@ namespace KamertonTest
                          MODBUS_SUCCESS = false;
                          //  Com2_SUCCESS               = false;
                          toolStripStatusLabel1.Text = "    MODBUS ERROR(byte_set1) ";
+                         toolStripStatusLabel1.BackColor = Color.Red;
                          // toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
                          e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                      }
@@ -7904,7 +7923,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      // Com2_SUCCESS               = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set2)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                  }
                  test_end1();
@@ -7942,7 +7963,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set3)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");          // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;                      // Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !
                  }
 
@@ -7967,7 +7990,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set4)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");       // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
 
@@ -7990,7 +8015,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set5)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");         // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
 
@@ -8015,7 +8042,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set6)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
                  //  Thread.Sleep(50);
@@ -8044,7 +8073,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set7)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
                  Thread.Sleep(50);
@@ -8067,7 +8098,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set8)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
 
@@ -8092,7 +8125,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set9)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
  
@@ -8114,7 +8149,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set10)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
 
@@ -8131,7 +8168,9 @@ namespace KamertonTest
                      MODBUS_SUCCESS = false;
                      Com2_SUCCESS = false;
                      toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set11)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
                      toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
                      e.Cancel = true;
                  }
 
@@ -10021,7 +10060,9 @@ namespace KamertonTest
 				 MODBUS_SUCCESS             = false;
 				 Com2_SUCCESS               = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set5)  ";
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");         // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
 			 }
 			 Thread.Sleep(500);
 
@@ -10240,7 +10281,9 @@ namespace KamertonTest
 				 MODBUS_SUCCESS             = false;
 				 Com2_SUCCESS               = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set4)  ";
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");       // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
 			 }
 
 		 }
@@ -10315,7 +10358,9 @@ namespace KamertonTest
 				 MODBUS_SUCCESS             = false;
 				 Com2_SUCCESS               = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set5 Osc)  ";
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");         // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
 			 }
 
 			 for(int i_coil = 0; i_coil < 16; i_coil++)
@@ -10337,7 +10382,9 @@ namespace KamertonTest
 					 MODBUS_SUCCESS             = false;
 					 Com2_SUCCESS               = false;
 					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set6 Osc)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
 					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
 				 }
 
 		 }
@@ -10428,7 +10475,9 @@ namespace KamertonTest
 					 MODBUS_SUCCESS             = false;
 					 Com2_SUCCESS               = false;
 					 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set5)  ";
+                     toolStripStatusLabel1.BackColor = Color.Red;
 					 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");         // Обработка ошибки.
+                     toolStripStatusLabel4.BackColor = Color.Red;
 					 }
 			 }
 
@@ -10453,7 +10502,9 @@ namespace KamertonTest
 				 MODBUS_SUCCESS             = false;
 				 Com2_SUCCESS               = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set2)  ";
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");  // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
 			 }
 			 test_end1();
 			 // *********************** Проверить питание ********************************
@@ -10491,7 +10542,9 @@ namespace KamertonTest
 				 MODBUS_SUCCESS             = false;
 				 Com2_SUCCESS               = false;
 				 toolStripStatusLabel1.Text = "    MODBUS ERROR (byte_set3)  ";
+                 toolStripStatusLabel1.BackColor = Color.Red;
 				 toolStripStatusLabel4.Text = ("Связь с прибором КАМЕРТОН 5  НЕ УСТАНОВЛЕНА !");          // Обработка ошибки.
+                 toolStripStatusLabel4.BackColor = Color.Red;
 			 }
 
 
