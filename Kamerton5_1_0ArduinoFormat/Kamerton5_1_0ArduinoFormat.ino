@@ -5189,7 +5189,7 @@ void test_MTT()
   regBank.set(25, 0);                                                             //  XP1- 19 HaSs  sensor подключения трубки    MTT включить должно быть в "0"
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[30])));
   if (test_repeat == false)  myFile.println(buffer);                              // "Command sensor ON MTT  send!
-  regBank.set(18, 0);    // Трубка поднята                                        // XP1 - 20  HangUp  DCD Трубку поднять DCD должно быть в "0"
+  regBank.set(18, 0);    // Трубка поднята                                        // "Command HangUp ON  MTT -> UP(PODNATA BBEPX) send!" 
   UpdateRegs();                                                                   // Выполнить команду
   delay(100);
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Command HangUp ON  MTT -> UP(PODNATA BBEPX) send!" 
@@ -5968,7 +5968,7 @@ void testGGS()
   regBank.set(18, 0);    //Трубка поднята  
   strcpy_P(buffer, (char*)pgm_read_word(&(table_message[27])));                   // "Command sensor OFF  MTT                           send!"      ;
   if (test_repeat == false) myFile.println(buffer);                               // "Command sensor ON  MTT                           send!"      ;
-  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Command HangUp OFF MTT                              send! "      ;
+  strcpy_P(buffer, (char*)pgm_read_word(&(table_message[32])));                   // "Command HangUp ON  MTT -> UP(PODNATA BBEPX) send!" 
   if (test_repeat == false) myFile.println(buffer);
   resistor(1, por_int_buffer[1]);                                                 // Установить уровень сигнала 60 мв
   resistor(2, por_int_buffer[2]);                                                 // Установить уровень сигнала 60 мв
@@ -6020,7 +6020,7 @@ void testGGS()
     regcount_err = regBank.get(adr_reg_count_err);                          // Получить данные счетчика всех ошибок
     regcount_err++;                                                         // увеличить счетчик всех ошибок
     regBank.set(adr_reg_count_err, regcount_err);                           // Сохранить данные счетчика всех ошибок
-    strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));        // "Test MTT HangUp (DCD)                                       OFF - ";
+     strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));        // "Proverка - MTT HangUp (DCD)  PODNATA BBEPX      - ";
     myFile.print(buffer);                                                   // "Test MTT HangUp (DCD)                                       OFF - ";
     strcpy_P(buffer, (char*)pgm_read_word(&(table_message[0])));            // "    Error! - ";
     myFile.print(buffer);                                                   // "    Error! - ";
@@ -6030,7 +6030,7 @@ void testGGS()
   {
     if (test_repeat == false)
     {
-      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));      // "Test MTT HangUp (DCD)                                       OFF - ";
+      strcpy_P(buffer, (char*)pgm_read_word(&(string_table_err[67])));      // "Proverка - MTT HangUp (DCD)  PODNATA BBEPX      - ";
       myFile.print(buffer);                                                 //
       strcpy_P(buffer, (char*)pgm_read_word(&(table_message[1])));          // "Pass";
       myFile.println(buffer);                                               // "Test MTT HangUp (DCD)                                       OFF - ";
@@ -6065,6 +6065,7 @@ void testGGS()
 
   measure_vol_max(analog_mag_radio, adr_reg40332, adr_reg40532, 332, por_int_buffer[29], por_int_buffer[30]);
   measure_vol_max(analog_mag_phone, adr_reg40292, adr_reg40492, 292, por_int_buffer[31], por_int_buffer[32]);              // Измерить уровень сигнала на выходе "Test GGS ** Signal mag phone                                ON  - ";
+  if (bitRead(i50, 2) == 0)      myFile.println("Sensor MTT OFF (otkluchen)");     
   measure_vol_max(analog_ggs,       adr_reg40289, adr_reg40489, 289, por_int_buffer[33], por_int_buffer[34]);              // Измерить уровень сигнала на выходе "Test GGS ** Signal GGS                                      ON  - ";
 
   measure_vol_min(analog_gg_radio1, adr_reg40287, adr_reg40487, 287, por_int_buffer[18]);                                  // Измерить уровень сигнала на выходе "Test GGS ** Signal GG Radio1                                OFF - ";
