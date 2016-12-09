@@ -17,7 +17,7 @@
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\Publish\</PublishUrl>
+    <PublishUrl>F:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -31,7 +31,7 @@
     <PublisherName>Decima</PublisherName>
     <SuiteName>Kamerton 5.1.0</SuiteName>
     <MinimumRequiredVersion>1.0.1.1</MinimumRequiredVersion>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

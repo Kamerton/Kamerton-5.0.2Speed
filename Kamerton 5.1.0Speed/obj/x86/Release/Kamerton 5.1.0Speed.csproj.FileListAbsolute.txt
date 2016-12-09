@@ -25,3 +25,29 @@ E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 
 E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.application
 E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe
 E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.pdb
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.pdb
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Oscilloscope\Oscilloscope_settings.ini
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Oscilloscope\Osc_DLL.dll
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Oscilloscope\Oscilloscope.cs
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Kamerton 5.1.0.exe.manifest
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Kamerton 5.1.0.application
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Kamerton 5.1.0.exe
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Kamerton 5.1.0.pdb
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\mbusmaster.net.dll
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0Speed.csprojResolveAssemblyReference.cache
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form2.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form9.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form1.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Properties.Resources.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Resource1.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form3.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form4.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form5.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form6.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form7.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\KamertonTest.Form8.resources
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0Speed.csproj.GenerateResource.Cache
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.TrustInfo.xml
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe.manifest
+D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.application

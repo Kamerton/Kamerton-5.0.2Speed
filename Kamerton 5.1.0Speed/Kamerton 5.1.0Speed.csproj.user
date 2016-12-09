@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\Publish\|E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.0.2Speed\Publish\|E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\Publish\|E:\1 SVN Kamerton5.0.1\trunk\Kamerton 5.0.1\Publish\|E:\Kamerton5.0.1\Kamerton 5.0.1\Publish\</PublishUrlHistory>
+    <PublishUrlHistory>F:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\Publish\|F:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.0.2Speed\Publish\|E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\Publish\|E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.0.2Speed\Publish\|E:\1 SVN KamertonTestArduino\trunk\Kamerton 5.0.2Speed\Publish\</PublishUrlHistory>
     <InstallUrlHistory>\\Nto-farid\обмен\Kamerton5.0x64\|\\Nto-farid\обмен\</InstallUrlHistory>
     <SupportUrlHistory>\\Nto-farid\обмен\Kamerton5.0x64</SupportUrlHistory>
     <UpdateUrlHistory>\\Nto-farid\обмен\Kamerton5.0x64\|\\Nto-farid\обмен\|\\Decima-files\users\nto\Мосейчук\|http://localhost/KamertonTestFin/</UpdateUrlHistory>
