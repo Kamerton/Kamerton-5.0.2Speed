@@ -25,6 +25,11 @@ E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 
 E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.application
 E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe
 E:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.pdb
+<<<<<<< .mine
+F:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe
+F:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.pdb
+||||||| .r50
+=======
 D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe
 D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.pdb
 D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\bin\x86\Release\Oscilloscope\Oscilloscope_settings.ini
@@ -51,3 +56,4 @@ D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 
 D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.TrustInfo.xml
 D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.exe.manifest
 D:\1 SVN Kamerton-5.0.2Speed\trunk\Kamerton 5.1.0Speed\obj\x86\Release\Kamerton 5.1.0.application
+>>>>>>> .r51
