@@ -31,11 +31,11 @@ namespace KamertonTest
 
 
 
-
+               // Запуск программы и защита от повторного запуска программы
         [STAThread]
         static void Main()
         {     
-                string key = "Kamerton501";  //пишем тут любой ключ,это для проверки(вместо названия программы)
+                string key = "Kamerton501";                 //пишем тут любой ключ,это для проверки(вместо названия программы)
                 using(Mutex mutex = new Mutex(false, key))
                 {
                 if(!mutex.WaitOne(0, false))
